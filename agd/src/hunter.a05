@@ -1,0 +1,67 @@
+;Para el búo
+EVENT SPRITETYPE5
+;El sstinga será par alamacenar la dirección
+;El settingb como contandor de impactos de bala
+;at 3 21
+;DISPLAY DOUBLEDIGITS SETTINGB
+
+
+IF A<>0
+    IF SETTINGA = LEFT
+        IF CANGOLEFT
+            SPRITELEFT
+        ELSE
+            LET SETTINGA = RIGHT
+            LET FRAME = 0
+        ENDIF
+    ELSE
+        IF CANGORIGHT
+            SPRITERIGHT
+        ELSE
+            LET SETTINGA = LEFT
+            LET FRAME = 0
+        ENDIF
+    ENDIF
+
+    IF DIRECTION = UP
+        IF CANGOUP
+            SPRITEUP
+        ELSE
+            LET DIRECTION = DOWN
+            LET FRAME = 0
+        ENDIF
+    ELSE
+        IF CANGODOWN
+            SPRITEDOWN
+        ELSE
+            LET DIRECTION = UP
+            LET FRAME = 0
+        ENDIF
+    ENDIF
+    ANIMATE SLOW
+ENDIF
+
+;Colisión del buo con el player
+IF COLLISION PLAYER
+    ; Si el modo test no está establecido
+    IF C = 0
+        KILL
+    ENDIF
+ENDIF
+
+;colisión con la bala
+IF COLLISION 1
+    ADD 1 TO SETTINGB
+    ;Si los impactos de bala son mayores de 19
+    IF SETTINGB >= 10
+        EXPLODE 30
+        OTHER
+            REMOVE
+        ENDSPRITE
+        REMOVE
+        LET D=1
+    ENDIF
+
+
+ENDIF
+

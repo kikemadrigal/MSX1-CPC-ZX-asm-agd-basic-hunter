@@ -1,0 +1,236 @@
+;EL boss
+EVENT SPRITETYPE3
+
+;Debug
+;at 3 18
+;DISPLAY DIRECTION
+at 3 21
+DISPLAY O
+at 3 24
+DISPLAY Z
+at 3 26
+;Dirección bala para que salga a la derecha o i<quierda
+display U
+
+
+
+;F y G son las coordenadas x e y del boss que utilizaremos en el evento6 el sprite que sigue a otro sprite
+; para hacer los jefes más grandes
+LET F = X
+LET G = Y
+
+;Si los milisegundos se ponen a 0 eso es que ha pasado 1 segundo
+IF R = 1
+    ADD 1 TO Z
+    IF Z = 4
+        LET Z = 0
+        LET FRAME = 0
+    ELSE
+        LET FRAME = 1
+    ENDIF
+ENDIF
+
+;Se moverá de izquierda a derecha casi todo el tiempo
+IF Z>=1
+    ;Si es el boss 0
+    IF SETTINGA = 0
+        IF DIRECTION = LEFT
+            ;Si puede ir a la izquierda lo movemos a la izquierda
+            IF CANGOLEFT
+                SPRITELEFT
+            ;Si no puede ir a la izquierda es que hay un bloque pared
+            ELSE
+                ;Le ponemos la dirección derecha
+                LET DIRECTION = RIGHT
+            ENDIF
+        ;Si la dirección no es izquierda, lo movemos a la derecha
+        ELSE
+            IF CANGORIGHT
+                SPRITERIGHT 
+            ELSE
+                LET DIRECTION = LEFT
+            ENDIF
+        ENDIF
+    ENDIF
+    ;Si es el boss 1
+    IF SETTINGA = 1
+        IF DIRECTION = UP
+            ;Si puede ir a la izquierda lo movemos a la izquierda
+            IF CANGOUP
+                SPRITEUP
+            ;Si no puede ir a la izquierda es que hay un bloque pared
+            ELSE
+                ;Le ponemos la dirección derecha
+                LET DIRECTION = DOWN
+            ENDIF
+        ;Si la dirección no es izquierda, lo movemos a la derecha
+        ELSE
+            IF CANGODOWN
+                SPRITEDOWN
+            ELSE
+                LET DIRECTION = UP
+            ENDIF
+        ENDIF
+    ENDIF
+    ;Si es el jefe final irá todo el rato a por ti pero un poco más despacio
+    IF SETTINGA = 2
+        IF Z=2
+            IF Y > W
+                IF CANGOUP
+                    SUBTRACT 1 FROM Y
+                    LET DIRECTION = UP
+                ENDIF
+            ENDIF
+            IF Y < W
+                IF CANGODOWN
+                    ADD 1 TO Y
+                    LET DIRECTION = DOWN
+                ENDIF
+            ENDIF
+            IF X > V
+                IF CANGOLEFT
+                    SUBTRACT 1 FROM X
+                    LET DIRECTION = LEFT
+                ENDIF
+            ENDIF
+            IF X < V
+                IF CANGORIGHT
+                    ADD 1 TO X
+                    LET DIRECTION = RIGHT
+                ENDIF
+            ENDIF
+        ENDIF
+    ENDIF
+; si Z vale 0 atacará al player
+ELSE
+    IF Y > W
+        IF CANGOUP
+            SPRITEUP
+        ENDIF
+    ENDIF
+    IF Y < W
+        IF CANGODOWN
+            SPRITEDOWN
+        ENDIF
+    ENDIF
+    IF X > V
+        IF CANGOLEFT
+            SPRITELEFT
+        ENDIF
+    ENDIF
+    IF X < V
+        IF CANGORIGHT
+            SPRITERIGHT
+        ENDIF
+    ENDIF
+
+
+
+    ;Crearemos un disparo si la O vale 1
+    IF O = 1
+        ;Hacemos un sonido
+        SOUND 2
+        SPAWN 1 9    
+        LET V = X
+        LET W = Y
+        ;Vamos a asignar la U que es la futura dirección de bala
+        ;Si la dirección actual del boss es la derecha
+        IF DIRECTION = 1
+            ADD 20 TO V
+            LET U = 1
+        ; Si no es la derecha puede ser izquierda, arriba o abajo
+        ELSE
+            IF DIRECTION = LEFT
+                SUBTRACT 16 FROM V
+                LET U = 0
+            ELSE
+               GETRANDOM 2
+               IF RND = 0
+                   SUBTRACT 20 FROM V
+                   LET U = LEFT  
+               ELSE
+                   ADD 20 TO V
+                   LET U = RIGHT
+               ENDIF
+            ENDIF
+        ENDIF
+        ;Con esto configuramos los parámetros de la bala
+        SPAWNED
+        ;En settina le ponemos que es de tipo 1 boss
+        LET SETTINGA = 1
+        ;Le ponemos el sprite de la bala
+        LET IMAGE = 29
+        LET DIRECTION = U
+        LET X = V
+        LET Y = W
+        ENDSPRITE
+        ;Ponemos que se ha pulsado el disparo para que no se vuelva a dispara
+        ; hata que el evento tipo1(el del disparo) ponga en 1 la cariable porque se ha salido o 
+        ;ha chocado, en todos los eventos colisión con el disparo también se debe poner LET d=1
+        LET O=0
+    ENDIF
+ENDIF
+;Las animaciones las controlamos nostros con frame
+;ANIMATE SLOW
+
+
+
+
+;Colision del boss con el player
+IF COLLISION PLAYER
+    ;Si el modo test no está establecido
+    IF C = 0
+        KILL
+    ENDIF
+ENDIF
+
+;Si hay una colisión con el disparo
+IF COLLISION 1
+    ; Hacemos un sonido
+    SOUND 4
+    ;K=Energía del enemigo
+    SUBTRACT 1 FROM K
+    ; Si al boss no le queda energía lo quitamos
+    IF K <= 0
+        EXPLODE 30
+        REMOVE
+        ;Le ponemos que no le quedan capturas para que se paren los muñecos
+        LET A = 0
+    ENDIF
+    ;OTHER
+    ;REMOVE
+    ;ENDSPRITE
+    LET D=1
+
+
+
+    ;Mostramos la información del boss
+    ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
+    at 3 2
+    print "Boss:"
+    at 3 7
+    display DOUBLEDIGITS K
+    AT 3 10
+    PRINT "         "
+    LET N = 80
+    LET W = K
+    ADD N TO W
+    WHILE N < W
+        ;Empezaremos de alto en el pixel 24
+        LET V = 24
+        ;Haremos clolumnas de 8 pixeles
+        WHILE V < 32
+            ;PLOT posición_X posición_y
+            PLOT N V
+            ADD 1 TO V
+        ENDWHILE
+        ADD 1 TO N
+    ENDWHILE
+ENDIF
+
+
+;DATA 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+;DATA 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 10
+
+
+

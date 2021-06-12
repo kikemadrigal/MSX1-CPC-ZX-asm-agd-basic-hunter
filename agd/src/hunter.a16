@@ -1,0 +1,13 @@
+EVENT KILLPLAYER
+;Solo moriremos si la pantalla está activa
+;IF C=0
+; El disparo (archivo event00) tiene una restricción para que solo se dispare una bala
+; con esto nos aseguramos de que la variable esté siempre a 1 para que pueda disparar
+;MUSIC 0 0
+SOUND 5
+LET D=1
+SUBTRACT 1 FROM LIVES
+AT 0 12
+DISPLAY DOUBLEDIGITS LIVES
+DELAY 30 
+;ENDIF

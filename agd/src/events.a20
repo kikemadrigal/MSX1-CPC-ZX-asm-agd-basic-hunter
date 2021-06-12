@@ -1,0 +1,24 @@
+;Evento que ocurre al coger un bloque
+EVENT COLLECTBLOCK
+
+;Sumamos a la puntuación 10 puntos
+SCORE 10
+;Restamos a la variable de bloques que hay que recoger por pantalla
+SUBTRACT 1 TO A
+;Hacemos un sonido
+SOUND 3
+
+;Mostramos la puntuación
+AT 0 2
+SHOWSCORE 
+
+;Borramos lo que había escrito
+AT 0 18
+print " "
+;Mostramos las que faltan por coger
+AT 0 18
+DISPLAY A
+
+
+
+
