@@ -2,6 +2,29 @@
 
 💟 MSX Murcia
 😀
+
+# Intructions
+
+## Play online
+
+🕹️🕹️🕹️🕹️🕹️🕹️
+
+MSX 1 version
+
+
+https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?diska=hunter.dsk
+
+https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?rom=hunter.rom
+
+
+## Download dsk
+
+Descárgate el archivo .dsk MSX1 version 😀
+
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs
+
+
+y abrelo con tu emulador favorito
 # AMSTRAD CPC AGD 
 
 ## Spriteset
@@ -74,12 +97,6 @@
 
 # MSX1 AGD 
 
-🕹️🕹️🕹️🕹️🕹️🕹️
-
-
-https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?diska=hunter.dsk
-
-https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?rom=hunter.rom
 
 ## Spriteset
 
@@ -172,22 +189,8 @@ https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?rom=hunter.rom
 
 <img src=docs/MSX/30.PNG width=200px />
 
-## MSX2 basic
-
-
-https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?diska=hunter2.dsk
-
-
 
 👻
-
-# Intructions
-
-Descárgate el archivo .dsk  😀
-
-https://github.com/kikemadrigal/MSX1-asm-agd-hunter/tree/main/docs
-
-y abrelo con tu emulador favorito
 
 # Development
 
