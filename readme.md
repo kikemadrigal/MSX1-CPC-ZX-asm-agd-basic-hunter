@@ -12,16 +12,16 @@
 MSX 1 version
 
 
-https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?diska=hunter.dsk
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=hunter.dsk
 
-https://kikemadrigal.github.io/MSX1-asm-agd-basic-hunter/?rom=hunter.rom
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?rom=hunter.rom
 
 
 ## Download dsk
 
 Descárgate el archivo .dsk MSX1 version 😀
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs
 
 
 y abrelo con tu emulador favorito
