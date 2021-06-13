@@ -51,10 +51,14 @@ ENDIF
 
 ;colisión con la bala
 IF COLLISION 1
+    SOUND 2
+    BEEP 2
     ADD 1 TO SETTINGB
     ;Si los impactos de bala son mayores de 19
     IF SETTINGB >= 10
         EXPLODE 30
+        SOUND 4
+        BEEP 35
         OTHER
             REMOVE
         ENDSPRITE

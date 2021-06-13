@@ -4,13 +4,13 @@ EVENT SPRITETYPE3
 ;Debug
 ;at 3 18
 ;DISPLAY DIRECTION
-at 3 21
-DISPLAY O
-at 3 24
-DISPLAY Z
-at 3 26
+;at 3 21
+;DISPLAY O
+;at 3 24
+;DISPLAY Z
+;at 3 26
 ;Dirección bala para que salga a la derecha o i<quierda
-display U
+;display U
 
 
 
@@ -129,6 +129,7 @@ ELSE
     ;Crearemos un disparo si la O vale 1
     IF O = 1
         ;Hacemos un sonido
+        BEEP 50
         SOUND 2
         SPAWN 1 9    
         LET V = X
@@ -187,6 +188,7 @@ ENDIF
 ;Si hay una colisión con el disparo
 IF COLLISION 1
     ; Hacemos un sonido
+    BEEP 14
     SOUND 4
     ;K=Energía del enemigo
     SUBTRACT 1 FROM K

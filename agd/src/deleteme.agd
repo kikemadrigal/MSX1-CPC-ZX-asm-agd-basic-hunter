@@ -762,9 +762,9 @@ SPRITEPOSITION  8 29 40 232
 
 DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  30   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0   0   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
-                  0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   8   8   8   8
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+                  0   0   0   0   0   0   0   0   0   0   0   0   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+                  0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0  19   0   0   0
+                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   8   8   8   0   0
                   0   0   0   0  19   4   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                  27  28  27  28  28  15   0   0   0   0   5   4   5   4   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0
@@ -1832,6 +1832,7 @@ if OBJ=3
     ADD 10 TO B
     ;Borramos el objeto y lo metemos en ek inventario
     GET OBJ
+    BEEP 16
     SOUND 5
     ;Motramos el número de balas
     AT 0 23
@@ -1921,6 +1922,7 @@ IF KEY FIRE
     IF D=1
         ;Si quedan le quedanbalas al player
         IF B>0
+            Beep 50
             SOUND 2
             SPAWN 1 9
             LET U = DIRECTION
@@ -1999,6 +2001,7 @@ IF COLLISION 1
     ;Esto hace un efecto de explosión
     ;explode 30
     ;hacemos un sonido
+    BEEP 14
     SOUND 5
     ;Vamos a la bala
     OTHER
@@ -2287,6 +2290,7 @@ IF COLLISION 1
             ;Borramos la bala-lo has tenido que quitar porque se borra en el remove del animal
             REMOVE
             ;Hacemos el sonido de muerte
+            BEEP 60
             SOUND 5
         ENDIF
     ENDIF ; final de si no es una bola
@@ -2298,13 +2302,13 @@ EVENT SPRITETYPE3
 ;Debug
 ;at 3 18
 ;DISPLAY DIRECTION
-at 3 21
-DISPLAY O
-at 3 24
-DISPLAY Z
-at 3 26
+;at 3 21
+;DISPLAY O
+;at 3 24
+;DISPLAY Z
+;at 3 26
 ;Dirección bala para que salga a la derecha o i<quierda
-display U
+;display U
 
 
 
@@ -2423,6 +2427,7 @@ ELSE
     ;Crearemos un disparo si la O vale 1
     IF O = 1
         ;Hacemos un sonido
+        BEEP 50
         SOUND 2
         SPAWN 1 9    
         LET V = X
@@ -2481,6 +2486,7 @@ ENDIF
 ;Si hay una colisión con el disparo
 IF COLLISION 1
     ; Hacemos un sonido
+    BEEP 14
     SOUND 4
     ;K=Energía del enemigo
     SUBTRACT 1 FROM K
@@ -2670,10 +2676,14 @@ ENDIF
 
 ;colisión con la bala
 IF COLLISION 1
+    SOUND 2
+    BEEP 2
     ADD 1 TO SETTINGB
     ;Si los impactos de bala son mayores de 19
     IF SETTINGB >= 10
         EXPLODE 30
+        SOUND 4
+        BEEP 35
         OTHER
             REMOVE
         ENDSPRITE
@@ -2705,6 +2715,11 @@ IF SETTINGA = 0
             LET X = 0
             LET Y = 212
         ENDIF
+        ;Si es spectrum
+        IF P = 2
+            LET X = 0
+            LET Y = 212
+        ENDIF
     ENDIF
 
 ENDIF
@@ -2724,6 +2739,7 @@ IF SETTINGA = 1
     ENDIF
     ;Si hay una colisión con el disparo
     IF COLLISION 1
+        BEEP 14
         SOUND 4
         ;K=Energía del enemigo
         SUBTRACT 1 FROM K
@@ -2914,6 +2930,7 @@ IF COLLISION 0              ;Si hay colision con el player
     IF SETTINGA = 0          ; Si el interruptor no lo han tocado
         LET SETTINGA = 1 ;Lo marcamos como tiocado
         SOUND 0 
+        BEEP 14
     ENDIF
       
 ENDIF
@@ -3432,12 +3449,17 @@ ENDIF
 EVENT MAINLOOP2
 EVENT INTROMENU
 CLS
+
 ;DEFINEMUSIC "Music1.pt3"
 ;DEFINEMUSIC "alice.pt3"
 ;DEFINEMUSIC "Music2.pt3"
 ;MUSIC 1 1
 ;en el evento EVENT RESTARTSCREEN (event14) ponemosMUSIC 2 1
+
+
+
 BORDER 0
+
 
 
 LET CONTROL = 99
@@ -3550,9 +3572,16 @@ EVENT GAMEINIT
 
 ;Para poder ver las pantallas directamente
 ;Debug
-LET SCREEN = 9
+LET SCREEN = 1
 ;SI C == 1 pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima, mirar la 3 variable abajp
+;Si es un spectrum 128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK 
 
+;P (0 msx 1 amstrad 2 spectrum )
+LET P = 1
+
+IF P = 2
+   ;COLOUR 40
+ENDIF
 
 ;Settings
 ;ver archivo envent09 (INITSPRITE)
@@ -3578,7 +3607,7 @@ LET C = 0 ; pone el modo test y las colisiones no funcionan excepto el timepo, l
 LET M = 2 ; Minutos, esta variable se inicializará con 2 minutos, aparece en restartsvreen(event14) y en mainloop (event10)   
                                 LET N = 0 ; Para mostrar la barra de enerhía del boss                                 
                                 LET O = 1 ; Utilizada para que el boss solo dispare una vez, la 1 vez estará activada (1), aparece en todas las colisiones (ebemt)
-LET P = 1 ;Indica el target , 0 MSX, 1 Amstrad, 2 spectrum               
+LET P = P ;Indica el target , 0 MSX, 1 Amstrad, 2 spectrum            
                 LET Q = 0 ; Utilizada en el evento 2 de los animales para saber si la bala la generó el player
 LET R = 0 ; Décimas de segundo segundos, utiliza en mainlopp (event10), en el boss (event3)
 LET S = 0 ; Hace que solo se haga una iteración en el mainloop(event 10) y en el player (event 0) y aqui es donde se pone a 1 porque este evento se lee después del mainloop
@@ -3602,8 +3631,10 @@ LET T = 60 ; Segundos, esta variable se inicializará con 60 segundos, aparece e
 
 EVENT RESTARTSCREEN
 
-;MUSIC 2 1
-;MUSIC 0 0
+IF P = 0
+    MUSIC 2 1
+ENDIF
+
 
 ;Ponemos los minutos en 2
 LET M = 2
@@ -3675,6 +3706,7 @@ EVENT KILLPLAYER
 ; con esto nos aseguramos de que la variable esté siempre a 1 para que pueda disparar
 ;MUSIC 0 0
 SOUND 5
+BEEP 60
 LET D=1
 SUBTRACT 1 FROM LIVES
 AT 0 12
@@ -3725,7 +3757,7 @@ SCORE 10
 SUBTRACT 1 TO A
 ;Hacemos un sonido
 SOUND 3
-
+BEEP 50
 ;Mostramos la puntuación
 AT 0 2
 SHOWSCORE 

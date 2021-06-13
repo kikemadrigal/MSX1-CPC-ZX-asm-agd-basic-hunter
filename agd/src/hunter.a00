@@ -185,6 +185,7 @@ if OBJ=3
     ADD 10 TO B
     ;Borramos el objeto y lo metemos en ek inventario
     GET OBJ
+    BEEP 16
     SOUND 5
     ;Motramos el número de balas
     AT 0 23
@@ -274,6 +275,7 @@ IF KEY FIRE
     IF D=1
         ;Si quedan le quedanbalas al player
         IF B>0
+            Beep 50
             SOUND 2
             SPAWN 1 9
             LET U = DIRECTION
@@ -352,6 +354,7 @@ IF COLLISION 1
     ;Esto hace un efecto de explosión
     ;explode 30
     ;hacemos un sonido
+    BEEP 14
     SOUND 5
     ;Vamos a la bala
     OTHER

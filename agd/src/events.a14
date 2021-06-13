@@ -1,7 +1,9 @@
 EVENT RESTARTSCREEN
 
-;MUSIC 2 1
-;MUSIC 0 0
+IF P = 0
+    MUSIC 2 1
+ENDIF
+
 
 ;Ponemos los minutos en 2
 LET M = 2

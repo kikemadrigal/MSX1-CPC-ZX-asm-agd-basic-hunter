@@ -19,6 +19,11 @@ IF SETTINGA = 0
             LET X = 0
             LET Y = 212
         ENDIF
+        ;Si es spectrum
+        IF P = 2
+            LET X = 0
+            LET Y = 212
+        ENDIF
     ENDIF
 
 ENDIF

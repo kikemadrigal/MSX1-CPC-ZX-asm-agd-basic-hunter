@@ -7,7 +7,7 @@ SCORE 10
 SUBTRACT 1 TO A
 ;Hacemos un sonido
 SOUND 3
-
+BEEP 50
 ;Mostramos la puntuación
 AT 0 2
 SHOWSCORE 

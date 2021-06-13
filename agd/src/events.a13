@@ -37,9 +37,16 @@ EVENT GAMEINIT
 
 ;Para poder ver las pantallas directamente
 ;Debug
-LET SCREEN = 9
+LET SCREEN = 1
 ;SI C == 1 pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima, mirar la 3 variable abajp
+;Si es un spectrum 128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK 
 
+;P (0 msx 1 amstrad 2 spectrum )
+LET P = 1
+
+IF P = 2
+   ;COLOUR 40
+ENDIF
 
 ;Settings
 ;ver archivo envent09 (INITSPRITE)
@@ -65,7 +72,7 @@ LET C = 0 ; pone el modo test y las colisiones no funcionan excepto el timepo, l
 LET M = 2 ; Minutos, esta variable se inicializará con 2 minutos, aparece en restartsvreen(event14) y en mainloop (event10)   
                                 LET N = 0 ; Para mostrar la barra de enerhía del boss                                 
                                 LET O = 1 ; Utilizada para que el boss solo dispare una vez, la 1 vez estará activada (1), aparece en todas las colisiones (ebemt)
-LET P = 1 ;Indica el target , 0 MSX, 1 Amstrad, 2 spectrum               
+LET P = P ;Indica el target , 0 MSX, 1 Amstrad, 2 spectrum            
                 LET Q = 0 ; Utilizada en el evento 2 de los animales para saber si la bala la generó el player
 LET R = 0 ; Décimas de segundo segundos, utiliza en mainlopp (event10), en el boss (event3)
 LET S = 0 ; Hace que solo se haga una iteración en el mainloop(event 10) y en el player (event 0) y aqui es donde se pone a 1 porque este evento se lee después del mainloop

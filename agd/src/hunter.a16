@@ -5,6 +5,7 @@ EVENT KILLPLAYER
 ; con esto nos aseguramos de que la variable esté siempre a 1 para que pueda disparar
 ;MUSIC 0 0
 SOUND 5
+BEEP 60
 LET D=1
 SUBTRACT 1 FROM LIVES
 AT 0 12

@@ -87,13 +87,29 @@ y abrelo con tu emulador favorito
 <BR clear="left">
 <img src=docs/CPC/29.PNG width=200px align="left" />
 <BR clear="left">
+
 <BR><BR><BR>
 
+# SPECTRUM ZX AGD 
+
+## Spriteset
+
+<img src=docs/ZX/ZX-spriteset.PNG width=500px />
+
+## tileset
+
+<img src=docs/ZX/ZX-tileset.PNG width=500px />
+
+## Level 1
 
 
+## Level 2
 
 
+## Level 3
 
+
+<BR><BR><BR>
 
 # MSX1 AGD 
 

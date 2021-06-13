@@ -72,6 +72,7 @@ IF COLLISION 0              ;Si hay colision con el player
     IF SETTINGA = 0          ; Si el interruptor no lo han tocado
         LET SETTINGA = 1 ;Lo marcamos como tiocado
         SOUND 0 
+        BEEP 14
     ENDIF
       
 ENDIF

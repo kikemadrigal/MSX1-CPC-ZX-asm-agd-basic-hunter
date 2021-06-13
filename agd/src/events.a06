@@ -19,6 +19,11 @@ IF SETTINGA = 0
             LET X = 0
             LET Y = 212
         ENDIF
+        ;Si es spectrum
+        IF P = 2
+            LET X = 0
+            LET Y = 212
+        ENDIF
     ENDIF
 
 ENDIF
@@ -38,6 +43,7 @@ IF SETTINGA = 1
     ENDIF
     ;Si hay una colisión con el disparo
     IF COLLISION 1
+        BEEP 14
         SOUND 4
         ;K=Energía del enemigo
         SUBTRACT 1 FROM K

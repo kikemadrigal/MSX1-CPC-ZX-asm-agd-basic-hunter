@@ -187,6 +187,7 @@ IF COLLISION 1
             ;Borramos la bala-lo has tenido que quitar porque se borra en el remove del animal
             REMOVE
             ;Hacemos el sonido de muerte
+            BEEP 60
             SOUND 5
         ENDIF
     ENDIF ; final de si no es una bola

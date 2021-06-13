@@ -1,11 +1,16 @@
 EVENT INTROMENU
 CLS
+
 ;DEFINEMUSIC "Music1.pt3"
 ;DEFINEMUSIC "alice.pt3"
 ;DEFINEMUSIC "Music2.pt3"
 ;MUSIC 1 1
 ;en el evento EVENT RESTARTSCREEN (event14) ponemosMUSIC 2 1
+
+
+
 BORDER 0
+
 
 
 LET CONTROL = 99
