@@ -20,8 +20,10 @@
 
 
 1 'main loop'
+    1 'Chekeamos los tiles del mapa
+    2000 gosub 13600
     1 'input system
-    2000 gosub 2500
+    2005 gosub 2500
     1 'Physics system'
     2010 gosub 10100
     1'Render player
@@ -39,32 +41,29 @@
 1 '2 Sistema de input'
     1 'Nos guardamos las posiciones del player antes de cambiarlas'
     2500 on stick(0) gosub 2700,2500,2600,2500,2800,2500,2640
-    1 'Rutina salto va junto a la línea 120 y subrutina 5200'
-    2520 if pa=1 then py=py-pj
-    1 '50 es la distancia máxima a la que puede saltar'
-    2530 if pa=1 and py<po-50 then pj=-pj
-    2540 if pa=1 and py>po then py=po:pj=0:pj=-pj:pa=0:strig(0)on
+
 2599 return
 1 're=8 es el efecto de sonido 8 de la rutina de reprodución de sonidos 2300
 1 '3 derecha'
-    2600 px=px+pv:if px>246 then px=246
+    1 'comprobamos que no hay un sólido a la derecha y despues si se ha salido lo recolocamos'
+    2600 if t3<>39 then px=px+pv:if px>246 then px=246 
     2610 swap p(0),p(1):ps=p(1)
 2630 return
 1 '7 izquierda'
-    2640 px=px-pv:if px<=0 then px=0
+    2640 if t7<>39 then px=px-pv:if px<=0 then px=0
     2650 swap p(2),p(3):ps=p(3)
 2660 return
 1 '1 Arriba'
     1 'Si no estamos sobre una escalera y no estamos saltando y lo que hay debajo en un sólido entonces salta,
     1 'Guardamos la posición vieja de y en po'
-    1 'pj=2 distancia en pixeles que se le va a sumar o restar en el input system'
-    2700 if t0<>69 and pa=0 and t5=32 then po=py:pj=8:pa=1:strig(0)off else py=py-pv
-    2710 if py<=0 then py=0
+
+    2700 if t0<>69 and pa=0 then po=py:pa=1 else py=py-pv
+    
 2750 return
 1 '5 abajo'
     1 'Si lo que hay abajo es una escalera baja'
     2800 if t5=69 then py=py+pv
-    2820 if py>180 then py=180
+    
 2850 return
 
 
@@ -76,7 +75,8 @@
 
 1 'Debug'
     9000 'nada'
-    9010 preset (0,0): print #1," px "px" py "py" tx "tx" ty "ty
+    1 '9010 preset (0,0): print #1," px "px" py "py" tx "tx" ty "ty
+    9010 preset (0,0): print #1,"px "px" py "py" pa "pa" tx "tx" ty "ty
     9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
     1 '9010 preset (0,0): print #1,pa 
 9090 return

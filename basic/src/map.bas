@@ -15,10 +15,10 @@
     1 '2: tile tipo escalera'
     1 '3: tiles coleccionables'
     1 '4: tiles asesinos'
-    13020 dim t(5,5)
-    13030 t(1,0)=32:t(1,1)=39
-    13040 t(2,0)=69
-    13050 t(3,0)=67:t(3,1)=98
+    1 '13020 dim t(5,5)
+    1 '13030 t(1,0)=32:t(1,1)=39
+    1 '13040 t(2,0)=69
+    1 '13050 t(3,0)=67:t(3,1)=98
 13090 return
 
 
@@ -59,18 +59,19 @@
 
 
 1'chequeando contorno de una coordeanda dada por tx y ty
+    13600 tx=px/8:ty=py/8
     1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px'
-    13600 t0=m(ty+1,tx)
+    13605 if ty>0 then t0=m(ty+1,tx)
     1 't1 será el tile de arriba'
-    13610 t1=m(ty-1,tx)
+    13610 't1=m(ty-1,tx)
     1't3 será el tile de la derecha
     13620 t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
-    13630 t5=m(ty+2,tx)
+    13630 if ty>0 then t5=m(ty+2,tx)
     1 'Izquierda'
-    13640 if tx<=0 then t7=m(ty,0) else t7=m(ty,tx-1)
+    13640 if tx>0 then t7=m(ty,tx-1)
 13690  return
 
 
