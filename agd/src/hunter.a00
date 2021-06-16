@@ -11,15 +11,28 @@ EVENT PLAYER
 ;Para ver para lo que sirven cada variable ver el archivo Game Initialisation (events.a13)
 
 ;Debug para mostrar los valores de las variablesd del jugador
-;at 2 22
-;display X
-;at 4 28
-;display D
+;at 2 0
+;display TRIPLEDIGITS X
+;at 2 4
+;display TRIPLEDIGITS Y
+;at 2 8
+;display TRIPLEDIGITS LEFTEDGE
+;at 2 12
+;display TRIPLEDIGITS RIGHTEDGE
+;at 2 16
+;display DOUBLEDIGITS DIRECTION
+
 
 ;Estas variables so utiladas en el main loop y en el evento 3 del noss
 LET V = X
 LET W = Y
 LET U = DIRECTION
+
+;Si es un spectrum
+IF P = 2
+    ;Lo pintamos de color blanco
+    spriteink 7
+ENDIF
 
 ;Posicionamos el player según la pantalla
 IF S=0
@@ -227,6 +240,7 @@ IF KEY LEFT
     ELSE
         IF CANGOLEFT
             SPRITELEFT
+            ;SUBTRACT 1 FROM X
             ANIMATE
         ENDIF
     ENDIF
@@ -243,6 +257,7 @@ IF KEY RIGHT
     ELSE
         IF CANGORIGHT
             SPRITERIGHT
+            ;ADD 1 TO X
             ANIMATE
         ENDIF
     ENDIF
@@ -281,18 +296,18 @@ IF KEY FIRE
             LET U = DIRECTION
             LET V= X
             LET W= Y
-            IF DIRECTION = RIGHT
-                ADD 16 TO V
+            IF DIRECTION = 3
+                ;ADD 16 TO V
             ELSE
-                SUBTRACT 16 FROM V
+                ;SUBTRACT 16 FROM V
             ENDIF
             ;Con esto configuramos los parámetros de la bala
             SPAWNED
-            LET DIRECTION = U
-            ; Le decimos que el disparo es de tipo player
-            LET SETTINGA = 0
-            LET X= V
-            LET Y= W
+                LET DIRECTION = U
+                ; Le decimos que el disparo es de tipo player
+                LET SETTINGA = 0
+                LET X= V
+                LET Y= W
             ENDSPRITE
             ;Quitamos 1 al número de balas
             SUBTRACT 1 FROM B
@@ -343,33 +358,41 @@ ENDIF
 
 ;Colision del player con la bala
 IF COLLISION 1
-    ;Cambiamos el color del borde
-    REPEAT 6
-        BORDER 6
-        BORDER 7
-    ENDREPEAT
-    BORDER 1
-    ;Borramos la el player
-    ;KILL
-    ;Esto hace un efecto de explosión
-    ;explode 30
-    ;hacemos un sonido
-    BEEP 14
-    SOUND 5
-    ;Vamos a la bala
-    OTHER
-        ;Borramos la bala
-        REMOVE
-    ENDSPRITE
-    ;Activamos que el player pueda crar más balas
-    LET D = 1
-    ;Activamos que el boss pueda crar más balas
-    LET O = 1
+    ;Si es una bala del boss
+    IF SETTINGA = 1
+        ;Cambiamos el color del borde
+        REPEAT 6
+            BORDER 3
+            BORDER 0
+        ENDREPEAT
+
+        ;Borramos la el player
+        KILL
+        ;Esto hace un efecto de explosión
+        ;explode 30
+        ;hacemos un sonido
+        BEEP 14
+        SOUND 5
+        ;Vamos a la bala
+        OTHER
+            ;Borramos la bala
+            REMOVE
+        ENDSPRITE
+        ;Activamos que el player pueda crar más balas
+        LET D = 1
+        ;Activamos que el boss pueda crar más balas
+        LET O = 1
+    ENDIF
 ENDIF
 
 
 
 
-
+;Si es un spectrum
+IF P = 2
+    ;Lo pintamos de color azul claro
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    spriteink 5
+ENDIF
 
 

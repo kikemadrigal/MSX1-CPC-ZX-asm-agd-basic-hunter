@@ -1,0 +1,172 @@
+    output "sprites.bin"
+
+    db   #fe               ; ID archivo binario, siempre hay que poner el mismo 0FEh
+    dw   INICIO            ; dirección de inicio
+    dw   FINAL - 1         ; dirección final
+    dw   INICIO             ; dircción del programa de ejecución (para cuando pongas r en bload"nombre_programa", r)
+
+    org #77FF ; Le quitamos 1 byte para que no cuente el ret
+
+INICIO:
+    ret    
+SPRITE_DATA:
+    ; 0-
+    db 007h,00Fh,007h,007h,003h,001h,003h,00Fh
+    db 00Bh,00Bh,003h,003h,003h,003h,002h,003h
+    db 080h,0C0h,080h,0C0h,080h,080h,040h,040h
+    db 07Ch,070h,000h,0E0h,0C0h,0C0h,040h,060h
+    ; 1-
+    db 007h,00Fh,007h,007h,003h,001h,003h,003h
+    db 002h,002h,002h,003h,003h,001h,001h,001h
+    db 080h,0C0h,080h,0C0h,080h,080h,0C0h,0C0h
+    db 0FCh,0F0h,020h,0E0h,0D0h,070h,000h,080h
+    ; 2-
+    db 001h,003h,001h,003h,001h,001h,002h,002h
+    db 03Eh,00Eh,000h,007h,003h,003h,002h,006h
+    db 0E0h,0F0h,0E0h,0E0h,0C0h,080h,0C0h,0F0h
+    db 0D0h,0D0h,0C0h,0C0h,0C0h,0C0h,040h,0C0h
+    ; 3-
+    db 001h,003h,001h,003h,001h,001h,003h,003h
+    db 03Fh,00Fh,004h,007h,00Bh,00Eh,000h,001h
+    db 0E0h,0F0h,0E0h,0E0h,0C0h,080h,0C0h,0C0h
+    db 040h,040h,040h,0C0h,0C0h,080h,080h,080h
+    ; 4-
+    db 000h,000h,000h,000h,003h,000h,000h,000h
+    db 003h,002h,002h,003h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,0C0h,040h,040h,040h
+    db 0C0h,000h,000h,0E0h,000h,000h,000h,000h
+    ; 5-
+    db 000h,000h,000h,000h,007h,000h,000h,000h
+    db 000h,000h,000h,007h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,0E0h,020h,020h,020h
+    db 0E0h,020h,020h,0E0h,000h,000h,000h,000h
+    ; 6-
+    db 003h,007h,003h,003h,001h,001h,003h,003h
+    db 007h,00Bh,003h,003h,003h,001h,001h,001h
+    db 0C0h,0E0h,0C0h,0C0h,080h,080h,0C0h,0D0h
+    db 0E0h,0C0h,0C0h,0C0h,0C0h,080h,080h,040h
+    ; 7-
+    db 003h,007h,003h,003h,001h,001h,003h,00Bh
+    db 007h,003h,003h,003h,003h,001h,001h,002h
+    db 0C0h,0E0h,0C0h,0C0h,080h,080h,0C0h,0C0h
+    db 0E0h,0D0h,0C0h,0C0h,0C0h,080h,080h,080h
+    ; 8-
+    db 000h,000h,000h,000h,003h,002h,002h,003h
+    db 000h,000h,000h,003h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,0E0h,000h,000h,0E0h
+    db 020h,020h,020h,0E0h,000h,000h,000h,000h
+    ; 9-
+    db 000h,000h,000h,000h,003h,002h,002h,003h
+    db 002h,002h,002h,003h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,0E0h,000h,000h,0E0h
+    db 020h,020h,020h,0E0h,000h,000h,000h,000h
+    ; 10-
+    db 000h,000h,000h,000h,003h,002h,000h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,0E0h,020h,020h,020h
+    db 040h,080h,080h,080h,000h,000h,000h,000h
+    ; 11-
+    db 000h,000h,000h,000h,003h,002h,002h,003h
+    db 002h,002h,002h,003h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,0E0h,020h,020h,0E0h
+    db 020h,020h,020h,0E0h,000h,000h,000h,000h
+    ; 12-
+    db 000h,000h,000h,000h,000h,000h,000h,0FFh
+    db 0FFh,000h,000h,000h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,0FFh
+    db 0FFh,000h,000h,000h,000h,000h,000h,000h
+    ; 13-
+    db 000h,000h,000h,000h,000h,030h,030h,030h
+    db 030h,008h,007h,003h,003h,002h,002h,003h
+    db 000h,000h,000h,000h,020h,038h,03Eh,03Eh
+    db 00Ch,00Ch,0FCh,0FCh,012h,091h,0D8h,000h
+    ; 14-
+    db 000h,000h,000h,000h,000h,000h,000h,0F0h
+    db 030h,008h,007h,003h,003h,00Eh,004h,000h
+    db 000h,000h,000h,000h,060h,038h,03Eh,03Eh
+    db 00Ch,00Ch,0FCh,0FCh,01Ch,014h,028h,000h
+    ; 15-
+    db 000h,000h,000h,000h,004h,01Ch,07Ch,07Ch
+    db 030h,030h,03Fh,03Fh,048h,089h,01Bh,000h
+    db 000h,000h,000h,000h,000h,00Ch,00Ch,00Ch
+    db 00Ch,010h,0E0h,0C0h,0C0h,040h,040h,0C0h
+    ; 16-
+    db 000h,000h,000h,000h,006h,01Ch,07Ch,07Ch
+    db 030h,030h,03Fh,03Fh,038h,028h,014h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,00Fh
+    db 00Ch,010h,0E0h,0C0h,0C0h,070h,020h,000h
+    ; 17-
+    db 000h,000h,001h,001h,000h,000h,000h,01Fh
+    db 03Fh,03Dh,0FDh,03Dh,01Ch,00Ch,00Eh,000h
+    db 000h,000h,040h,0E0h,0E0h,0F8h,02Ch,03Ch
+    db 0F8h,0E0h,0C0h,0C0h,080h,080h,0E0h,000h
+    ; 18-
+    db 003h,002h,000h,000h,01Fh,03Fh,03Dh,07Dh
+    db 0BDh,01Ch,01Ch,021h,040h,000h,000h,000h
+    db 0E0h,0E0h,0F8h,02Ch,03Ch,0F8h,0E0h,0C0h
+    db 0C0h,0C0h,080h,000h,000h,000h,000h,000h
+    ; 19-
+    db 000h,000h,002h,007h,007h,01Fh,034h,03Ch
+    db 01Fh,007h,003h,003h,001h,001h,007h,000h
+    db 000h,000h,080h,080h,000h,000h,000h,0F8h
+    db 0FCh,0BCh,0BFh,0BCh,038h,030h,070h,000h
+    ; 20-
+    db 007h,007h,01Fh,034h,03Ch,01Fh,007h,003h
+    db 003h,003h,001h,000h,000h,000h,000h,000h
+    db 0C0h,040h,000h,000h,0F8h,0FCh,0BCh,0BEh
+    db 0BDh,038h,038h,084h,002h,000h,000h,000h
+    ; 21-
+    db 000h,000h,000h,000h,000h,000h,00Fh,01Fh
+    db 03Fh,07Fh,0DFh,06Ch,033h,034h,024h,05Ah
+    db 000h,000h,000h,000h,00Ch,01Eh,01Bh,09Fh
+    db 0CCh,0ACh,07Ch,0F8h,0E0h,0A0h,0A0h,0D0h
+    ; 22-
+    db 000h,000h,000h,000h,000h,000h,01Eh,03Fh
+    db 07Fh,0FFh,0BEh,0D9h,067h,068h,050h,080h
+    db 000h,000h,000h,000h,018h,03Ch,036h,03Eh
+    db 098h,058h,0F8h,0F0h,0C0h,040h,040h,080h
+    ; 23-
+    db 000h,000h,000h,000h,030h,078h,0D8h,0F9h
+    db 033h,035h,03Eh,01Fh,007h,005h,005h,00Bh
+    db 000h,000h,000h,000h,000h,000h,0F0h,0F8h
+    db 0FCh,0FEh,0FBh,036h,0CCh,02Ch,024h,05Ah
+    ; 24-
+    db 000h,000h,000h,000h,018h,03Ch,06Ch,07Ch
+    db 019h,01Ah,01Fh,00Fh,003h,002h,002h,001h
+    db 000h,000h,000h,000h,000h,000h,078h,0FCh
+    db 0FEh,0FFh,07Dh,09Bh,0E6h,016h,00Ah,001h
+    ; 25-
+    db 060h,060h,0C0h,0C0h,0C0h,0C0h,0C0h,0DCh
+    db 0FAh,0FDh,01Fh,01Fh,014h,034h,028h,036h
+    db 000h,081h,042h,03Ch,05Ah,0FFh,0E7h,03Ch
+    db 018h,0D8h,0F0h,0F0h,008h,038h,070h,058h
+    ; 26-
+    db 000h,038h,038h,0F0h,0C0h,0C0h,0C0h,0DCh
+    db 0FAh,0FDh,01Fh,01Fh,014h,014h,00Ah,001h
+    db 000h,000h,0C3h,03Ch,05Ah,0FFh,0E7h,03Ch
+    db 018h,0D8h,0F0h,0F0h,018h,018h,014h,00Ah
+    ; 27-
+    db 000h,081h,042h,03Ch,05Ah,0FFh,0E7h,03Ch
+    db 018h,01Bh,00Fh,00Fh,010h,01Ch,00Eh,01Ah
+    db 006h,006h,003h,003h,003h,003h,003h,03Bh
+    db 05Fh,0BFh,0F8h,0F8h,028h,02Ch,014h,06Ch
+    ; 28-
+    db 000h,000h,0C3h,03Ch,05Ah,0FFh,0E7h,03Ch
+    db 018h,01Bh,00Fh,00Fh,018h,018h,028h,050h
+    db 000h,01Ch,01Ch,00Fh,003h,003h,003h,03Bh
+    db 05Fh,0BFh,0F8h,0F8h,028h,028h,050h,080h
+    ; 29-
+    db 000h,000h,000h,000h,000h,000h,01Fh,03Fh
+    db 03Fh,0E1h,0F1h,079h,01Dh,017h,010h,018h
+    db 030h,068h,07Ch,030h,030h,018h,018h,084h
+    db 0DCh,0FCh,0F8h,0F0h,0E0h,040h,040h,060h
+    ; 30-
+    db 000h,001h,001h,000h,000h,000h,01Fh,03Fh
+    db 03Fh,0E1h,0F1h,079h,01Dh,017h,00Ch,006h
+    db 0E0h,0A0h,0F0h,0C0h,0C0h,030h,018h,084h
+    db 0DCh,0FCh,0F8h,0F0h,0E0h,040h,020h,010h
+
+
+
+
+FINAL:

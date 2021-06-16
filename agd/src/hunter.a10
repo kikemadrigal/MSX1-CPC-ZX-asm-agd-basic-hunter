@@ -144,10 +144,10 @@ IF S=0
         LET H=18
         LET I=26
     ENDIF
-    IF SCREEN=2
+    IF SCREEN=2 
         LET A=8
         LET H=18
-        LET I=25
+        LET I=24
     ENDIF
     IF SCREEN=3
         LET A=8

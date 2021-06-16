@@ -8,6 +8,11 @@ SOUND 5
 BEEP 60
 LET D=1
 SUBTRACT 1 FROM LIVES
+;Si no es un MSX (no tendrá el modo pacman para coleccionar bloques habilitado)
+IF P <> 0
+    ;Hacemos que vulva a leer el nivel
+    LET S = 0
+ENDIF
 AT 0 12
 DISPLAY DOUBLEDIGITS LIVES
 DELAY 30 

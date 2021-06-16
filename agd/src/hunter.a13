@@ -30,10 +30,18 @@ EVENT GAMEINIT
 
 ;    DIRECTION
 
-; LEFT 0
-; RIGHT 1
-; UP 2
+; LEFT 2
+; RIGHT 3
+; UP 0
 ; DOWN 3
+
+
+;       COLOURS
+; Amstrad / spectrum
+; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+; MSX
+;0 transparente, 1 negro, 2 verde normal, 3 verde claro, 4 azul oscuro, 5 azul turquesa, 6 rojo oscuro
+;7 azul claro, 8 rojo claro, 9 rosa, 10 amarillo, 11 ambar, 12 verde oscuro, 13 lila, 14 fris, 15 blanco
 
 ;Para poder ver las pantallas directamente
 ;Debug
@@ -42,11 +50,7 @@ LET SCREEN = 1
 ;Si es un spectrum 128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK 
 
 ;P (0 msx 1 amstrad 2 spectrum )
-LET P = 3
-
-IF P = 2
-   ;COLOUR 40
-ENDIF
+; por favor, especifica en el evento INTROMENU (event12) el valor de P   
 
 ;Settings
 ;ver archivo envent09 (INITSPRITE)

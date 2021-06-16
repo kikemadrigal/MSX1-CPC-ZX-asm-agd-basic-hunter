@@ -1,0 +1,13 @@
+
+Problemas
+---------
+-En amstrad no diapara cuando está abajo
+-Se vuelven a dibujar los bloques collectables
+
+
+
+
+todo
+----
+
+

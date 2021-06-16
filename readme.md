@@ -16,6 +16,10 @@ https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=hunter.ds
 
 https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?rom=hunter.rom
 
+MSX 1 basic version
+
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=hunter2.dsk
+
 
 ## Download dsk
 

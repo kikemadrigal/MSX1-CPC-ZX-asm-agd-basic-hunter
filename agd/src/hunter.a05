@@ -3,7 +3,14 @@ EVENT SPRITETYPE5
 ;El sstinga será par alamacenar la dirección
 ;El settingb como contandor de impactos de bala
 ;at 3 21
-;DISPLAY DOUBLEDIGITS SETTINGB
+;DISPLAY DOUBLEDIGITS SETTINGB 
+
+
+;Si es unspectrum
+IF P = 2
+    ;Lo pintamos de color blanco
+    spriteink 7
+ENDIF
 
 
 IF A<>0
@@ -51,10 +58,14 @@ ENDIF
 
 ;colisión con la bala
 IF COLLISION 1
+    SOUND 2
+    BEEP 2
     ADD 1 TO SETTINGB
     ;Si los impactos de bala son mayores de 19
     IF SETTINGB >= 10
         EXPLODE 30
+        SOUND 4
+        BEEP 35
         OTHER
             REMOVE
         ENDSPRITE
@@ -65,3 +76,10 @@ IF COLLISION 1
 
 ENDIF
 
+
+
+;Si es unspectrum
+IF P = 2
+    ;Lo pintamos de color amarillo 
+    spriteink 6
+ENDIF
