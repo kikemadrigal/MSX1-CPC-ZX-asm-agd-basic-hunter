@@ -12,13 +12,13 @@
 ## MSX 1 version
 
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=MSX/hunter.dsk
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunter.dsk
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?rom=MSX/hunter.rom
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?rom=hunter.rom
 
 MSX 1 basic version
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=MSX/hunter2.dsk
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunter2.dsk
 
 
 ### Download dsk
