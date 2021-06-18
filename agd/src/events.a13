@@ -45,7 +45,7 @@ EVENT GAMEINIT
 
 ;Para poder ver las pantallas directamente
 ;Debug
-LET SCREEN = 14
+LET SCREEN = 18
 ;SI C == 1 pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima, mirar la 3 variable abajp
 ;Si es un spectrum 128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK 
 
@@ -64,7 +64,7 @@ LET LIVES = 3
 
         LET A = 1 ; Objetivos que hay que coger para podr pasar de pantalla,aparece en el mainloop event10 y en el collect block event20
         LET B = 100 ; variable utilizada para contar las bala
-LET C = 0 ; pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima
+LET C = 1 ; pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima
                 LET D = 1 ; Solo se permite 1 bala a la vez para el player
                                         ;LET E = 0 ; Controla que el interruptor esté pulsado o no
                                 LET F = 0 ; Utilizada para la posición x del boss

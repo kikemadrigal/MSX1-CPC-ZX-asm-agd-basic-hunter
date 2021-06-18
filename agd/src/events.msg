@@ -1,7 +1,7 @@
 DEFINEMESSAGES
 
-"CLEAR SCREEN!!"
-"LEVEL CLEAR!!!!!"
+"Completed screen"
+"Completed level"
 "Game over"
 "score: "
 "New high score"

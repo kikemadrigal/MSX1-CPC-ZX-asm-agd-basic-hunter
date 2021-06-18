@@ -1,13 +1,22 @@
 
 Problemas
 ---------
--En amstrad no diapara cuando está abajo
--Se vuelven a dibujar los bloques collectables
 
+-Como evitar que se vuelvan a dibujar los bloques collectables en amstrad y spectrum?
+-Como poner la música en amstrad?
+-Parece que no se quedan los mnsajes
 
+"Completed screen"
+"Completed level"
+"Game over"
+"score: "
+"New high score"
 
 
 todo
 ----
-
+-Arrgla los malos
+-Añadele tu muscia
+-Que se pare la musica cuando se cojan todos los objetos
+-Pon en la intro los muñecos bailando
 

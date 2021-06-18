@@ -5,21 +5,8 @@ EVENT MAINLOOP1
 ;display J
 ;at 3 25
 ;display K
-;Si quedan objetos por recoger
 
 
-;LET T = 60                      ; 60 seconds
-;LET S = 0                       ; 25ths of a second
-; Update the bonus timer.
-;ADD 1 TO S
-;IF S > 25
-;    SUBTRACT 25 FROM S
-;    IF T > 0
-;        SUBTRACT 1 FROM T
-;    ENDIF
-;    AT 12 26
-;    DISPLAY SECONDS T
-;ENDIF
 ;Si quedan cestas por recoger
 IF A > 0 
     ;Reloj (variables R=décimas de segundo, T=Segundos, M=minutos)
@@ -61,7 +48,9 @@ IF A > 0
         ENDIF 
     ENDIF
 ELSE
-    ;MUSIC 0 0
+    IF P = 0
+        MUSIC 0 0
+    ENDIF
 ENDIF
 
 
@@ -72,7 +61,7 @@ ENDIF
 
 ; Si no está en modo jefe de la fase
 IF J=0
-    ;Y no quedan bolsas por coger
+    ;Y no quedan cestas por recoger
     IF A<=0
         ;Mostramos el mensaje de miaión cumplida
         AT 9 9           
@@ -115,7 +104,12 @@ IF J=0
         ;Borramos el mensaje  
         REDRAW    
         CLS    
-        SCREENRIGHT
+        ; Para entender esto tienes que mirar el mapa
+        IF SCREEN = 15
+            LET SCREEN = 16
+        ELSE
+            SCREENRIGHT
+        ENDIF
         ;Marcamos a en 0 para que vuelva a tomar el valor de C con los bloques que hay que coger por pantalla
         LET S = 0
     ENDIF
@@ -277,14 +271,14 @@ IF S=0
         LET I=28
     ENDIF
     IF SCREEN=14
-        LET A=8
+        LET A=7
         LET H=8
         LET I=3
     ENDIF
     IF SCREEN=15
         LET A=8
-        LET H=17
-        LET I=20
+        LET H=3
+        LET I=22
     ENDIF
     IF SCREEN=16
         LET A=9

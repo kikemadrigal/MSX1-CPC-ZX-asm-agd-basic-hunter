@@ -1,0 +1,33 @@
+EVENT COMPLETEDGAME
+;MUSIC 3 1
+CLS
+
+at 2 5
+PRINT "Has ganado!!!"
+at 5 0
+PRINT "Creditos"
+at 6 0
+PRINT "--------"
+at 9 0
+PRINT "Logica: Kike Madrigal"
+at 11 0
+PRINT "Programacion: Kike Madrigal"
+at 13 0
+PRINT "Graficos: Kike Madrigal"
+at 15 0
+PRINT "Musica y efectos: Kike Madrigal"
+
+
+
+;DELAY 255        
+;DELAY 255        
+;DELAY 255 
+
+
+
+AT 19 0
+PRINT "Presione una tecla para continuar"
+WAITKEY
+
+
+

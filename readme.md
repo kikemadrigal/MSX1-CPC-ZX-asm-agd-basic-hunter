@@ -9,26 +9,48 @@
 
 🕹️🕹️🕹️🕹️🕹️🕹️
 
-MSX 1 version
+## MSX 1 version
 
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=hunter.dsk
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=MSX/hunter.dsk
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?rom=hunter.rom
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?rom=MSX/hunter.rom
 
 MSX 1 basic version
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=hunter2.dsk
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/?diska=MSX/hunter2.dsk
 
 
-## Download dsk
+### Download dsk
 
 Descárgate el archivo .dsk MSX1 version 😀
 
-https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/MSX/hunter.dsk
 
+
+## Amstrad version 
+
+Descárgate el dsk
+
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=MSX/hunter.dsk
+
+O descárgate el cdt
+
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=MSX/hunter.cdt
+
+Después utiliza esta web https://www.retrovm.com/  , en la parte de abajo a la izquierda pincha en choose configuration y elige 464, después pincha en la carpeta y busca l juego que te has descargado.
 
 y abrelo con tu emulador favorito
+
+## Spectrum version
+
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/ZX/index.html
+
+### Donload tap
+
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/ZX/hunter.tap
+
+
 # AMSTRAD CPC AGD 
 
 ## Spriteset
