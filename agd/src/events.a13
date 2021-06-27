@@ -1,5 +1,5 @@
 EVENT GAMEINIT 
-;TAS QUEDAO PROBANDO EL 12
+
 ;      Eventos
 
 ;1 - Intro/Menu - 12
@@ -18,7 +18,7 @@ EVENT GAMEINIT
 ;endloop
 
 
-;     Sonidos
+;     Sonidos / Sounds
 
 ;1 Jumping
 ;2 Explosion, disparo boss
@@ -30,9 +30,9 @@ EVENT GAMEINIT
 
 ;    DIRECTION
 
-; LEFT 2
-; RIGHT 3
-; UP 0
+; LEFT 1
+; RIGHT 0
+; UP 2
 ; DOWN 3
 
 
@@ -45,7 +45,7 @@ EVENT GAMEINIT
 
 ;Para poder ver las pantallas directamente
 ;Debug
-LET SCREEN = 18
+LET SCREEN = 1
 ;SI C == 1 pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima, mirar la 3 variable abajp
 ;Si es un spectrum 128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK 
 
@@ -59,14 +59,14 @@ LET SCREEN = 18
 LET LIVES = 3
 
 
-;Libres P y L
+
 ;GEN.| PLAYER | BALA | ANIMAL | BOSS | SWITCH 
 
         LET A = 1 ; Objetivos que hay que coger para podr pasar de pantalla,aparece en el mainloop event10 y en el collect block event20
         LET B = 100 ; variable utilizada para contar las bala
-LET C = 1 ; pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima
+LET C = 0   ; pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima
                 LET D = 1 ; Solo se permite 1 bala a la vez para el player
-                                        ;LET E = 0 ; Controla que el interruptor esté pulsado o no
+                                        LET E = 0 ; número de balas disparadas por el player
                                 LET F = 0 ; Utilizada para la posición x del boss
                                 LET G = 0 ; Utilizada para la posición y del boss
                                         LET H = 0 ; Posición de las puertas del interruptor por pantalla eje y
@@ -74,6 +74,7 @@ LET C = 1 ; pone el modo test y las colisiones no funcionan excepto el timepo, l
                                 LET J = 0 ; Determina cuando entramos en la pantalla del boss que siempre es la 10 (o la 9 si contamos con el 0)
                                 LET K = 0 ; Determina la energía del boss, el primer jefe tendrá una energía de 100, utilizada en mainloop(event10) y en el boss (event03)   
 LET M = 2 ; Minutos, esta variable se inicializará con 2 minutos, aparece en restartsvreen(event14) y en mainloop (event10)   
+                                LET L = 0 ; Almacena el segundo actual para que el boss no vuelva a disparar en ese instante
                                 LET N = 0 ; Para mostrar la barra de enerhía del boss                                 
                                 LET O = 1 ; Utilizada para que el boss solo dispare una vez, la 1 vez estará activada (1), aparece en todas las colisiones (ebemt)
 LET P = P ;Indica el target , 0 MSX, 1 Amstrad, 2 spectrum, está evento INTROMENU (event12) por motivos de carga de música 
@@ -92,6 +93,21 @@ LET T = 60 ; Segundos, esta variable se inicializará con 60 segundos, aparece e
 
 
 
+;Types (ver event09 INITSPRITE)
+;Type 0 ;determina el tipo de player, por defecto en MPAGD
+        ;Settinga 
+        ;Settingb
+        ;image del 0 al 8
+
+;Type 1 ;Es el comportamiento de la bala
+        ;Settinga determina si la ha creado el player (0), o el boss (1)
+        ;Settingb
+        ;image 9
+ ;Type 2 ;Es el comportamiento del animal
+        ;Settinga determina si es un zorro(0,image 10y 11), un conejo(1,image 12 y 23)
+        ;        una tortuga, una cabra, un cisne, un pinguino, una bola
+        ;Settingb
+        ;image del 10 al 24      
 
 
 

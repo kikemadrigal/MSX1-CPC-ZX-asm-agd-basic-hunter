@@ -87,9 +87,6 @@ IF A<>0
     ANIMATE SLOW
 ENDIF
 
-;SUBTRACT 16 FROM X
- ;ADD 16 TO X
-
 
 IF COLLISION PLAYER
     ;La plataforma que se mueve horizontal con el player
@@ -140,15 +137,14 @@ ENDIF
 IF COLLISION 1
     ;Si no es una bola, (las bolas no se pueden destruir)
     IF SETTINGA < 6
-        ;Esto hace un efecto de explosión
-        EXPLODE 30
         ;Vamos a la bala
         OTHER
-
             ;si la bala proviene del player
             IF SETTINGA = 0
                 ;Almcenamos que se está en modo player
                 LET Q = 0
+                ;Esto hace un efecto de explosión
+                EXPLODE 30
             ;Si la bala proviene del boss
             ELSE
                 LET Q = 1
@@ -156,7 +152,7 @@ IF COLLISION 1
             ;Activamos que el player pueda crar más balas
             LET D = 1
             ;Activamos que el boss pueda crar más balas
-            LET O = 1
+            ;LET O = 1
             
         ENDSPRITE
 

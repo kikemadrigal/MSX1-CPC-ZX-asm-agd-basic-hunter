@@ -26,12 +26,12 @@ IF A > 0
                 ENDIF
             ENDIF
         ENDIF
-        at 2 27
+        at 1 27
         ;Con soubledigits obligamos a que siempre se muestren 2 digitos, si no llega se pone un 0
         DISPLAY DOUBLEDIGITS M
-        AT 2 29
+        AT 1 29
         PRINT ":"
-        at 2 30
+        at 1 30
         DISPLAY DOUBLEDIGITS T
         ;Se pone el borde rojo cuando quedan menos de 10 segundos
         IF M = 0
@@ -49,7 +49,7 @@ IF A > 0
     ENDIF
 ELSE
     IF P = 0
-        MUSIC 0 0
+        ;MUSIC 0 0
     ENDIF
 ENDIF
 
@@ -130,9 +130,9 @@ ELSE
             AT 9 9           
             MESSAGE 1
             ;Hacemos una pequeña pausa
-            DELAY 100    
+            DELAY 200    
             ;Borramos el mensaje  
-            REDRAW    
+            REDRAW            
             CLS    
             SCREENRIGHT
             LET C = 0 
@@ -210,7 +210,7 @@ IF S=0
     ENDIF
     IF SCREEN=9
         LET A=1
-        LET K=50
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 
@@ -218,21 +218,19 @@ IF S=0
             
         ;Mostramos la información del boss
         ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
-        ;at 2 2
-        ;print "Boss:"
-        ;at 2 7
-        ;display DOUBLEDIGITS K
-        ;AT 2 10
-        ;PRINT "            "
-        ;;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
-        ;LET N = 55
-        ;LET W = K
+        at 1 2
+        print "Boss:"
+        at 1 7
+        display DOUBLEDIGITS K
+        ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
+        LET N = 90
+        LET W = K
         ;ADD N TO W
         ;WHILE N < W
         ;    ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde empezará a dibujarse la barra de energía del boss
-        ;    LET V = 16
+        ;    LET V = 8
         ;    ;Haremos clolumnas de 8 pixeles
-        ;    WHILE V < 32
+        ;    WHILE V < 16
         ;        ;PLOT posición_X posición_y
         ;        PLOT N V
         ;        ADD 1 TO V
@@ -297,9 +295,33 @@ IF S=0
     ENDIF
     IF SCREEN=19
         LET A=1
-        LET K=50
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
+
+
+        ;Mostramos la información del boss
+        ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
+        at 1 2
+        print "Boss:"
+        at 1 7
+        display DOUBLEDIGITS K
+        ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
+        LET N = 90
+        LET W = K
+        ;ADD N TO W
+        ;WHILE N < W
+        ;    ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde empezará a dibujarse la barra de energía del boss
+        ;    LET V = 8
+        ;    ;Haremos clolumnas de 8 pixeles
+        ;    WHILE V < 16
+        ;        ;PLOT posición_X posición_y
+        ;        PLOT N V
+        ;        ADD 1 TO V
+        ;    ENDWHILE
+        ;    ADD 1 TO N
+        ;ENDWHILE
+
     ENDIF
 
 
@@ -315,7 +337,7 @@ IF S=0
     ;I=X
     IF SCREEN=20
         LET A=8 
-        LET H=6
+        LET H=5
         LET I=3
     ENDIF
     IF SCREEN=21
@@ -360,9 +382,34 @@ IF S=0
     ENDIF
     IF SCREEN=29
         LET A=1
-        LET K=30
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
+
+
+
+                ;Mostramos la información del boss
+        ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
+        at 1 2
+        print "Boss:"
+        at 1 7
+        display DOUBLEDIGITS K
+        ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
+        LET N = 90
+        LET W = K
+        ;ADD N TO W
+        ;WHILE N < W
+        ;    ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde empezará a dibujarse la barra de energía del boss
+        ;    LET V = 8
+        ;    ;Haremos clolumnas de 8 pixeles
+        ;    WHILE V < 16
+        ;        ;PLOT posición_X posición_y
+        ;        PLOT N V
+        ;        ADD 1 TO V
+        ;    ENDWHILE
+        ;    ADD 1 TO N
+        ;ENDWHILE
+ 
     ENDIF
 
     ;Cestas por coger

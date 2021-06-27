@@ -7,7 +7,7 @@ EVENT SPRITETYPE3
 ;at 3 21
 ;DISPLAY O
 ;at 3 24
-;DISPLAY Z
+;DISPLAY D
 ;at 3 26
 ;Dirección bala para que salga a la derecha o i<quierda
 ;display U
@@ -30,13 +30,14 @@ IF R = 1
     ENDIF
 ENDIF
 
-;Se moverá de izquierda a derecha casi todo el tiempo
-IF Z>=1
+;Se moverá casi todo el tiempo de izquiera a derecha de arriba a abajo,etc y solo atacará al  player cuando Z=0
+IF Z>=2
     ;Si es el boss 0
     IF SETTINGA = 0
         IF DIRECTION = LEFT
             ;Si puede ir a la izquierda lo movemos a la izquierda
             IF CANGOLEFT
+                ;y si no hay colisión del sprite de la parte de abajo (ya que son 2 sprites)
                 SPRITELEFT
             ;Si no puede ir a la izquierda es que hay un bloque pared
             ELSE
@@ -74,107 +75,105 @@ IF Z>=1
     ENDIF
     ;Si es el jefe final irá todo el rato a por ti pero un poco más despacio
     IF SETTINGA = 2
-        IF Z=2
+        GETRANDOM 100
+        IF RND < 20
             IF Y > W
                 IF CANGOUP
-                    SUBTRACT 1 FROM Y
-                    LET DIRECTION = UP
+                    SPRITEUP
                 ENDIF
             ENDIF
             IF Y < W
                 IF CANGODOWN
-                    ADD 1 TO Y
-                    LET DIRECTION = DOWN
+                    SPRITEDOWN
                 ENDIF
             ENDIF
             IF X > V
                 IF CANGOLEFT
-                    SUBTRACT 1 FROM X
-                    LET DIRECTION = LEFT
+                    SPRITELEFT
                 ENDIF
             ENDIF
             IF X < V
                 IF CANGORIGHT
-                    ADD 1 TO X
-                    LET DIRECTION = RIGHT
+                    SPRITERIGHT
                 ENDIF
             ENDIF
         ENDIF
     ENDIF
 ; si Z vale 0 atacará al player
 ELSE
-    IF Y > W
-        IF CANGOUP
-            SPRITEUP
+    GETRANDOM 100
+    IF RND < 20
+        IF Y > W
+            IF CANGOUP
+                SPRITEUP
+            ENDIF
+        ENDIF
+        IF Y < W
+            IF CANGODOWN
+                SPRITEDOWN
+            ENDIF
+        ENDIF
+        IF X > V
+            IF CANGOLEFT
+                SPRITELEFT
+            ENDIF
+        ENDIF
+        IF X < V
+            IF CANGORIGHT
+                SPRITERIGHT
+            ENDIF
         ENDIF
     ENDIF
-    IF Y < W
-        IF CANGODOWN
-            SPRITEDOWN
-        ENDIF
-    ENDIF
-    IF X > V
-        IF CANGOLEFT
-            SPRITELEFT
-        ENDIF
-    ENDIF
-    IF X < V
-        IF CANGORIGHT
-            SPRITERIGHT
-        ENDIF
-    ENDIF
-
 
 
     ;Crearemos un disparo si la O vale 1
-    IF O = 1
-        ;Hacemos un sonido
-        IF P = 0
-            SOUND 2
-        ELSE
-            BEEP 50
-        ENDIF
-        
-        
-        SPAWN 1 9    
-        LET V = X
-        LET W = Y
-        ;Vamos a asignar la U que es la futura dirección de bala
-        ;Si la dirección actual del boss es la derecha
-        IF DIRECTION = 1
-            ADD 20 TO V
-            LET U = 1
-        ; Si no es la derecha puede ser izquierda, arriba o abajo
-        ELSE
-            IF DIRECTION = LEFT
-                SUBTRACT 16 FROM V
-                LET U = 0
+    ;IF O = 1
+        IF L <> Z
+            ;Hacemos un sonido
+            IF P = 0
+                SOUND 2
             ELSE
-               GETRANDOM 2
-               IF RND = 0
-                   SUBTRACT 20 FROM V
-                   LET U = LEFT  
-               ELSE
-                   ADD 20 TO V
-                   LET U = RIGHT
-               ENDIF
+                BEEP 50
             ENDIF
+            
+            ;Creamos una bala con la imagen 9
+            SPAWN 1 9    
+            LET V = X
+            LET W = Y
+            ;Vamos a asignar la U que es la futura dirección de bala
+            ;Si la dirección actual del boss es la derecha vamos a añadir o quitarle los 16px
+            ;del sprite para que no marque colisión
+            IF DIRECTION = 1
+                ADD 20 TO V
+            ; Si no es la derecha puede ser izquierda, arriba o abajo
+            ELSE
+                IF DIRECTION = LEFT
+                    SUBTRACT 16 FROM V
+                ELSE
+                GETRANDOM 2
+                IF RND = 0
+                    SUBTRACT 20 FROM V
+                    LET U = LEFT  
+                ELSE
+                    ADD 20 TO V
+                    LET U = RIGHT
+                ENDIF
+                ENDIF
+            ENDIF
+            ;Con esto configuramos los parámetros de la bala
+            SPAWNED
+                ;En settina le ponemos que es de tipo 1 boss
+                LET SETTINGA = 1
+                ;Le ponemos el sprite de la bala
+                LET IMAGE = 29
+                LET DIRECTION = U
+                LET X = V
+                LET Y = W
+            ENDSPRITE
+            ;Almacenamos el contador para que no se vuelva a disparar en ese segundo
+            LET L = Z
         ENDIF
-        ;Con esto configuramos los parámetros de la bala
-        SPAWNED
-        ;En settina le ponemos que es de tipo 1 boss
-        LET SETTINGA = 1
-        ;Le ponemos el sprite de la bala
-        LET IMAGE = 29
-        LET DIRECTION = U
-        LET X = V
-        LET Y = W
-        ENDSPRITE
-        ;Ponemos que se ha pulsado el disparo para que no se vuelva a dispara
-        ; hata que el evento tipo1(el del disparo) ponga en 1 la cariable porque se ha salido o 
-        ;ha chocado, en todos los eventos colisión con el disparo también se debe poner LET d=1
-        LET O=0
-    ENDIF
+    ;ENDIF
 ENDIF
 ;Las animaciones las controlamos nostros con frame
 ;ANIMATE SLOW
@@ -191,60 +190,63 @@ IF COLLISION PLAYER
 ENDIF
 
 ;Si hay una colisión con el disparo
-    IF COLLISION 1
-        ; Hacemos un sonido
-        IF P = 0
-            SOUND 4
-        ELSE
-            BEEP 14
-        ENDIF
-        ;K=Energía del enemigo
-        SUBTRACT 1 FROM K
-        ; Si al boss no le queda energía lo quitamos
-        IF K <= 0
-            EXPLODE 30
-            REMOVE
-            ;Le ponemos que no le quedan capturas para que se paren los muñecos
-            LET A = 0
-        ENDIF
-        ;OTHER
-        ;REMOVE
-        ;ENDSPRITE
-        LET D=1
-
-
-
-        ;Mostramos la información del boss
-        ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
-        at 2 0
-        print "Boss:"
-        at 2 7
-        display DOUBLEDIGITS K
-        ;AT 3 10
-        ;PRINT "               "
-        ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
-        LET N = 90
-        LET L = K
-        ADD N TO L
-        WHILE N < L
-            ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde emepezará a dibujarse labarra de energía
-            LET V = 16
-            ;Haremos clolumnas de 8 pixeles
-            WHILE V < 24
-                
-                ;PLOT posición_X posición_y
-                PLOT N V
-                ADD 1 TO V
-                
-            ENDWHILE
-            ADD 1 TO N
-        ENDWHILE
+IF COLLISION 1
+    ; Hacemos un sonido
+    IF P = 0
+        SOUND 4
+    ELSE
+        BEEP 14
     ENDIF
+    ;K=Energía del enemigo
+    SUBTRACT 1 FROM K
+    ; Si al boss no le queda energía lo quitamos
+    IF K <= 0
+        EXPLODE 30
+        REMOVE
+        ;Le ponemos que no le quedan capturas para que se paren los muñecos
+        LET A = 0
+        AT 1 2
+        PRINT "           "
+    ELSE
+        OTHER
+            REMOVE
+        ENDSPRITE
+    ENDIF
+    ;Volvemos a activar los disparos del player
+    LET D = 1
+    ;let O = 1
 
 
 
-
+    ;Mostramos la información del boss
+    ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
+    at 1 2
+    print "Boss:"
+    at 1 7
+    display DOUBLEDIGITS K
+    ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
+    ;LET N = 90
+    ;LET L = K
+    ;ADD N TO L
+    ;WHILE N < L
+    ;    ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde emepezará a dibujarse labarra de energía
+    ;    LET V = 8
+    ;    ;Haremos clolumnas de 8 pixeles
+    ;    WHILE V < 16
+    ;        
+    ;        ;PLOT posición_X posición_y
+    ;        PLOT N V
+    ;        ADD 1 TO V
+    ;        
+    ;    ENDWHILE
+    ;    ADD 1 TO N
+    ;ENDWHILE
 ENDIF
+
+
+
+
+
 
 
 

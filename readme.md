@@ -3,11 +3,16 @@
 💟 MSX Murcia
 😀
 
-# Intructions
 
-## Play online
+# Play online
 
 🕹️🕹️🕹️🕹️🕹️🕹️
+
+## Android version
+
+### Download
+
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/hunter.apk
 
 ## MSX 1 version
 
@@ -30,13 +35,13 @@ https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/
 
 ## Amstrad version 
 
-Descárgate el dsk
+Descárgate el disco
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=MSX/hunter.dsk
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/CPC/hunter.dsk
 
-O descárgate el cdt
+O descárgate la cassette
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=MSX/hunter.cdt
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/CPC/hunter.cdt
 
 Después utiliza esta web https://www.retrovm.com/  , en la parte de abajo a la izquierda pincha en choose configuration y elige 464, después pincha en la carpeta y busca l juego que te has descargado.
 

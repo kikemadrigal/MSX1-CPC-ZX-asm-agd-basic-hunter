@@ -12,11 +12,11 @@ EVENT PLAYER
 
 ;Debug para mostrar los valores de las variablesd del jugador
 ;at 2 0
-;display TRIPLEDIGITS X
+;display TRIPLEDIGITS D
 ;at 2 4
-;display TRIPLEDIGITS Y
+;display TRIPLEDIGITS E
 ;at 2 8
-;display TRIPLEDIGITS LEFTEDGE
+;display TRIPLEDIGITS T
 ;at 2 12
 ;display TRIPLEDIGITS RIGHTEDGE
 ;at 2 16
@@ -55,7 +55,7 @@ if OBJ=3
     IF P = 0
         SOUND 5
     ELSE
-        BEPP 70
+        BEEP 70
     ENDIF
     ;Motramos el número de balas
     AT 0 23
@@ -96,13 +96,7 @@ IF KEY LEFT
         EXIT
     ELSE
         IF CANGOLEFT
-            ;IF P = 1
-            ;    REPEAT 2
-            ;        SPRITELEFT
-            ;    ENDREPEAT
-            ;ELSE
-                SPRITELEFT
-            ;ENDIF
+            SPRITELEFT
             ANIMATE
         ENDIF
     ENDIF
@@ -118,15 +112,7 @@ IF KEY RIGHT
         EXIT
     ELSE
         IF CANGORIGHT
-            ;Como en amstrad va un poco lento le he metido esto
-            ; Si el target es amstrad
-            ;IF P = 1
-            ;    REPEAT 2
-            ;        SPRITERIGHT
-            ;    ENDREPEAT
-            ;ELSE
-                SPRITERIGHT
-            ;ENDIF
+            SPRITERIGHT
             ANIMATE
         ENDIF
     ENDIF
@@ -155,28 +141,33 @@ ENDIF
 
 
 IF KEY FIRE
-    ;Si está activado el poder crear balas
-    IF D=1
-        ;Si quedan le quedanbalas al player
+    ;Si es contador de número de disparos es menor que 2
+    IF D < 2
+        ;Con esto hacemos que solo se puedan disparar 5 balas por segundo
+        ;Guardamos el segundo en el que estamos en la variable E
+        ADD 1 TO D
+        LET E = T
+        ;Si quedan le quedan balas al player
         IF B>0
             IF P = 0
                 SOUND 2
             ELSE
-                Beep 50
+                BEEP 50
             ENDIF
             SPAWN 1 9
             LET U = DIRECTION
             LET V= X
             LET W= Y
-            IF DIRECTION = 3
-                ;ADD 16 TO V
+            ;Hay que sumarle unos pixeles a la derecha e izquierda a la bala
+            IF DIRECTION = LEFT
+                SUBTRACT 20 FROM V 
             ELSE
-                ;SUBTRACT 16 FROM V
+                ADD 20 TO V
             ENDIF
             ;Con esto configuramos los parámetros de la bala
             SPAWNED
                 LET DIRECTION = U
-                ; Le decimos que el disparo es de tipo player
+                ; Le decimos que el disparo proviene del player
                 LET SETTINGA = 0
                 LET X= V
                 LET Y= W
@@ -190,12 +181,21 @@ IF KEY FIRE
         ELSE
             KILL
             ADD 100 TO B
+            ; Ponemos el mensaje de qu elas balas se agotaron
+            AT 9 9           
+            MESSAGE 5
+            ;Hacemos una pequeña pausa
+            DELAY 200    
+            ;Borramos el mensaje  
+            REDRAW  
+            LET D = 0
+        ENDIF
+    ELSE
+    ;Cuando el segundo sea distinto reiniciaremos la variable que cuenta los disparos
+        IF T <> E
+            LET D = 0
         ENDIF
     ENDIF
-    ;Ponemos que se ha pulsado el disparo para que no se vuelva a dispara
-    ; hata que el evento tipo1(el del disparo) ponga en 1 la cariable porque se ha salido o 
-    ;ha chocado, en todos los eventos colisión con el disparo también se debe poner LET d=1
-    LET D=0
 ENDIF
 
 
@@ -229,37 +229,26 @@ ENDIF
 
 
 ;Colision del player con la bala
-IF COLLISION 1
-    ;Si es una bala del boss
-    IF SETTINGA = 1
-        ;Cambiamos el color del borde
-        REPEAT 6
-            BORDER 3
-            BORDER 0
-        ENDREPEAT
-
-        ;Borramos la el player
-        KILL
-        ;Esto hace un efecto de explosión
-        ;explode 30
-        ;hacemos un sonido
-        BEEP 14
-        IF P = 0
-            SOUND 5
-        ELSE
-            Beep 70
-        ENDIF
-        
-        ;Vamos a la bala
-        OTHER
-            ;Borramos la bala
-            REMOVE
-        ENDSPRITE
-        ;Activamos que el player pueda crar más balas
-        LET D = 1
-        ;Activamos que el boss pueda crar más balas
-        LET O = 1
+IF COLLISION 1   
+    ;Esto hace un efecto de explosión
+    IF P = 0
+        SOUND 5
+    ELSE
+        Beep 70
     ENDIF
+   
+    ;Vamos a la bala
+    OTHER
+        ;Si es una bala del boss
+        IF SETTINGA = 1
+            ;El evento Killplayer hace varias
+            KILL
+        ;Si la bala es del player
+        ELSE
+            ;Activamos que el player pueda crar más balas
+            LET D = 1
+        ENDIF
+    ENDSPRITE
 ENDIF
 
 

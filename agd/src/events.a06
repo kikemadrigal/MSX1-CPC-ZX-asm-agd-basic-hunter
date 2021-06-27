@@ -1,11 +1,15 @@
 ;El sprite que sigue a otro sprite
 EVENT SPRITETYPE6
 
-IF Z = 0
-    ;LET FRAME = 0
-ELSE
-    ;LET FRAME = 1
+;Si es un spectrum
+IF P = 2
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    ;Lo pintamos de color blanco
+    spriteink 7
 ENDIF
+
+
+
 
 ;Si es el 2 sprite del player
 IF SETTINGA = 0
@@ -57,49 +61,52 @@ IF SETTINGA = 1
             REMOVE
             ;Le ponemos que no le quedan capturas para que se paren los muñecos
             LET A = 0
+            AT 1 2
+            PRINT "           "
+        ELSE
+            OTHER
+                REMOVE
+            ENDSPRITE
         ENDIF
-        ;OTHER
-        ;REMOVE
-        ;ENDSPRITE
+        ;Volvemos a activar los diapros del player
         LET D=1
 
 
 
         ;Mostramos la información del boss
         ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
-        at 2 0
+        at 1 2
         print "Boss:"
-        at 2 7
+        at 1 7
         display DOUBLEDIGITS K
-        ;AT 3 10
-        ;PRINT "               "
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
         LET N = 90
         LET L = K
-        ADD N TO L
-        WHILE N < L
-            ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde emepezará a dibujarse labarra de energía
-            LET V = 16
-            ;Haremos clolumnas de 8 pixeles
-            WHILE V < 24
-                
-                ;PLOT posición_X posición_y
-                PLOT N V
-                ADD 1 TO V
-                
-            ENDWHILE
-            ADD 1 TO N
-        ENDWHILE
+        ;ADD N TO L
+        ;WHILE N < L
+        ;    ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde emepezará a dibujarse labarra de energía
+        ;    LET V = 8
+        ;    ;Haremos clolumnas de 8 pixeles
+        ;    WHILE V < 16
+        ;        
+        ;        ;PLOT posición_X posición_y
+        ;        PLOT N V
+        ;        ADD 1 TO V
+        ;        
+        ;    ENDWHILE
+        ;    ADD 1 TO N
+        ;ENDWHILE
     ENDIF
-
-
-
-
 ENDIF
 
 
 
-
+;Si es un spectrum
+IF P = 2
+    ;Lo pintamos de color azul claro
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    spriteink 3
+ENDIF
 
 
 

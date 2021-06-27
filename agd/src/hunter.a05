@@ -59,12 +59,12 @@ ENDIF
 ;colisión con la bala
 IF COLLISION 1
     IF P = 0
-        SOUND 2
+        SOUND 4
     ELSE
         BEEP 2
     ENDIF
     ADD 1 TO SETTINGB
-    ;Si los impactos de bala son mayores de 19
+    ;Si los impactos de bala son mayores de 10
     IF SETTINGB >= 10
         EXPLODE 30
         IF P = 0
@@ -76,9 +76,15 @@ IF COLLISION 1
             REMOVE
         ENDSPRITE
         REMOVE
-        LET D=1
+    ;Si los disparos son menos de 10
+    ELSE
+        ;Borramo solo la bala
+        OTHER
+            REMOVE
+        ENDSPRITE
     ENDIF
-
+    ;Volvemos a activar la bala
+    LET D=1
 
 ENDIF
 

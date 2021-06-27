@@ -8,7 +8,7 @@ EVENT INITSPRITE
 if type=0
 	spriteink 6
 	LET DIRECTION = RIGHT
-   LET SETTINGA = 0
+   ;LET SETTINGA = 0
 endif
 
 

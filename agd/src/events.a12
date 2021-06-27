@@ -1,6 +1,6 @@
 EVENT INTROMENU
 ;0 MSX,1 amstrad, 2spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
-LET P = 1
+LET P = 0
 
 
 IF P = 0
@@ -8,7 +8,7 @@ IF P = 0
     ;DEFINEMUSIC "alice.pt3"
     ;DEFINEMUSIC "Music2.pt3"
     ;MUSIC 1 1
-    ;en el evento EVENT RESTARTSCREEN (event14) ponemosMUSIC 2 1
+    ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0)
 ELSE
     SOUND 1
     REPEAT 20
@@ -26,10 +26,11 @@ ENDIF
 ;7 azul claro, 8 rojo claro, 9 rosa, 10 amarillo, 11 ambar, 12 verde oscuro, 13 lila, 14 fris, 15 blanco
 ;Establecemos el color del borde (0 negro)
 BORDER 0
+
 ;Establecemos el color del borde (0 begro)
-;PAPER 0
+PAPER 0
 ;Establecemos el color de la tinta (7 blanco)
-;INK 7
+INK 7
 ;Esto utiliza la máscara ;128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK
 IF P = 2
     COLOUR 7
@@ -39,7 +40,7 @@ CLS
 LET CONTROL = 99
 WHILE CONTROL >= 99
     AT 2 7
-    PRINT "MSX Murcia presents:"
+    PRINT "8 bit Murcia presents:"
     AT 4 7
     PRINT "El cazador/The hunter"
     AT 8 10
