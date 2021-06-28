@@ -13,23 +13,20 @@ ENDIF
 
 ;Si es el 2 sprite del player
 IF SETTINGA = 0
-    ; Si es MSX
-    IF P = 0
-        LET X = V
-        LET Y = W
-    ELSE
+    LET X = V
+    LET Y = W
+    ;Com oen amstrad y spectrum no queremos un segundo sprite
+    ;Con esto quitamos el 2 sprite del player que le metemos para que tenga más colorines en MSX 1
+    IF COLLISION 0
         ;Si es amstrad
         IF P = 1
-            LET X = 0
-            LET Y = 212
+            REMOVE
         ENDIF
         ;Si es spectrum
         IF P = 2
-            LET X = 0
-            LET Y = 212
+            REMOVE
         ENDIF
-    ENDIF
-
+    ENDIF 
 ENDIF
 
 

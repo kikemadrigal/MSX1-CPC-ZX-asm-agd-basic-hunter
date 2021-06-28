@@ -12,7 +12,7 @@
 
 ### Download
 
-https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/MSX/hunter.dsk
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/ANDROID/hunter%20apk.zip
 
 ## MSX 1 version
 
@@ -22,8 +22,7 @@ https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunte
 
 MSX 1 basic version
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunter2.dsk
-
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/MSX/hunter2.dsk
 
 ### Download dsk
 
