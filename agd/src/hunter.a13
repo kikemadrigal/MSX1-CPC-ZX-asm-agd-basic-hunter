@@ -45,7 +45,7 @@ EVENT GAMEINIT
 
 ;Para poder ver las pantallas directamente
 ;Debug
-LET SCREEN = 9
+LET SCREEN = 1
 ;SI C == 1 pone el modo test y las colisiones no funcionan excepto el timepo, las balas y la plataforma que te chafa por encima, mirar la 3 variable abajp
 ;Si es un spectrum 128 * FLASH + 64 * BRIGHT + 8 * PAPER + INK 
 

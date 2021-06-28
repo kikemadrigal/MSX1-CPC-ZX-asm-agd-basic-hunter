@@ -1723,10 +1723,10 @@ IF KEY FIRE
             KILL
             ADD 100 TO B
             ; Ponemos el mensaje de qu elas balas se agotaron
-            AT 9 9           
+            AT 9 9          
             MESSAGE 5
             ;Hacemos una pequeña pausa
-            DELAY 200    
+            DELAY 100    
             ;Borramos el mensaje  
             REDRAW  
             LET D = 0
@@ -3454,10 +3454,10 @@ LET P = 0
 
 IF P = 0 
     DEFINEMUSIC "Music1.pt3"
-    DEFINEMUSIC "alice.pt3"
     DEFINEMUSIC "Music2.pt3"
+    DEFINEMUSIC "alice.pt3"
     MUSIC 1 1
-    ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0)
+    ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0),EVENTO16 linea 4(killplayer)
 ELSE
     ;SOUND 1		; Tema musical Pac-man
     ;SOUND 0             ; Música sólo una vez
@@ -3794,7 +3794,7 @@ EVENT FELLTOOFAR
 EVENT KILLPLAYER
 
 
-;MUSIC 0 0
+MUSIC 0 0
 IF P = 0
     SOUND 5
 ELSE
