@@ -182,10 +182,10 @@ IF KEY FIRE
             KILL
             ADD 100 TO B
             ; Ponemos el mensaje de qu elas balas se agotaron
-            AT 9 9           
+            AT 9 9          
             MESSAGE 5
             ;Hacemos una pequeña pausa
-            DELAY 200    
+            DELAY 100    
             ;Borramos el mensaje  
             REDRAW  
             LET D = 0

@@ -10,7 +10,7 @@ IF P = 0
     DEFINEMUSIC "alice.pt3"
     DEFINEMUSIC "Music2.pt3"
     MUSIC 1 1
-    ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0)
+    ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0),EVENTO16 linea 4(killplayer)
 ELSE
     ;SOUND 1		; Tema musical Pac-man
     ;SOUND 0             ; Música sólo una vez

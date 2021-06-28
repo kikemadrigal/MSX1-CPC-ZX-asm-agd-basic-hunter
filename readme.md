@@ -12,14 +12,13 @@
 
 ### Download
 
-https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/hunter.apk
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/MSX/hunter.dsk
 
 ## MSX 1 version
 
 
 https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunter.dsk
 
-https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?rom=hunter.rom
 
 MSX 1 basic version
 
