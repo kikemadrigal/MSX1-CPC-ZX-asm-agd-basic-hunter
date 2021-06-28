@@ -160,9 +160,9 @@ IF KEY FIRE
             LET W= Y
             ;Hay que sumarle unos pixeles a la derecha e izquierda a la bala
             IF DIRECTION = LEFT
-                SUBTRACT 20 FROM V 
+                SUBTRACT 16 FROM V 
             ELSE
-                ADD 20 TO V
+                ADD 16 TO V            
             ENDIF
             ;Con esto configuramos los parámetros de la bala
             SPAWNED

@@ -210,7 +210,7 @@ IF S=0
     ENDIF
     IF SCREEN=9
         LET A=1
-        LET K=200
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 
@@ -295,7 +295,7 @@ IF S=0
     ENDIF
     IF SCREEN=19
         LET A=1
-        LET K=200
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 
@@ -382,7 +382,7 @@ IF S=0
     ENDIF
     IF SCREEN=29
         LET A=1
-        LET K=200
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 

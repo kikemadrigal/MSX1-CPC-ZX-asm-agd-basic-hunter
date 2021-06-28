@@ -1,20 +1,25 @@
 EVENT INTROMENU
-;0 MSX,1 amstrad, 2spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
+
+
+;0 MSX, 1 amstrad, 2 spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
 LET P = 0
 
 
-IF P = 0
-    ;DEFINEMUSIC "Music1.pt3"
-    ;DEFINEMUSIC "alice.pt3"
-    ;DEFINEMUSIC "Music2.pt3"
-    ;MUSIC 1 1
+IF P = 0 
+    DEFINEMUSIC "Music1.pt3"
+    DEFINEMUSIC "alice.pt3"
+    DEFINEMUSIC "Music2.pt3"
+    MUSIC 1 1
     ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0)
 ELSE
-    SOUND 1
-    REPEAT 20
-        SOUND 96            ; reproduce siguiente nota
-        SOUND 36  
-    ENDREPEAT
+    ;SOUND 1		; Tema musical Pac-man
+    ;SOUND 0             ; Música sólo una vez
+    ;;DELAY 200          ; Espera a la música
+    ;SOUND 36		; monitor
+    ;WHILE A = 1		; repite mientras suena el tema Pac-man
+    ;    ;SOUND 96		; reproduce siguiente nota
+    ;    SOUND 36		; monitor
+    ;ENDWHILE
 ENDIF
 
 
@@ -26,7 +31,6 @@ ENDIF
 ;7 azul claro, 8 rojo claro, 9 rosa, 10 amarillo, 11 ambar, 12 verde oscuro, 13 lila, 14 fris, 15 blanco
 ;Establecemos el color del borde (0 negro)
 BORDER 0
-
 ;Establecemos el color del borde (0 begro)
 PAPER 0
 ;Establecemos el color de la tinta (7 blanco)
@@ -40,9 +44,9 @@ CLS
 LET CONTROL = 99
 WHILE CONTROL >= 99
     AT 2 7
-    PRINT "8 bit Murcia presents:"
+    PRINT "8 bits Murcia presents:"
     AT 4 7
-    PRINT "El cazador/The hunter"
+    PRINT "The hunter"
     AT 8 10
     PRINT "1. KEYBOARD"
     AT 10 10
@@ -53,6 +57,13 @@ WHILE CONTROL >= 99
     PRINT "3. REDEFINE"
     LET CONTROL = 99
     WHILE CONTROL = 99
+        ;SOUND 1		; Tema musical Pac-man
+	    ;SOUND 0             ; Música sólo una vez
+	    ;SOUND 36		; monitor
+	    ;WHILE A = 1		; repite mientras suena el tema Pac-man
+		SOUND 96            ; reproduce siguiente nota
+		SOUND 36            ; monitor
+	    ;ENDWHILE
         IF KEY OPTION1
             LET CONTROL = 0
         ENDIF

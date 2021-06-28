@@ -5,3 +5,4 @@ DEFINEMESSAGES
 "Game over"
 "score: "
 "New high score"
+"No bullets"

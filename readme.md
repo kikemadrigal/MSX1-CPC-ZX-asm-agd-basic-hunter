@@ -66,6 +66,12 @@ https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/ZX/hunter.tap
 
 <img src=docs/CPC/cpc-tileset.PNG width=500px />
 
+## Window size
+
+<img src=docs/CPC/windowsize.PNG width=200px align="left"  />
+
+<BR clear="left">
+
 ## Level 1
 
 <img src=docs/CPC/0.PNG width=200px align="left"  />

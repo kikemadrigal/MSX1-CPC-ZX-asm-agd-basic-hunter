@@ -4,19 +4,11 @@ Problemas
 
 -Como evitar que se vuelvan a dibujar los bloques collectables en amstrad y spectrum?
 -Como poner la música en amstrad?
--Parece que no se quedan los mnsajes
+-Como poner la música en spectrum, he llegado a poner la música de beeper pero no se reproduce en juegos grandes
 
-"Completed screen"
-"Completed level"
-"Game over"
-"score: "
-"New high score"
+
 
 
 todo
 ----
--Arrgla los malos
--Añadele tu muscia
--Que se pare la musica cuando se cojan todos los objetos
--Pon en la intro los muñecos bailando
-
+-testea el juego en apk

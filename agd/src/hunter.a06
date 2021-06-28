@@ -1,10 +1,11 @@
 ;El sprite que sigue a otro sprite
 EVENT SPRITETYPE6
 
-IF Z = 0
-    ;LET FRAME = 0
-ELSE
-    ;LET FRAME = 1
+;Si es un spectrum
+IF P = 2
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    ;Lo pintamos de color blanco
+    spriteink 7
 ENDIF
 
 
@@ -67,8 +68,9 @@ IF SETTINGA = 1
                 REMOVE
             ENDSPRITE
         ENDIF
-        ;Volvemos a activar los diapros del player
-        LET D=1
+        ;Volvemos a activar los disparos del player
+        ;LET D = 1
+        ;let O = 1
 
 
 
@@ -79,8 +81,8 @@ IF SETTINGA = 1
         at 1 7
         display DOUBLEDIGITS K
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
-        LET N = 90
-        LET L = K
+        ;LET N = 90
+        ;LET L = K
         ;ADD N TO L
         ;WHILE N < L
         ;    ;Empezaremos de alto en el pixel 16, coordenada en el eje y donde emepezará a dibujarse labarra de energía
@@ -100,7 +102,12 @@ ENDIF
 
 
 
-
+;Si es un spectrum
+IF P = 2
+    ;Lo pintamos de color azul claro
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    spriteink 3
+ENDIF
 
 
 

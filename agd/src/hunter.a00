@@ -11,12 +11,12 @@ EVENT PLAYER
 ;Para ver para lo que sirven cada variable ver el archivo Game Initialisation (events.a13)
 
 ;Debug para mostrar los valores de las variablesd del jugador
-at 2 0
-display TRIPLEDIGITS D
+;at 2 0
+;display TRIPLEDIGITS D
 ;at 2 4
-;display TRIPLEDIGITS Y
+;display TRIPLEDIGITS E
 ;at 2 8
-;display TRIPLEDIGITS LEFTEDGE
+;display TRIPLEDIGITS T
 ;at 2 12
 ;display TRIPLEDIGITS RIGHTEDGE
 ;at 2 16
@@ -141,8 +141,12 @@ ENDIF
 
 
 IF KEY FIRE
-    ;Si está activado el poder crear balas
-    IF T <> E
+    ;Si es contador de número de disparos es menor que 2
+    IF D < 2
+        ;Con esto hacemos que solo se puedan disparar 5 balas por segundo
+        ;Guardamos el segundo en el que estamos en la variable E
+        ADD 1 TO D
+        LET E = T
         ;Si quedan le quedan balas al player
         IF B>0
             IF P = 0
@@ -184,19 +188,14 @@ IF KEY FIRE
             DELAY 200    
             ;Borramos el mensaje  
             REDRAW  
+            LET D = 0
         ENDIF
-        
-
-        ;Con esto hacemos que solo se puedan disparar 5 balas por segundo
-        ;Guardamos el segundo en el que estamos en la variable E
-        LET E = T
-        ;ADD 1 TO D
+    ELSE
+    ;Cuando el segundo sea distinto reiniciaremos la variable que cuenta los disparos
+        IF T <> E
+            LET D = 0
+        ENDIF
     ENDIF
-    ;Ponemos que se ha pulsado el disparo para que no se vuelva a disparaR
-    ; hata que el evento tipo1(el del disparo) ponga en 1 la Variable porque se ha salido o 
-    ;ha chocado, en todos los eventos colisión con el disparo también se debe poner LET d = 1
-
-    ;LET D = 0
 ENDIF
 
 
@@ -242,9 +241,7 @@ IF COLLISION 1
     OTHER
         ;Si es una bala del boss
         IF SETTINGA = 1
-            ;Borramos la bala
-            REMOVE
-            ;Borramos la el player
+            ;El evento Killplayer hace varias
             KILL
         ;Si la bala es del player
         ELSE

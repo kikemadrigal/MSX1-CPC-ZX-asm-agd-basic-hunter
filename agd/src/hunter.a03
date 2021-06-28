@@ -19,6 +19,13 @@ EVENT SPRITETYPE3
 LET F = X
 LET G = Y
 
+;Si es un spectrum
+IF P = 2
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    ;Lo pintamos de color blanco
+    spriteink 7
+ENDIF
+
 ;Si los milisegundos se ponen a 0 eso es que ha pasado 1 segundo
 IF R = 1
     ADD 1 TO Z
@@ -126,54 +133,56 @@ ELSE
     ENDIF
 
 
-    ;Crearemos un disparo si la O vale 1
-    ;IF O = 1
-        IF L <> Z
-            ;Hacemos un sonido
-            IF P = 0
-                SOUND 2
+    ;Solo crearemos el disparo si es un segundo distinto
+
+    IF L <> Z
+        ;Hacemos un sonido
+        IF P = 0
+            SOUND 2
+        ELSE
+            BEEP 50
+        ENDIF
+        
+        ;Creamos una bala con la imagen 9
+        SPAWN 1 9    
+        LET V = X
+        LET W = Y
+        ;Vamos a asignar la U que es la futura dirección de bala
+        ;Si la dirección actual del boss es la derecha vamos a añadir o quitarle los 16px
+        ;del sprite para que no marque colisión
+        IF DIRECTION = LEFT
+            SUBTRACT 16 FROM V
+            LET U = LEFT
+        ; Si no es la derecha puede ser izquierda, arriba o abajo
+        ELSE
+            IF DIRECTION = RIGHT
+                ADD 16 TO V
+                LET U = RIGHT
             ELSE
-                BEEP 50
-            ENDIF
-            
-            ;Creamos una bala con la imagen 9
-            SPAWN 1 9    
-            LET V = X
-            LET W = Y
-            ;Vamos a asignar la U que es la futura dirección de bala
-            ;Si la dirección actual del boss es la derecha vamos a añadir o quitarle los 16px
-            ;del sprite para que no marque colisión
-            IF DIRECTION = 1
-                ADD 20 TO V
-            ; Si no es la derecha puede ser izquierda, arriba o abajo
-            ELSE
-                IF DIRECTION = LEFT
-                    SUBTRACT 16 FROM V
-                ELSE
-                GETRANDOM 2
-                IF RND = 0
+                IF DIRECTION = UP
                     SUBTRACT 20 FROM V
-                    LET U = LEFT  
+                    LET U = LEFT
                 ELSE
                     ADD 20 TO V
                     LET U = RIGHT
                 ENDIF
-                ENDIF
             ENDIF
-            ;Con esto configuramos los parámetros de la bala
-            SPAWNED
-                ;En settina le ponemos que es de tipo 1 boss
-                LET SETTINGA = 1
-                ;Le ponemos el sprite de la bala
-                LET IMAGE = 29
-                LET DIRECTION = U
-                LET X = V
-                LET Y = W
-            ENDSPRITE
-            ;Almacenamos el contador para que no se vuelva a disparar en ese segundo
-            LET L = Z
         ENDIF
-    ;ENDIF
+        
+        ;Con esto configuramos los parámetros de la bala
+        SPAWNED
+            ;En settina le ponemos que es de tipo 1 boss
+            LET SETTINGA = 1
+            ;Le ponemos el sprite de la bala
+            LET IMAGE = 29
+            LET DIRECTION = U
+            LET X = V
+            LET Y = W
+        ENDSPRITE
+        ;Almacenamos el contador para que no se vuelva a disparar en ese segundo
+        LET L = Z
+    ENDIF
+
 ENDIF
 ;Las animaciones las controlamos nostros con frame
 ;ANIMATE SLOW
@@ -244,7 +253,12 @@ IF COLLISION 1
 ENDIF
 
 
-
+;Si es un spectrum
+IF P = 2
+    ;Lo pintamos de color azul claro
+    ; 0.Negro, 1 azul oscuro, 3 rosa, 4 verde, 5 azul claro, 6 amarillo, 7 blanco
+    spriteink 3
+ENDIF
 
 
 
