@@ -7,8 +7,8 @@ LET P = 0
 
 IF P = 0 
     DEFINEMUSIC "Music1.pt3"
-    DEFINEMUSIC "alice.pt3"
     DEFINEMUSIC "Music2.pt3"
+    DEFINEMUSIC "alice.pt3"
     MUSIC 1 1
     ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1, en el vento10, línea 52 (music 0 0),EVENTO16 linea 4(killplayer)
 ELSE
