@@ -10,61 +10,77 @@
 60 'bload"level0.bin",r:print #1,"Tilemap cargado en RAM"
 1 'Inicializamos el mapa'
 70 print #1,"!Cargando mapa":gosub 13000
+1 'Inicialización de las variables del juego'
+1 'x,y son variables temporales'
+80 x=0:y=0
 1 'Inicialización player'
 100 gosub 10000
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
-
+1 ' Rutina inicializar enemigos'
+120 gosub 12000
 
 
 
 
 1 'main loop'
-    1 'Chekeamos los tiles del mapa
-    2000 gosub 13600
+    2000 'nada
     1 'input system
     2005 gosub 2500
-    1 'Physics system'
+    1 'Physics player'
     2010 gosub 10100
+    1 'Physics enemy'
+    2020 'gosub 12700
     1'Render player
-    2020 gosub 10200
+    2030 gosub 10200
+    1 'Render enemies'
+    2040 'gosub 12800
     1 'si el mapa cambia 1 'Rutina hacer copys con mapa, 2 Escribimos en la VRAM, aumentamos el nivel:ponmeos el mc=0'
     1 '8000=mostramos la puntuación'
-    2030 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
-    2040 if pb=0 then mc=1:if ma>1 then ma=0
+    2050 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
+    2060 if pb=0 then mc=1:if ma>1 then ma=0
     1 'debug'
-    2080 'gosub 9000
+    2070 'gosub 9000
 2090 goto 2000
 
 
 
 1 '2 Sistema de input'
     1 'Nos guardamos las posiciones del player antes de cambiarlas'
-    2500 on stick(0) gosub 2700,2500,2600,2500,2800,2500,2640
+    2500 on stick(0) gosub 2600,2660,2700,2500,2800,2500,2860,2900
 
 2599 return
+1 '1 Arriba'
+    1 'Si  no estamos saltando y lo que hay debajo en un sólido entonces salta,
+    1 'Guardamos la posición vieja de y en po'
+    2600 if pa=0 then po=py:pa=1 
+2650 return
+1 '2 arriba-derecha'
+    2660 if pa=0 then po=py:pa=1 
+    2670 if t3<>tw then px=px+pv:if px>246 then px=246 
+    2680 swap p(0),p(1):ps=p(1)
+2690 return
 1 're=8 es el efecto de sonido 8 de la rutina de reprodución de sonidos 2300
 1 '3 derecha'
     1 'comprobamos que no hay un sólido a la derecha y despues si se ha salido lo recolocamos'
-    2600 if t3<>39 then px=px+pv:if px>246 then px=246 
-    2610 swap p(0),p(1):ps=p(1)
-2630 return
-1 '7 izquierda'
-    2640 if t7<>39 then px=px-pv:if px<=0 then px=0
-    2650 swap p(2),p(3):ps=p(3)
-2660 return
-1 '1 Arriba'
-    1 'Si no estamos sobre una escalera y no estamos saltando y lo que hay debajo en un sólido entonces salta,
-    1 'Guardamos la posición vieja de y en po'
-
-    2700 if t0<>69 and pa=0 then po=py:pa=1 else py=py-pv
-    
-2750 return
+    2700 if t3<>tw then px=px+pv:if px>246 then px=246 
+    2710 swap p(0),p(1):ps=p(1)
+2720 return
 1 '5 abajo'
     1 'Si lo que hay abajo es una escalera baja'
-    2800 if t5=69 then py=py+pv
-    
+    2800 'if t5=69 then py=py+pv
 2850 return
+1 '7 izquierda'
+    2860 if t7<>tw then px=px-pv:if px<=0 then px=0
+    2870 swap p(2),p(3):ps=p(3)
+2890 return
+1 '8 izquierda-arriba'
+    2900 if pa=0 then po=py:pa=1 
+    2910 if t7<>tw then px=px-pv:if px<=0 then px=0
+    2920 swap p(2),p(3):ps=p(3)
+2950 return
+
+
 
 
 1 'HUD'
@@ -76,9 +92,10 @@
 1 'Debug'
     9000 'nada'
     1 '9010 preset (0,0): print #1," px "px" py "py" tx "tx" ty "ty
-    9010 preset (0,0): print #1,"px "px" py "py" pa "pa" tx "tx" ty "ty
-    9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
-    1 '9010 preset (0,0): print #1,pa 
+    1 '9010 preset (0,0): print #1,"px "px" py "py" pa "pa" tx "tx" ty "ty
+    1 '9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
+    1 '9010 preset (0,0): print #1,"pa "pa" ty "ty" t5 "t5" tx "tx" t1 "t1
+    9010 preset (0,0): print #1,"en  "en" en0 "ex(0)" en1 "ex(1)
 9090 return
 
 
@@ -114,10 +131,12 @@
 1'------------------------------------'
     1 'Situamos al player
     1 'creamos 2 enemigos'
-    20000 'gosub 12500: ex(en-1)=4*8:ey(en-1)=20*8
-    20030 'gosub 12500: ex(en-1)=26*8:ey(en-1)=20*8
+    
+    20000 en=0:gosub 12500: ex(en-1)=4*8:ey(en-1)=20*8
+    20030 gosub 12500: ex(en-1)=26*8:ey(en-1)=20*8
     1 'Rendremos que coger 6 bloques'
     20040 pb=2
+    20050 px=3*8:py=18*8
 20090 return
 
 1'------------------------------------'
@@ -125,10 +144,11 @@
 1'------------------------------------'
     1 'Situamos al player
     1 'creamos 2 enemigos'
-    20100 'gosub 12500: ex(en-1)=4*8:ey(en-1)=20*8
-    20130 'gosub 12500: ex(en-1)=26*8:ey(en-1)=20*8
+    20100 en=0:gosub 12500: ex(en-1)=14*8:ey(en-1)=5*8
+    20130 gosub 12500: ex(en-1)=28*8:ey(en-1)=4*8
     1 'Rendremos que coger 6 bloques'
     20140 pb=2
+    20150 px=3*8:py=18*8
 20190 return
 
 1 ' ----------------------------------------------------------------------------------------'
@@ -150,7 +170,7 @@
     1 'pr=player record, puntuación'
     1 'pb=bloques cogidos por el player'
     1 'pg=player gungs, balas, disparos que le quedan'
-    10000 px=3*8:py=19*8:pv=8:pw=8:pj=0:po=py:pe=100:pa=0:pl=3:pr=0:pb=0:pg=100
+    10000 px=3*8:py=18*8:pv=8:pw=8:pj=0:po=py:pe=100:pa=0:pl=3:pr=0:pb=0:pg=100
     1 'para ver el sprite camnando a la derecha, izquierda, etc utilizaremos un array'
     1 'Sprite 0 camina a la dercha'
     1 'sprite 1 camina ala derecha moviéndose'
@@ -165,14 +185,17 @@
 1 'Physics player'
     10100 'nada'
     1 'Rutina de quequeo de tiles está en el main.bas'
-    1 'Rutina salto va junto a la línea 120 y subrutina 5200'
+    1 'Rutina salto: si esta saltando le restamos a la posición y la velocidad vertical
     10110 if pa=1 then py=py-pw
-    1 '50 es la distancia máxima a la que puede saltar, con pa=2 le decimos que está cayendo'
-    10120 if pa=1 and py<po-32 then pa=2
-    1 '10130 if pa=1 and py>po then py=po:pw=0:pw=-pw:pa=0
-    
-    10130 if pa=2 then py=py+pw
-
+    1 'Si tenemos en la cabeza un bloque sólido bajamos'
+    10111 if t1=tw then pa=2
+    1 '-48 es la distancia máxima a la que puede saltar de la posición original (po), con pa=2 le decimos que está cayendo'
+    10120 if pa=1 and py<po-48 then pa=2
+    1 'Si cuando estemos cayendo hay un bloque sólido se termina el salto'
+    10135 if t5=tw and pa=2 then pa=0
+    1 'Rutina caida
+    10136 if pa=2 then py=py+pw
+   
 
     1 'Contorno, chqueamos que no se haya salido por la gravedad'
     10140 if py>170 then py=170
@@ -182,21 +205,15 @@
     1 'Si estamos sobre una escalera subimos: la definición de esto está en el input system'
    
     1 'Chequeo bloques collectables'
-    1' Cuando lo cojamos se borra y le metemos al array uno vacío
-    1 'Tambien descontamos de los que hay que coger por level y pintamos'
-    10160 if t0=67 then beep:copy (0,0)-(8,8),1 to (px+4,py+8),0:m(ty+1,tx)=-1:pb=pb-1:gosub 8000
+    1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
+    1 'Con pb-1 le decimos que queda un bloque menos por recoger'
+    1 'Con gosub 8000 actualizamos el marcador'
+    10165 x=px:y=py:gosub 13600
+    10168 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
 
-    1 'gravedad'
-    1 'Si no está saltando y no hay nada debajo hacemos que caiga'
-    10170 'if pa=0 and t5<>32 then py=py+pv
-    1 'Si está saltando y el tile no es suelo le hacemos que cauga'
-    10175 if t5=32 and pa=2 then py=po:pw=0:pw=-pw:pa=0
-    1 'Si está saltando y hay suelo debajo paramos el salto y activamos la interrupción de la barra espaciadora'
-    10180 'if pa=1 and t5 = 32 then pa=0:strig(0) on
-    10190 'if pa=1 and t1 = 32 then py=py-pv
-
-  
-
+    1 'Gravedad'
+    1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
+    10170 if pa=0 and t5<>tw then py=py+pv
 10195 return
 
 
@@ -207,12 +224,129 @@
 
 
 1' ------------------------------------'
+1' Rutinas disparos / fires 11000-11999 '
+1' -------------------------------------'
+1 'Rutina inicializar disparos'
+1 'Recuerda que reservaste el espacio para X variables disparo en un array en el loader'
+1 'Los disparos se irán creando dinámicamente según vayamos pulsando la barra espaciadora'
+1 'Los parámteros se los metemos a ojo, la posición e y, son las del player'
+1 'dn= disparo número, sirve para ir creando disparos ya que despues se incrementa'
+1 'dd=disparo destruido, variable utilizada para eliminar enemigos (ver linea 11330 y 11200)'
+    11000 dn=0:dd=0
+11060 return
+
+1 ' Rutina crear disparos'
+1 ' Recuerda que hemos reservamos espacio para disparos en el loader'
+    1 ' solo permitiremos X disparos (recuerda que el 1 es la plantilla del cual copiamos, solo se mostraán 4)'
+    11100 if dn>9 then return 
+    1 'Posición'
+    11120 dx(dn)=px+16:dy(dn)=py+8
+    1 'Físicas: velocidad'
+    11130 dv(dn)=8
+    1 'Render: sprite y plano'
+    11140 ds(dn)=6:dp(dn)=6+dn
+    1 'RPG: disparo activo (no utlizado)'
+    11150 da(dn)=0
+    1 ' Para crear disparos sumamos 1 al contador de numero de disparos'
+    11160 dn=dn+1
+    11170 beep
+11180 return
+
+1 ' Rutina eliminar disparos'
+    1 ' Si el enemigo es la última posición de array simplemente le restamos 1 al número de enemigos'
+    1 ' Aunque tenemos 5 disparos reservados en memoria, la rutina actualizar disparos solo pinta dn '
+    11200 'Bajamos el número de disparos para que nos pinte los X que habíamos reservado en el loader, solo los que le decimos
+    11210 dn=dn-1
+    11220 'Ponemos el sprite fuera para que no se vea'
+    11230 put sprite dp(dd),(-16,0),15,ds(dd)
+    11240 'preset (0,130):print #1,"D:ds: "ds(dd)", dp: "dp(dd)", dx: "dx(dd)
+    1 'Copiamos los valores del ultimo disparo sobre el disparo destruido (al fin y al cabo es solo moverlos)'
+    11250 dx(dd)=dx(dn):dy(dd)=dy(dn):dv(dd)=dv(dn):ds(dd)=ds(dn):dp(dd)=dp(dn):da(dd)=da(dn) 
+11260 return
+
+1 'Rutina actualizar disparos'
+    1 'Si no hay disparos no pintes'
+    11300 if dn=0 then return 
+    11310 for i=0 to dn-1 
+        1 'Si hay le sumamos la velocidad'
+        11320 dx(i)=dx(i)+dv(i) 
+        1 'lo pintamos
+        11330 put sprite dp(i),(dx(i),dy(i)),15,ds(i)
+        1 'Si está fuera de la pantalla el disparo lo eliminamos'
+        11340 if dx(i)>=256 then dd=i:gosub 11200
+        11350 'preset (0,150+i*10):print #1,"i: "i", ds: "ds(i)", dp: "dp(i)
+        1 'Si la pantalla es superior a 256px, nos guardamos la posición del array del enemigo destruido y llamamos a la rutina destruir enemigo'
+    11360 next i
+11390 return1 '-----------------------------------'
+1  '       Enemy 12000-12999
+1 '-----------------------------------'
+
+1 'Init
+    1 'Definiendo el espacio para los arrays con los valores de los enemigos' 
+    1 'em=enemigos maximos'
+    12000 em=3
+    1 'Reservamos el espacio en RAM para 5 enemigos'
+    12010 DIM ex(em),ey(em),ev(em),el(em),es(em),ep(em),ec(em),ee(em)
+    1 'Componente de posicion'
+    1 'ex=coordenada x, ey=coordenada y', e1=coordenada previa x, e2=coordenada previa y
+    1 'Componente de fisica'
+    1 'ev=velocidad enemigo eje x, el=velocidad eje y'
+    1 'Componente de render'
+    1 'es=enemigo sprite, ep=enemigo plano'
+    1 'Componente RPG'
+    1 'ee=enemigo energia '
+    1 'en=enemigo numero, variable utilizar para gestionar la creación y destrucción de enemigos'
+    12020 en=0
+12030 return
+
+1 ' Crear enemigo'
+    12500 if en>5 then return
+    12510 en=en+1
+    12530 'ev(en)=16:el(en)=16
+    1 'Los enemigos son los sprites 10 al un motón'
+    12540 'es(en)=13:ep(en)=13+en:ec(en)=rnd(1)*15
+    12560 'ee(en)=100
+
+12580 return
+1 '
+1 '1 ' Rutina eliminar enemigos'
+1 '    12600 en=en-1
+1 '    12610 ey(ed)=rnd(1)*140
+1 '    12620 if ey(ed)<64 then goto 11610
+1 '    12630 ec(ed)=rnd(1)*15
+1 '    12640 if ec(ed)<2 then goto 11630
+1 '    12650 put sprite ep(ed),(-16,0),ec(ed),es(ed)
+1 '12660 return
+1 '
+1 'Update enemigo'
+    12700 if en<=0 then return
+    1 '12710 for i=0 to en-1
+    1 '    1 ' A cada uno le restamos la velocidad'
+    1 '    12720 ex(i)=ex(i)-ev(i)        
+    1 '    12730 'nada'
+    1 '    12770 put sprite ep(i),(ex(i),ey(i)),ec(ei),es(i)
+    1 '    12780 'preset (0,150+i*10):print #1,"es: "es(i)", ep: "ep(i)", ex: "ex(i)
+    1 '    12790 'if ex(i)<=0 then ed=i:gosub 11600
+    1 '12800 next i
+12810 return
+
+1 'Rutina eliminar todos los enemigos'
+    12900 en=0
+12910 return1' ------------------------------------'
 1'          map 13000-13999 '
 1' -------------------------------------'
 1 'mc=counter map
 1 'mu=update map, nos dice que debemos de volver a cargar el archivo.bin del disco en el array (en la RAM)'
-    1' tx=Es el tile
-    13000 tx=0:ty=0:t1=0:t3=0:t5=0:t7=0
+    1' tx=Es el tile en el que está el player en el eje x
+    1 't0=tile sobre el que está el player,t1 =tile arriba, t3 derecha, t5 abajo, t7 izquierda'
+    13000 tx=0:ty=0:t0=0:t1=0:t3=0:t5=0:t7=0
+    1 'te= tile vacío (empty)'
+    1 'tw= tile pared (wall)'
+    1 'tl= tile escalera (ladder)'
+    1 'tf= tile pienso (fodder)'
+    1 'td= tile mortal (deadly)'
+    1 'tc= tile coleccionable (collectable)'
+    13005 te=255:tw=32:tl=0:tf=0:td=0:tc=67
     1 'dim mapa(filas,clumnas)'
     1 'ma=mapa activo o actual, se empieza con el 0'
     1 'mc=mapa cambia'
@@ -267,19 +401,20 @@
 
 
 1'chequeando contorno de una coordeanda dada por tx y ty
-    13600 tx=px/8:ty=py/8
-    1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px'
+    13600 tx=x/8:ty=y/8
+    1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px y solo queremos ver las piernas'
     13605 if ty>0 then t0=m(ty+1,tx)
     1 't1 será el tile de arriba'
-    13610 't1=m(ty-1,tx)
+    13610 t1=m(ty-1,tx)
     1't3 será el tile de la derecha
     13620 t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
-    13630 if ty>0 then t5=m(ty+2,tx)
+    13630 if ty>0 and ty<20 then t5=m(ty+2,tx)
     1 'Izquierda'
     13640 if tx>0 then t7=m(ty,tx-1)
+    
 13690  return
 
 
@@ -333,58 +468,4 @@
 1 '                13280 next c
 1 '        13290 next f 
 1 '        13300 a=usr4(0):call turbo off
-1 '13310 return1' ------------------------------------'
-1' Rutinas disparos / fires 11000-11999 '
-1' -------------------------------------'
-1 'Rutina inicializar disparos'
-1 'Recuerda que reservaste el espacio para X variables disparo en un array en el loader'
-1 'Los disparos se irán creando dinámicamente según vayamos pulsando la barra espaciadora'
-1 'Los parámteros se los metemos a ojo, la posición e y, son las del player'
-1 'dn= disparo número, sirve para ir creando disparos ya que despues se incrementa'
-1 'dd=disparo destruido, variable utilizada para eliminar enemigos (ver linea 11330 y 11200)'
-    11000 dn=0:dd=0
-11060 return
-
-1 ' Rutina crear disparos'
-1 ' Recuerda que hemos reservamos espacio para disparos en el loader'
-    1 ' solo permitiremos X disparos (recuerda que el 1 es la plantilla del cual copiamos, solo se mostraán 4)'
-    11100 if dn>9 then return 
-    1 'Posición'
-    11120 dx(dn)=px+16:dy(dn)=py+8
-    1 'Físicas: velocidad'
-    11130 dv(dn)=8
-    1 'Render: sprite y plano'
-    11140 ds(dn)=6:dp(dn)=6+dn
-    1 'RPG: disparo activo (no utlizado)'
-    11150 da(dn)=0
-    1 ' Para crear disparos sumamos 1 al contador de numero de disparos'
-    11160 dn=dn+1
-    11170 beep
-11180 return
-
-1 ' Rutina eliminar disparos'
-    1 ' Si el enemigo es la última posición de array simplemente le restamos 1 al número de enemigos'
-    1 ' Aunque tenemos 5 disparos reservados en memoria, la rutina actualizar disparos solo pinta dn '
-    11200 'Bajamos el número de disparos para que nos pinte los X que habíamos reservado en el loader, solo los que le decimos
-    11210 dn=dn-1
-    11220 'Ponemos el sprite fuera para que no se vea'
-    11230 put sprite dp(dd),(-16,0),15,ds(dd)
-    11240 'preset (0,130):print #1,"D:ds: "ds(dd)", dp: "dp(dd)", dx: "dx(dd)
-    1 'Copiamos los valores del ultimo disparo sobre el disparo destruido (al fin y al cabo es solo moverlos)'
-    11250 dx(dd)=dx(dn):dy(dd)=dy(dn):dv(dd)=dv(dn):ds(dd)=ds(dn):dp(dd)=dp(dn):da(dd)=da(dn) 
-11260 return
-
-1 'Rutina actualizar disparos'
-    1 'Si no hay disparos no pintes'
-    11300 if dn=0 then return 
-    11310 for i=0 to dn-1 
-        1 'Si hay le sumamos la velocidad'
-        11320 dx(i)=dx(i)+dv(i) 
-        1 'lo pintamos
-        11330 put sprite dp(i),(dx(i),dy(i)),15,ds(i)
-        1 'Si está fuera de la pantalla el disparo lo eliminamos'
-        11340 if dx(i)>=256 then dd=i:gosub 11200
-        11350 'preset (0,150+i*10):print #1,"i: "i", ds: "ds(i)", dp: "dp(i)
-        1 'Si la pantalla es superior a 256px, nos guardamos la posición del array del enemigo destruido y llamamos a la rutina destruir enemigo'
-    11360 next i
-11390 return
+1 '13310 return

@@ -3,8 +3,16 @@
 1' -------------------------------------'
 1 'mc=counter map
 1 'mu=update map, nos dice que debemos de volver a cargar el archivo.bin del disco en el array (en la RAM)'
-    1' tx=Es el tile
-    13000 tx=0:ty=0:t1=0:t3=0:t5=0:t7=0
+    1' tx=Es el tile en el que está el player en el eje x
+    1 't0=tile sobre el que está el player,t1 =tile arriba, t3 derecha, t5 abajo, t7 izquierda'
+    13000 tx=0:ty=0:t0=0:t1=0:t3=0:t5=0:t7=0
+    1 'te= tile vacío (empty)'
+    1 'tw= tile pared (wall)'
+    1 'tl= tile escalera (ladder)'
+    1 'tf= tile pienso (fodder)'
+    1 'td= tile mortal (deadly)'
+    1 'tc= tile coleccionable (collectable)'
+    13005 te=255:tw=32:tl=0:tf=0:td=0:tc=67
     1 'dim mapa(filas,clumnas)'
     1 'ma=mapa activo o actual, se empieza con el 0'
     1 'mc=mapa cambia'
@@ -59,19 +67,20 @@
 
 
 1'chequeando contorno de una coordeanda dada por tx y ty
-    13600 tx=px/8:ty=py/8
-    1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px'
+    13600 tx=x/8:ty=y/8
+    1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px y solo queremos ver las piernas'
     13605 if ty>0 then t0=m(ty+1,tx)
     1 't1 será el tile de arriba'
-    13610 't1=m(ty-1,tx)
+    13610 t1=m(ty-1,tx)
     1't3 será el tile de la derecha
     13620 t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
-    13630 if ty>0 then t5=m(ty+2,tx)
+    13630 if ty>0 and ty<20 then t5=m(ty+2,tx)
     1 'Izquierda'
     13640 if tx>0 then t7=m(ty,tx-1)
+    
 13690  return
 
 
