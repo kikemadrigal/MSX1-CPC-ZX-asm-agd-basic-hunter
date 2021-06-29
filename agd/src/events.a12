@@ -2,7 +2,7 @@ EVENT INTROMENU
 
 
 ;0 MSX, 1 amstrad, 2 spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
-LET P = 1
+LET P = 0
 
 
 IF P = 0 

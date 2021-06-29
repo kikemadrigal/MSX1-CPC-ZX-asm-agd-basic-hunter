@@ -4,7 +4,7 @@
 😀
 
 
-# Play online
+# Play online & download 
 
 🕹️🕹️🕹️🕹️🕹️🕹️
 
@@ -14,44 +14,67 @@
 
 https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/ANDROID/hunter%20apk.zip
 
+
+
+
+
 ## MSX 1 version
 
+### Play online MPAGD version
 
 https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunter.dsk
 
+### Play online Basic version
 
-MSX 1 basic version
-
-https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/MSX/hunter2.dsk
+https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/MSX/?diska=hunter2.dsk
 
 ### Download dsk
 
-Descárgate el archivo .dsk MSX1 version 😀
+Descárgate el archivo .dsk MSX1 MPAGD version 😀
 
 https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/MSX/hunter.dsk
+
+Descárgate el archivo .dsk MSX1 Basic version 😀
+
+https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/MSX/hunter2.dsk
+
+
+
 
 
 ## Amstrad version 
 
-Descárgate el disco
+### Download dsk
 
 https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/CPC/hunter.dsk
 
-O descárgate la cassette
+### Download cassette
 
 https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/CPC/hunter.cdt
 
 Después utiliza esta web https://www.retrovm.com/  , en la parte de abajo a la izquierda pincha en choose configuration y elige 464, después pincha en la carpeta y busca l juego que te has descargado.
 
-y abrelo con tu emulador favorito
+
+
+
+
+
+
 
 ## Spectrum version
 
+### Play online
+
 https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/ZX/index.html
 
-### Donload tap
+### Download tap
 
 https://kikemadrigal.github.io/MSX1-CPC-ZX-asm-agd-basic-hunter/ZX/hunter.tap
+
+
+
+
+
 
 
 # AMSTRAD CPC AGD 

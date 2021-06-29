@@ -1,5 +1,11 @@
 EVENT GAMEINIT 
 
+
+; Como elegir tu plataforma
+;1.Ve al evento12 (Intromenu, linea 5) y dale el valor a la variable P según si es MSX, amstrad o spectrum
+;2.Ve al evento12 (Intromenu, lineas de la 8 a la 25, fijate que hay otras líneas en otros archivos) Quita o pon los comentarios par aponer la música según la suite que utilices
+
+
 ;      Eventos
 
 ;1 - Intro/Menu - 12

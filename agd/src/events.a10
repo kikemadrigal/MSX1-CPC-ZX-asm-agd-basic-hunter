@@ -156,7 +156,6 @@ ENDIF
 ;la variable S también es tratada en el evento del player (archivo a01) 
 ;y se pone a 1 cuando termina de actualizar las cosas
 IF S=0
-
     ;=======================================================
 
     ;                    LEVEL 1

@@ -1,7 +1,7 @@
 EVENT RESTARTSCREEN
 
 IF P = 0
-    MUSIC 2 1
+    ;MUSIC 2 1
 ENDIF
 
 
