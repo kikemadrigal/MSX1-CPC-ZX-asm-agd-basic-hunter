@@ -10,9 +10,10 @@ IF P = 0
     DEFINEMUSIC "music_game.pt3"
     DEFINEMUSIC "music_end.pt3"
     MUSIC 1 1
-    ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1
-    ;en el vento10, línea 52 (music 0 0)
-    ;EVENTO16 linea 4(killplayer)
+    ;event14, línea 4 (RESTARTSCREEN)MUSIC 2 1
+    ;event10, línea 52 (MAINLOOP1) MUSIC 0 0
+    ;event16, linea 4 (killplayer) MUSIC 0 0
+    ;event17, linea 12 (lostgame) MUSIC 3 0
 ELSE
     ;SOUND 1		; Tema musical Pac-man
     ;SOUND 0             ; Música sólo una vez
