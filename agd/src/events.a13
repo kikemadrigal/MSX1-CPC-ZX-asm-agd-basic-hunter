@@ -62,7 +62,7 @@ LET SCREEN = 1
 ;ver archivo envent09 (INITSPRITE)
 
 ; -----------variables----------
-LET LIVES = 9
+LET LIVES = 10
 
 
 

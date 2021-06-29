@@ -3052,7 +3052,7 @@ IF A > 0
     ENDIF
 ELSE
     IF P = 0
-        ;MUSIC 0 0
+        MUSIC 0 0
     ENDIF
 ENDIF
 
@@ -3450,10 +3450,10 @@ LET P = 0
 
 
 IF P = 0 
-    ;DEFINEMUSIC "Music1.pt3"
-    ;DEFINEMUSIC "Music2.pt3"
-    ;DEFINEMUSIC "alice.pt3"
-    ;MUSIC 1 1
+    DEFINEMUSIC "music_start.pt3"
+    DEFINEMUSIC "music_game.pt3"
+    DEFINEMUSIC "music_end.pt3"
+    MUSIC 1 1
     ;en el evento EVENT RESTARTSCREEN (event14, línea 4) ponemosMUSIC 2 1
     ;en el vento10, línea 52 (music 0 0)
     ;EVENTO16 linea 4(killplayer)
@@ -3631,7 +3631,7 @@ LET SCREEN = 1
 ;ver archivo envent09 (INITSPRITE)
 
 ; -----------variables----------
-LET LIVES = 9
+LET LIVES = 10
 
 
 
@@ -3692,7 +3692,7 @@ LET T = 60 ; Segundos, esta variable se inicializará con 60 segundos, aparece e
 EVENT RESTARTSCREEN
 
 IF P = 0
-    ;MUSIC 2 1
+    MUSIC 2 1
 ENDIF
 
 
@@ -3799,7 +3799,7 @@ EVENT FELLTOOFAR
 EVENT KILLPLAYER
 
 
-;MUSIC 0 0
+MUSIC 0 0
 IF P = 0
     SOUND 5
 ELSE
@@ -3818,7 +3818,7 @@ ENDIF
 AT 0 12
 DISPLAY DOUBLEDIGITS LIVES
 DELAY 30 
-
+MUSIC 3 0
 
 
 EVENT LOSTGAME
