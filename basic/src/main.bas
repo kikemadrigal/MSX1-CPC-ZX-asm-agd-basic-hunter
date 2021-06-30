@@ -1,13 +1,13 @@
 1 'Inicilizamos dispositivo: 003B, inicilizamos teclado: 003E, incializamos y preparamos el sonido:&H90'
 0 defusr=&h003B:a=usr(0):defusr1=&h003E:a=usr1(0):defusr2=&H90:a=usr2(0)
+
 1 'Enlazamos con las rutinas de la bios para aparagar y encender la pantalla'
 5 defusr3=&H41:defusr4=&H44
-10 bload"xbasic.bin",r
-20 screen 5,2,0:color 15,1,1:open "grp:" as #1:defint a-z
+10 bload"nbasic.bin",r
+20 open "grp:" as #1:defint a-z
 30 bload"sprites.bin",s:print #1,"!Sprites leidos"
 40 bload"scolor.bin",s:print #1,"!colores sprites leidos"
 50 bload"TILESET.S05",s,32768:print #1,"!tileset leido"
-60 'bload"level0.bin",r:print #1,"Tilemap cargado en RAM"
 1 'Inicializamos el mapa'
 70 print #1,"!Cargando mapa":gosub 13000
 1 'Inicialización de las variables del juego'
@@ -15,29 +15,34 @@
 80 x=0:y=0
 1 'Inicialización player'
 100 gosub 10000
+1 'Inicializamos shots'
+105 gosub 11000
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
 1 ' Rutina inicializar enemigos'
 120 gosub 12000
-
+130 'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
+1 'Mostramos la pantalla de presentación
+140 gosub 14000
 
 
 
 1 'main loop'
-    2000 'nada
+    2000 'nada'
     1 'input system
     2005 gosub 2500
     1 'Physics player'
     2010 gosub 10100
-    1 'Physics enemy'
-    2020 'gosub 12700
+    1 'Physics enemies'
+    2020 gosub 12700
     1'Render player
     2030 gosub 10200
-    1 'Render enemies'
-    2040 'gosub 12800
+    1 'Render shots'
+    2040 'gosub 11300
     1 'si el mapa cambia 1 'Rutina hacer copys con mapa, 2 Escribimos en la VRAM, aumentamos el nivel:ponmeos el mc=0'
     1 '8000=mostramos la puntuación'
     2050 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
+    1 'marcamos como que el mapa ha cambiado para que vuelva a cargarlo y le decimos que el mapa actual es el 0'
     2060 if pb=0 then mc=1:if ma>1 then ma=0
     1 'debug'
     2070 'gosub 9000
@@ -95,7 +100,10 @@
     1 '9010 preset (0,0): print #1,"px "px" py "py" pa "pa" tx "tx" ty "ty
     1 '9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
     1 '9010 preset (0,0): print #1,"pa "pa" ty "ty" t5 "t5" tx "tx" t1 "t1
-    9010 preset (0,0): print #1,"en  "en" en0 "ex(0)" en1 "ex(1)
+    1 '9010 preset (0,0): print #1,"en  "en" ex0 "ex(0)" ex1 "ex(1)
+    1 '9020 preset (0,8): print #1,"ep0  "ep(0)" es0 "es(0)" ep1 "ep(1)" es1 "es(1)
+    1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
+    9010 preset (0,16): print #1," dn "dn" dx0 "dx(0)" dy0 "dy(0)" ds0  "ds(0)" dp0 "dp(0)
 9090 return
 
 
@@ -122,20 +130,35 @@
     14050 preset (10,160): print #1, "!Cursores para mover, pulsa una tecla para continuar"
     14060 preset (10,180): print #1, "!libre: "fre(0)
     1 'Si no se pulsa una tecla se queda en blucle infinito reproduciebdo una música, si se pulsa se para la música'
-    1 '11870 re=1:gosub 4300
-    14070 if inkey$="" then goto 14070
+    14070 'b=usr6(0)
+    14080 if inkey$="" then goto 14070 
+    14085 'b=usr8(0)
 14090 return
+1'------------------------------------'
+1'  Pantalla de payer muere
+1'------------------------------------'
+    1 'Borramos los enemigos'
+    14100 en=0
+    14110 cls:preset (10,30):  print #1,"Game over"
+    1 'Recolocamos el player para que no se vea'
+    14120 py=212
+    1 'Marcamos el mapa como que ha cambiado para que lo vuelva a cargar'
+    14130 mc=1: ma=0
+    1 'hacemos una pequeña espera'
+    14140 for i =0 to 1000:next i
+    14150 goto 130
+14190 return
 
 1'------------------------------------'
 1'          screen 0
 1'------------------------------------'
     1 'Situamos al player
     1 'creamos 2 enemigos'
-    
-    20000 en=0:gosub 12500: ex(en-1)=4*8:ey(en-1)=20*8
-    20030 gosub 12500: ex(en-1)=26*8:ey(en-1)=20*8
+    20000 en=0
+    20010 gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
+    20030 gosub 12500: ex(en-1)=26*8:ey(en-1)=4*8
     1 'Rendremos que coger 6 bloques'
-    20040 pb=2
+    20040 pb=8
     20050 px=3*8:py=18*8
 20090 return
 
@@ -144,10 +167,9 @@
 1'------------------------------------'
     1 'Situamos al player
     1 'creamos 2 enemigos'
-    20100 en=0:gosub 12500: ex(en-1)=14*8:ey(en-1)=5*8
-    20130 gosub 12500: ex(en-1)=28*8:ey(en-1)=4*8
+    20100 en=0
     1 'Rendremos que coger 6 bloques'
-    20140 pb=2
+    20140 pb=6
     20150 px=3*8:py=18*8
 20190 return
 

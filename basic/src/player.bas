@@ -14,18 +14,16 @@
     10000 px=3*8:py=18*8:pv=8:pw=8:pj=0:po=py:pe=100:pa=0:pl=3:pr=0:pb=0:pg=100
     1 'para ver el sprite camnando a la derecha, izquierda, etc utilizaremos un array'
     1 'Sprite 0 camina a la dercha'
-    1 'sprite 1 camina ala derecha moviéndose'
-    10010 dim p(6):p(0)=0:p(1)=1:p(2)=2:p(3)=3:p(4)=4:p(5)=5
+    1 'sprite 1 camina ala derecha moviéndose, no se porqué  pero si pongo dim p(6) no funciona, parece que es algo del nbasic'
+    10010 p(0)=0:p(1)=1:p(2)=2:p(3)=3:p(4)=4:p(5)=5
     1 'Componente render: Plano 1(para el color) y 0 para el personaje, sprite del 0(para el color) y del 1 al 7 para el personaje'
     10020 pp=0:ps=0
-
-    10030 put sprite pp,(px,py),,ps
 10090 return
 
 
 1 'Physics player'
-    10100 'nada'
-    1 'Rutina de quequeo de tiles está en el main.bas'
+    1 'Con esto vemos los tiles que tenemos alrededor
+    10100 x=px:y=py:gosub 13600
     1 'Rutina salto: si esta saltando le restamos a la posición y la velocidad vertical
     10110 if pa=1 then py=py-pw
     1 'Si tenemos en la cabeza un bloque sólido bajamos'
@@ -48,8 +46,6 @@
     1 'Chequeo bloques collectables'
     1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
     1 'Con pb-1 le decimos que queda un bloque menos por recoger'
-    1 'Con gosub 8000 actualizamos el marcador'
-    10165 x=px:y=py:gosub 13600
     10168 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
 
     1 'Gravedad'
@@ -61,6 +57,15 @@
 1 'render player'
     10200 put sprite pp,(px,py),,ps
 10290 return
+
+1 ' Rutina player dead'
+    1 ' 8000 es el HUD'
+    1 ' 14100 es la rutina cuando se termina el juego
+    10300 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000:px=3*8:py=18*8
+10390 return
+
+ 
+
 
 
 

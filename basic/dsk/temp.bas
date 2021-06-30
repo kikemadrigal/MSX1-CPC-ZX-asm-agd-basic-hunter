@@ -1,13 +1,13 @@
 1 'Inicilizamos dispositivo: 003B, inicilizamos teclado: 003E, incializamos y preparamos el sonido:&H90'
 0 defusr=&h003B:a=usr(0):defusr1=&h003E:a=usr1(0):defusr2=&H90:a=usr2(0)
+
 1 'Enlazamos con las rutinas de la bios para aparagar y encender la pantalla'
 5 defusr3=&H41:defusr4=&H44
-10 bload"xbasic.bin",r
-20 screen 5,2,0:color 15,1,1:open "grp:" as #1:defint a-z
+10 bload"nbasic.bin",r
+20 open "grp:" as #1:defint a-z
 30 bload"sprites.bin",s:print #1,"!Sprites leidos"
 40 bload"scolor.bin",s:print #1,"!colores sprites leidos"
 50 bload"TILESET.S05",s,32768:print #1,"!tileset leido"
-60 'bload"level0.bin",r:print #1,"Tilemap cargado en RAM"
 1 'Inicializamos el mapa'
 70 print #1,"!Cargando mapa":gosub 13000
 1 'Inicialización de las variables del juego'
@@ -15,29 +15,34 @@
 80 x=0:y=0
 1 'Inicialización player'
 100 gosub 10000
+1 'Inicializamos shots'
+105 gosub 11000
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
 1 ' Rutina inicializar enemigos'
 120 gosub 12000
-
+130 'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
+1 'Mostramos la pantalla de presentación
+140 gosub 14000
 
 
 
 1 'main loop'
-    2000 'nada
+    2000 'nada'
     1 'input system
     2005 gosub 2500
     1 'Physics player'
     2010 gosub 10100
-    1 'Physics enemy'
-    2020 'gosub 12700
+    1 'Physics enemies'
+    2020 gosub 12700
     1'Render player
     2030 gosub 10200
-    1 'Render enemies'
-    2040 'gosub 12800
+    1 'Render shots'
+    2040 'gosub 11300
     1 'si el mapa cambia 1 'Rutina hacer copys con mapa, 2 Escribimos en la VRAM, aumentamos el nivel:ponmeos el mc=0'
     1 '8000=mostramos la puntuación'
     2050 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
+    1 'marcamos como que el mapa ha cambiado para que vuelva a cargarlo y le decimos que el mapa actual es el 0'
     2060 if pb=0 then mc=1:if ma>1 then ma=0
     1 'debug'
     2070 'gosub 9000
@@ -95,7 +100,10 @@
     1 '9010 preset (0,0): print #1,"px "px" py "py" pa "pa" tx "tx" ty "ty
     1 '9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
     1 '9010 preset (0,0): print #1,"pa "pa" ty "ty" t5 "t5" tx "tx" t1 "t1
-    9010 preset (0,0): print #1,"en  "en" en0 "ex(0)" en1 "ex(1)
+    1 '9010 preset (0,0): print #1,"en  "en" ex0 "ex(0)" ex1 "ex(1)
+    1 '9020 preset (0,8): print #1,"ep0  "ep(0)" es0 "es(0)" ep1 "ep(1)" es1 "es(1)
+    1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
+    9010 preset (0,16): print #1," dn "dn" dx0 "dx(0)" dy0 "dy(0)" ds0  "ds(0)" dp0 "dp(0)
 9090 return
 
 
@@ -122,20 +130,35 @@
     14050 preset (10,160): print #1, "!Cursores para mover, pulsa una tecla para continuar"
     14060 preset (10,180): print #1, "!libre: "fre(0)
     1 'Si no se pulsa una tecla se queda en blucle infinito reproduciebdo una música, si se pulsa se para la música'
-    1 '11870 re=1:gosub 4300
-    14070 if inkey$="" then goto 14070
+    14070 'b=usr6(0)
+    14080 if inkey$="" then goto 14070 
+    14085 'b=usr8(0)
 14090 return
+1'------------------------------------'
+1'  Pantalla de payer muere
+1'------------------------------------'
+    1 'Borramos los enemigos'
+    14100 en=0
+    14110 cls:preset (10,30):  print #1,"Game over"
+    1 'Recolocamos el player para que no se vea'
+    14120 py=212
+    1 'Marcamos el mapa como que ha cambiado para que lo vuelva a cargar'
+    14130 mc=1: ma=0
+    1 'hacemos una pequeña espera'
+    14140 for i =0 to 1000:next i
+    14150 goto 130
+14190 return
 
 1'------------------------------------'
 1'          screen 0
 1'------------------------------------'
     1 'Situamos al player
     1 'creamos 2 enemigos'
-    
-    20000 en=0:gosub 12500: ex(en-1)=4*8:ey(en-1)=20*8
-    20030 gosub 12500: ex(en-1)=26*8:ey(en-1)=20*8
+    20000 en=0
+    20010 gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
+    20030 gosub 12500: ex(en-1)=26*8:ey(en-1)=4*8
     1 'Rendremos que coger 6 bloques'
-    20040 pb=2
+    20040 pb=8
     20050 px=3*8:py=18*8
 20090 return
 
@@ -144,10 +167,9 @@
 1'------------------------------------'
     1 'Situamos al player
     1 'creamos 2 enemigos'
-    20100 en=0:gosub 12500: ex(en-1)=14*8:ey(en-1)=5*8
-    20130 gosub 12500: ex(en-1)=28*8:ey(en-1)=4*8
+    20100 en=0
     1 'Rendremos que coger 6 bloques'
-    20140 pb=2
+    20140 pb=6
     20150 px=3*8:py=18*8
 20190 return
 
@@ -173,18 +195,16 @@
     10000 px=3*8:py=18*8:pv=8:pw=8:pj=0:po=py:pe=100:pa=0:pl=3:pr=0:pb=0:pg=100
     1 'para ver el sprite camnando a la derecha, izquierda, etc utilizaremos un array'
     1 'Sprite 0 camina a la dercha'
-    1 'sprite 1 camina ala derecha moviéndose'
-    10010 dim p(6):p(0)=0:p(1)=1:p(2)=2:p(3)=3:p(4)=4:p(5)=5
+    1 'sprite 1 camina ala derecha moviéndose, no se porqué  pero si pongo dim p(6) no funciona, parece que es algo del nbasic'
+    10010 p(0)=0:p(1)=1:p(2)=2:p(3)=3:p(4)=4:p(5)=5
     1 'Componente render: Plano 1(para el color) y 0 para el personaje, sprite del 0(para el color) y del 1 al 7 para el personaje'
     10020 pp=0:ps=0
-
-    10030 put sprite pp,(px,py),,ps
 10090 return
 
 
 1 'Physics player'
-    10100 'nada'
-    1 'Rutina de quequeo de tiles está en el main.bas'
+    1 'Con esto vemos los tiles que tenemos alrededor
+    10100 x=px:y=py:gosub 13600
     1 'Rutina salto: si esta saltando le restamos a la posición y la velocidad vertical
     10110 if pa=1 then py=py-pw
     1 'Si tenemos en la cabeza un bloque sólido bajamos'
@@ -207,8 +227,6 @@
     1 'Chequeo bloques collectables'
     1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
     1 'Con pb-1 le decimos que queda un bloque menos por recoger'
-    1 'Con gosub 8000 actualizamos el marcador'
-    10165 x=px:y=py:gosub 13600
     10168 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
 
     1 'Gravedad'
@@ -221,6 +239,15 @@
     10200 put sprite pp,(px,py),,ps
 10290 return
 
+1 ' Rutina player dead'
+    1 ' 8000 es el HUD'
+    1 ' 14100 es la rutina cuando se termina el juego
+    10300 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000:px=3*8:py=18*8
+10390 return
+
+ 
+
+
 
 
 1' ------------------------------------'
@@ -232,7 +259,8 @@
 1 'Los parámteros se los metemos a ojo, la posición e y, son las del player'
 1 'dn= disparo número, sirve para ir creando disparos ya que despues se incrementa'
 1 'dd=disparo destruido, variable utilizada para eliminar enemigos (ver linea 11330 y 11200)'
-    11000 dn=0:dd=0
+    11000 dn=0:dd=0:dm=3
+    11010 DIM dx(dm),dy(dm),dv(dm),dw(dm),dd(dm),ds(dm),dp(dm),da(dm)
 11060 return
 
 1 ' Rutina crear disparos'
@@ -244,7 +272,7 @@
     1 'Físicas: velocidad'
     11130 dv(dn)=8
     1 'Render: sprite y plano'
-    11140 ds(dn)=6:dp(dn)=6+dn
+    11140 ds(dn)=12:dp(dn)=2+dn
     1 'RPG: disparo activo (no utlizado)'
     11150 da(dn)=0
     1 ' Para crear disparos sumamos 1 al contador de numero de disparos'
@@ -266,48 +294,51 @@
 
 1 'Rutina actualizar disparos'
     1 'Si no hay disparos no pintes'
-    11300 if dn=0 then return 
+    11300 if dn<=0 then return 
     11310 for i=0 to dn-1 
         1 'Si hay le sumamos la velocidad'
         11320 dx(i)=dx(i)+dv(i) 
-        1 'lo pintamos
+        1 'put sprite numero_plano, (coordenada),color, numero de sprite'
         11330 put sprite dp(i),(dx(i),dy(i)),15,ds(i)
         1 'Si está fuera de la pantalla el disparo lo eliminamos'
         11340 if dx(i)>=256 then dd=i:gosub 11200
         11350 'preset (0,150+i*10):print #1,"i: "i", ds: "ds(i)", dp: "dp(i)
         1 'Si la pantalla es superior a 256px, nos guardamos la posición del array del enemigo destruido y llamamos a la rutina destruir enemigo'
     11360 next i
-11390 return1 '-----------------------------------'
+11390 return
+
+1 '-----------------------------------'
 1  '       Enemy 12000-12999
 1 '-----------------------------------'
 
 1 'Init
     1 'Definiendo el espacio para los arrays con los valores de los enemigos' 
     1 'em=enemigos maximos'
-    12000 em=3
-    1 'Reservamos el espacio en RAM para 5 enemigos'
-    12010 DIM ex(em),ey(em),ev(em),el(em),es(em),ep(em),ec(em),ee(em)
-    1 'Componente de posicion'
-    1 'ex=coordenada x, ey=coordenada y', e1=coordenada previa x, e2=coordenada previa y
-    1 'Componente de fisica'
-    1 'ev=velocidad enemigo eje x, el=velocidad eje y'
-    1 'Componente de render'
-    1 'es=enemigo sprite, ep=enemigo plano'
-    1 'Componente RPG'
-    1 'ee=enemigo energia '
     1 'en=enemigo numero, variable utilizar para gestionar la creación y destrucción de enemigos'
-    12020 en=0
+    12000 em=3
+    12010 en=0
+    1 'ex=coordenada x, ey=coordenada y'
+    1 'ev=velocidad enemigo eje x, ew=velocidad eje y'r'
+    1 'ed=enemigo dirección'
+    1 'es=enemigo sprite, ep=enemigo plano'
+    1 'ee=enemigo energia '
+    1 'et= define el tipo, si es un perro, un pinguino, un pájaro, etc
+    1 'Perro sprites derecha 13 y 14, izquierda 15 y 16 '
+    1 'Conejo derecha 17,18  i<quierda 19,20'
+    1 'Tortuga derecha 21,22   izquierda 23,24'
+    1 'Reservamos el espacio en RAM para 5 enemigos'
+    12020 DIM ex(em),ey(em),ev(em),ew(em),ed(em),es(em),ep(em),ec(em),et(em),ee(em)
 12030 return
 
 1 ' Crear enemigo'
     12500 if en>5 then return
-    12510 en=en+1
-    12530 'ev(en)=16:el(en)=16
-    1 'Los enemigos son los sprites 10 al un motón'
-    12540 'es(en)=13:ep(en)=13+en:ec(en)=rnd(1)*15
-    12560 'ee(en)=100
-
-12580 return
+    12530 ev(en)=8:ew(en)=8
+    12540 ed(en)=3
+    12550 es(en)=13
+    12560 ep(en)=10+en
+    12570 ec(en)=6
+    12580 en=en+1
+12590 return
 1 '
 1 '1 ' Rutina eliminar enemigos'
 1 '    12600 en=en-1
@@ -320,19 +351,28 @@
 1 '
 1 'Update enemigo'
     12700 if en<=0 then return
-    1 '12710 for i=0 to en-1
-    1 '    1 ' A cada uno le restamos la velocidad'
-    1 '    12720 ex(i)=ex(i)-ev(i)        
-    1 '    12730 'nada'
-    1 '    12770 put sprite ep(i),(ex(i),ey(i)),ec(ei),es(i)
-    1 '    12780 'preset (0,150+i*10):print #1,"es: "es(i)", ep: "ep(i)", ex: "ex(i)
-    1 '    12790 'if ex(i)<=0 then ed=i:gosub 11600
-    1 '12800 next i
+    12710 for i = 0 to en-1
+        1 'Chequeo bloques collectables'
+        1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
+        12720 if ed(i)=3 then x=ex(i)+8: if ed(i)=7 then x=ex(i)-8
+        12730 y=ey(i):gosub 13600
+        1 'Si el tile en el que estamos no es sólido cambiamos la velocidad horizontal'
+        12740 if t5<>tw then ev(i)=-ev(i)
+        12750 ex(i)=ex(i)-ev(i):if ex(i)>256-40 then ex(i)=ex(i)-ev(i): if ex(i)<0 then ex(i)=ex(i)-ev(i)
+      
+        1 'Chequeamos la colisión con el player'
+        1 'La rutina 10300 es cuando el player muere'
+        12760  if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10300
+        1 'put sprite numero_plano, (coordenada),color, numero de sprite'
+        12770 put sprite ep(i),(ex(i),ey(i)),ec(i),es(i)
+    12800 next i
 12810 return
 
-1 'Rutina eliminar todos los enemigos'
-    12900 en=0
-12910 return1' ------------------------------------'
+
+
+
+
+1' ------------------------------------'
 1'          map 13000-13999 '
 1' -------------------------------------'
 1 'mc=counter map
@@ -365,7 +405,7 @@
 
 
 1 'Cargar mundo con los mapas de los niveles en el buffer o array'
-    13100 'esto almacenará el array a partir de la posición 8dc8 de la RAM'
+    13100 'print #1, "!cargando mapa"
     1 '20000 rutina de inicialización mundo 0
     13110 if ma=0 then bload"level0.bin",r:gosub 20000
     13111 if ma=1 then bload"level1.bin",r:gosub 20100
@@ -378,10 +418,12 @@
         13170 next c
     13180 next f
     13190 call turbo off
+    13191 'preset (0,0):print #1, "!mapa cargado"
 13195 return
 
 1 'Pintamos en la VRAM page 0, los valores definidos en el array hasta la columna 32
-    13300 a=usr3(0):call turbo on (m())
+    13300 a=usr3(0)
+    13301 call turbo on (m())
     13310 for f=0 to 22
         13360 for c=0 to 31
             13370 tn=m(f,c)
@@ -395,7 +437,8 @@
             13450 if tn>=224 and tn <256 then copy ((tn-224)*8,7*8)-(((tn-224)*8)+8,(7*8)+8),1 to (c*8,f*8),0,tpset
         13510 next c
     13520 next f 
-    13540 a=usr4(0):call turbo off
+    13540 a=usr4(0):
+    13541 call turbo off
 13570 return
 
 
@@ -407,7 +450,7 @@
     1 't1 será el tile de arriba'
     13610 t1=m(ty-1,tx)
     1't3 será el tile de la derecha
-    13620 t3=m(ty,tx+1)
+    13620 if ty>256-16 then t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'

@@ -1,10 +1,13 @@
 @echo off
 rem creamos los recursos
+tools\sjasm\sjasm asm\music.asm
 tools\sjasm\sjasm asm\sprites.asm
 tools\sjasm\sjasm asm\scolor.asm
 tools\sjasm\sjasm asm\level0.asm
 tools\sjasm\sjasm asm\level1.asm
 rem Copiamos los recursos
+move music.bin dsk
+copy assets\LOADER.S05 dsk
 move sprites.bin dsk
 move scolor.bin dsk
 move level0.bin dsk

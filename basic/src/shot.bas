@@ -7,7 +7,8 @@
 1 'Los parámteros se los metemos a ojo, la posición e y, son las del player'
 1 'dn= disparo número, sirve para ir creando disparos ya que despues se incrementa'
 1 'dd=disparo destruido, variable utilizada para eliminar enemigos (ver linea 11330 y 11200)'
-    11000 dn=0:dd=0
+    11000 dn=0:dd=0:dm=3
+    11010 DIM dx(dm),dy(dm),dv(dm),dw(dm),dd(dm),ds(dm),dp(dm),da(dm)
 11060 return
 
 1 ' Rutina crear disparos'
@@ -19,7 +20,7 @@
     1 'Físicas: velocidad'
     11130 dv(dn)=8
     1 'Render: sprite y plano'
-    11140 ds(dn)=6:dp(dn)=6+dn
+    11140 ds(dn)=12:dp(dn)=2+dn
     1 'RPG: disparo activo (no utlizado)'
     11150 da(dn)=0
     1 ' Para crear disparos sumamos 1 al contador de numero de disparos'
@@ -41,11 +42,11 @@
 
 1 'Rutina actualizar disparos'
     1 'Si no hay disparos no pintes'
-    11300 if dn=0 then return 
+    11300 if dn<=0 then return 
     11310 for i=0 to dn-1 
         1 'Si hay le sumamos la velocidad'
         11320 dx(i)=dx(i)+dv(i) 
-        1 'lo pintamos
+        1 'put sprite numero_plano, (coordenada),color, numero de sprite'
         11330 put sprite dp(i),(dx(i),dy(i)),15,ds(i)
         1 'Si está fuera de la pantalla el disparo lo eliminamos'
         11340 if dx(i)>=256 then dd=i:gosub 11200
@@ -53,3 +54,4 @@
         1 'Si la pantalla es superior a 256px, nos guardamos la posición del array del enemigo destruido y llamamos a la rutina destruir enemigo'
     11360 next i
 11390 return
+

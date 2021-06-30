@@ -31,7 +31,7 @@
 
 
 1 'Cargar mundo con los mapas de los niveles en el buffer o array'
-    13100 'esto almacenará el array a partir de la posición 8dc8 de la RAM'
+    13100 'print #1, "!cargando mapa"
     1 '20000 rutina de inicialización mundo 0
     13110 if ma=0 then bload"level0.bin",r:gosub 20000
     13111 if ma=1 then bload"level1.bin",r:gosub 20100
@@ -44,10 +44,12 @@
         13170 next c
     13180 next f
     13190 call turbo off
+    13191 'preset (0,0):print #1, "!mapa cargado"
 13195 return
 
 1 'Pintamos en la VRAM page 0, los valores definidos en el array hasta la columna 32
-    13300 a=usr3(0):call turbo on (m())
+    13300 a=usr3(0)
+    13301 call turbo on (m())
     13310 for f=0 to 22
         13360 for c=0 to 31
             13370 tn=m(f,c)
@@ -61,7 +63,8 @@
             13450 if tn>=224 and tn <256 then copy ((tn-224)*8,7*8)-(((tn-224)*8)+8,(7*8)+8),1 to (c*8,f*8),0,tpset
         13510 next c
     13520 next f 
-    13540 a=usr4(0):call turbo off
+    13540 a=usr4(0):
+    13541 call turbo off
 13570 return
 
 
@@ -73,7 +76,7 @@
     1 't1 será el tile de arriba'
     13610 t1=m(ty-1,tx)
     1't3 será el tile de la derecha
-    13620 t3=m(ty,tx+1)
+    13620 if ty>256-16 then t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
