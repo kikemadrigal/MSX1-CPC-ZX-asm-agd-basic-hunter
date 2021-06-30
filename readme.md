@@ -52,9 +52,9 @@ https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/
 
 https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/tree/main/docs/CPC/hunter.cdt
 
-Después utiliza esta web https://www.retrovm.com/  , en la parte de abajo a la izquierda pincha en choose configuration y elige 464, después pincha en la carpeta y busca l juego que te has descargado.
+Después utiliza esta web https://www.retrovm.com/  , en la parte de abajo a la izquierda pincha en choose configuration y elige 464, después pincha en la carpeta y busca l juego que te has descargado, por último escribe dentro del emulador run"hunter.bin.
 
-
+<img src=docs/CPC/retrovm.PNG width=500px  />
 
 
 
