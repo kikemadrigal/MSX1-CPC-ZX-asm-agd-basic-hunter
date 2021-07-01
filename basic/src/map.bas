@@ -70,17 +70,23 @@
 
 
 1'chequeando contorno de una coordeanda dada por tx y ty
-    13600 tx=x/8:ty=y/8
+    13600 'if gx<8 or gx> 256-16 or gy<0 or gy> 192-16 then return
+    13601 tx=gx/8:ty=gy/8
+    1 '13601 if ty<16 or ty >20*8 or tx<8 or tx > 30*8 then return
     1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px y solo queremos ver las piernas'
-    13605 if ty>0 then t0=m(ty+1,tx)
+    1 '13605 if ty>16 then t0=m(ty+1,tx)
+    13605 t0=m(ty+1,tx)
     1 't1 será el tile de arriba'
+    1 '13610 if ty>256-16 then t1=m(ty-1,tx)
     13610 t1=m(ty-1,tx)
     1't3 será el tile de la derecha
-    13620 if ty>256-16 then t3=m(ty,tx+1)
+    1 '13620 if ty>256-16 then t3=m(ty,tx+1)
+    13620 t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
     13630 if ty>0 and ty<20 then t5=m(ty+2,tx)
+
     1 'Izquierda'
     13640 if tx>0 then t7=m(ty,tx-1)
     

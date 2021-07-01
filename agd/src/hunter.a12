@@ -2,16 +2,16 @@ EVENT INTROMENU
 
 
 ;0 MSX, 1 amstrad, 2 spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
-LET P = 0
+LET P = 2
 
 
 IF P = 0 
-    DEFINEMUSIC "music_start.pt3"
-    DEFINEMUSIC "music_game.pt3"
-    DEFINEMUSIC "music_end.pt3"
-    MUSIC 1 1
-    ;event14, línea 4 (RESTARTSCREEN)MUSIC 2 1
+    ;DEFINEMUSIC "music_start.pt3"
+    ;DEFINEMUSIC "music_game.pt3"
+    ;DEFINEMUSIC "music_end.pt3"
+    ;MUSIC 1 1
     ;event10, línea 52 (MAINLOOP1) MUSIC 0 0
+    ;event14, línea 4 (RESTARTSCREEN)MUSIC 2 1
     ;event16, linea 4 (killplayer) MUSIC 0 0
     ;event17, linea 12 (lostgame) MUSIC 3 0
 ELSE

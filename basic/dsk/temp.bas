@@ -11,16 +11,20 @@
 1 'Inicializamos el mapa'
 70 print #1,"!Cargando mapa":gosub 13000
 1 'Inicialización de las variables del juego'
-1 'x,y son variables temporales'
-80 x=0:y=0
+1 'gx,gy son variables temporales del juego'
+1 'gc=modo colisión de los sprites, gc=0 modo on sprite, gc=1 modo rectángulos'
+80 gx=0:gy=0:gc=1:time=0
 1 'Inicialización player'
 100 gosub 10000
 1 'Inicializamos shots'
 105 gosub 11000
+1 ' Rutina inicializar enemigos'
+106 gosub 12000
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
-1 ' Rutina inicializar enemigos'
-120 gosub 12000
+1 'gc es si el juego está en modo colisión onsprite
+1 'La rutina 10300 es cuando el player muere'
+120 if gc=0 then on sprite gosub 10300:sprite on
 130 'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
 1 'Mostramos la pantalla de presentación
 140 gosub 14000
@@ -30,7 +34,7 @@
 1 'main loop'
     2000 'nada'
     1 'input system
-    2005 gosub 2500
+    2005 gosub 3500
     1 'Physics player'
     2010 gosub 10100
     1 'Physics enemies'
@@ -38,7 +42,7 @@
     1'Render player
     2030 gosub 10200
     1 'Render shots'
-    2040 'gosub 11300
+    2040 gosub 11300
     1 'si el mapa cambia 1 'Rutina hacer copys con mapa, 2 Escribimos en la VRAM, aumentamos el nivel:ponmeos el mc=0'
     1 '8000=mostramos la puntuación'
     2050 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
@@ -50,25 +54,24 @@
 
 
 
-1 '2 Sistema de input'
+1 'Sistema de input'
     1 'Nos guardamos las posiciones del player antes de cambiarlas'
     2500 on stick(0) gosub 2600,2660,2700,2500,2800,2500,2860,2900
-
 2599 return
 1 '1 Arriba'
     1 'Si  no estamos saltando y lo que hay debajo en un sólido entonces salta,
     1 'Guardamos la posición vieja de y en po'
-    2600 if pa=0 then po=py:pa=1 
+    2600 if pj=0 then po=py:pj=1:pd=3
 2650 return
 1 '2 arriba-derecha'
-    2660 if pa=0 then po=py:pa=1 
-    2670 if t3<>tw then px=px+pv:if px>246 then px=246 
+    2660 if pj=0 then po=py:pj=1 
+    2670 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
     2680 swap p(0),p(1):ps=p(1)
 2690 return
 1 're=8 es el efecto de sonido 8 de la rutina de reprodución de sonidos 2300
 1 '3 derecha'
     1 'comprobamos que no hay un sólido a la derecha y despues si se ha salido lo recolocamos'
-    2700 if t3<>tw then px=px+pv:if px>246 then px=246 
+    2700 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
     2710 swap p(0),p(1):ps=p(1)
 2720 return
 1 '5 abajo'
@@ -76,16 +79,71 @@
     2800 'if t5=69 then py=py+pv
 2850 return
 1 '7 izquierda'
-    2860 if t7<>tw then px=px-pv:if px<=0 then px=0
+    2860 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
     2870 swap p(2),p(3):ps=p(3)
 2890 return
 1 '8 izquierda-arriba'
-    2900 if pa=0 then po=py:pa=1 
-    2910 if t7<>tw then px=px-pv:if px<=0 then px=0
+    2900 if pj=0 then po=py:pj=1 
+    2910 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
     2920 swap p(2),p(3):ps=p(3)
 2950 return
 
 
+
+
+1 'Sistema de input 2'
+    1 'Nos guardamos las posiciones del player antes de cambiarlas'
+    3500 on stick(0) goto 3600,3660,3700,3500,3800,3500,3860,3900
+    3510 goto 3960
+1 '1 Arriba'
+    1 'Si  no estamos saltando y lo que hay debajo en un sólido entonces salta,
+    1 'Guardamos la posición vieja de y en po'
+    3600 if pj=0 then po=py:pd=3:pj=1
+3610 goto 3960
+1 '2 arriba-derecha'
+    3660 if pj=0 then po=py:pj=1 
+    3670 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
+    3680 swap p(0),p(1):ps=p(1)
+3690 goto 3960
+1 're=8 es el efecto de sonido 8 de la rutina de reprodución de sonidos 2300
+1 '3 derecha'
+    1 'comprobamos que no hay un sólido a la derecha y despues si se ha salido lo recolocamos'
+    3700 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
+    3710 swap p(0),p(1):ps=p(1)
+3720 goto 3960
+1 '5 abajo'
+    1 'Si lo que hay abajo es una escalera baja'
+    3800 'if t5=69 then py=py+pv
+3850 goto 3960
+1 '7 izquierda'
+    3860 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
+    3870 swap p(2),p(3):ps=p(3)
+3890 goto 3960
+1 '8 izquierda-arriba'
+    3900 if pj=0 then po=py:pj=1 
+    3910 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
+    3920 swap p(2),p(3):ps=p(3)
+
+3960 goto 2010
+
+1 ' ----------------------'
+1 '    Sound manager'
+1 ' ----------------------'
+1 'Reproductor de efectos d sonido'
+    4300 a=usr2(0)
+    4310 if re=1 then PLAY"O5 L8 V4 M8000 A A D F G2 A A A A r60 G E F D C D G R8 A2 A2 A8","o1 v4 c r8 o2 c r8 o1 v6 c r8 o2 v4 c r8 o1 c r8 o2 v6 c r8"
+    1 'Tirando el paquete'
+    4350 if re=5 then play "l10 o4 v4 g c"
+    1 'Paquete cogido'
+    4360 if re=6 then play"t250 o5 v12 d v9 e" 
+    1 'Pitido normal'
+    4370 if re=7 then play "O5 L8 V4 M8000 A A D F G2 A A A A"
+    1 'Toque fino'
+    4380 if re=8 then PLAY"S1M2000T150O7C32"
+    1 'Pasos'
+    4390 if re=9 then PLAY"o2 l64 t255 v10 m6500 c"
+    4400 if re=10 then sound 6,5:sound 8,16:sound 12,6:sound 13,9
+4420 return
 
 
 1 'HUD'
@@ -97,13 +155,15 @@
 1 'Debug'
     9000 'nada'
     1 '9010 preset (0,0): print #1," px "px" py "py" tx "tx" ty "ty
-    1 '9010 preset (0,0): print #1,"px "px" py "py" pa "pa" tx "tx" ty "ty
-    1 '9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
-    1 '9010 preset (0,0): print #1,"pa "pa" ty "ty" t5 "t5" tx "tx" t1 "t1
+    9010 preset (0,0): print #1,"pg "pg" ps "ps" pd "pd" pc "pc" px "px" py "py
+    9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
+    9030 preset (0,16): print #1," a0 "a0" a1 "a1" a3 "a3" a5 "a5" a7 "a7  
+    1 '9010 preset (0,0): print #1,"pj "pj" ty "ty" t5 "t5" tx "tx" t1 "t1
     1 '9010 preset (0,0): print #1,"en  "en" ex0 "ex(0)" ex1 "ex(1)
-    1 '9020 preset (0,8): print #1,"ep0  "ep(0)" es0 "es(0)" ep1 "ep(1)" es1 "es(1)
+    1 '9020 preset (0,8): print #1,"ed0  "ed(0)" ee0 "ee(0)
     1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
-    9010 preset (0,16): print #1," dn "dn" dx0 "dx(0)" dy0 "dy(0)" ds0  "ds(0)" dp0 "dp(0)
+    1 '9020 preset (0,16): print #1," dd "dd" dx "dx" dy "dy" ds  "ds" dp "dp
+    1 '9010 preset (0,16): print #1," st "stick(0)" pj "pj" time"time
 9090 return
 
 
@@ -155,10 +215,10 @@
     1 'Situamos al player
     1 'creamos 2 enemigos'
     20000 en=0
-    20010 gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
-    20030 gosub 12500: ex(en-1)=26*8:ey(en-1)=4*8
+    20010 'gosub 12500: ex(en-1)=2*8:ey(en-1)=14*8
+    20030 gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
     1 'Rendremos que coger 6 bloques'
-    20040 pb=8
+    20040 pb=3
     20050 px=3*8:py=18*8
 20090 return
 
@@ -186,13 +246,14 @@
 1 'inicialización player'
     1 'pv=velocidad horizontal
     1 'pw=velocidad vertical'
-    1 'po=player y old'
-    1 'pa=salta activdo'
+    1 'po=player y position old'
+    1 'pd= player direction, 1 up, 3 right, 5 down, 7 left'
+    1 'pj=player jump, salta activdo'
     1 'pl=player life o vida'
     1 'pr=player record, puntuación'
     1 'pb=bloques cogidos por el player'
     1 'pg=player gungs, balas, disparos que le quedan'
-    10000 px=3*8:py=18*8:pv=8:pw=8:pj=0:po=py:pe=100:pa=0:pl=3:pr=0:pb=0:pg=100
+    10000 px=3*8:py=18*8:pv=8:pw=8:po=py:pd=3:pj=0:pl=3:pr=0:pb=0:pg=100:pc=11
     1 'para ver el sprite camnando a la derecha, izquierda, etc utilizaremos un array'
     1 'Sprite 0 camina a la dercha'
     1 'sprite 1 camina ala derecha moviéndose, no se porqué  pero si pongo dim p(6) no funciona, parece que es algo del nbasic'
@@ -204,17 +265,19 @@
 
 1 'Physics player'
     1 'Con esto vemos los tiles que tenemos alrededor
-    10100 x=px:y=py:gosub 13600
+
+    10100 gx=px:gy=py:gosub 13600
+
     1 'Rutina salto: si esta saltando le restamos a la posición y la velocidad vertical
-    10110 if pa=1 then py=py-pw
+    10110 if pj=1 then py=py-pw
     1 'Si tenemos en la cabeza un bloque sólido bajamos'
-    10111 if t1=tw then pa=2
-    1 '-48 es la distancia máxima a la que puede saltar de la posición original (po), con pa=2 le decimos que está cayendo'
-    10120 if pa=1 and py<po-48 then pa=2
+    10111 if t1=tw then pj=2
+    1 '-48 es la distancia máxima a la que puede saltar de la posición original (po), con pj=2 le decimos que está cayendo'
+    10120 if pj=1 and py<po-48 then pj=2
     1 'Si cuando estemos cayendo hay un bloque sólido se termina el salto'
-    10135 if t5=tw and pa=2 then pa=0
+    10135 if t5=tw and pj=2 then pj=0
     1 'Rutina caida
-    10136 if pa=2 then py=py+pw
+    10136 if pj=2 then py=py+pw
    
 
     1 'Contorno, chqueamos que no se haya salido por la gravedad'
@@ -231,18 +294,24 @@
 
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
-    10170 if pa=0 and t5<>tw then py=py+pv
+    10170 if pj=0 and t5<>tw then py=py+pv
+
 10195 return
 
 
 1 'render player'
-    10200 put sprite pp,(px,py),,ps
+    10200 'call turbo on (pp, px,py,ps)
+    10201 put sprite pp,(px,py),,ps
+    10202 'call turbo off
 10290 return
 
 1 ' Rutina player dead'
     1 ' 8000 es el HUD'
     1 ' 14100 es la rutina cuando se termina el juego
-    10300 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000:px=3*8:py=18*8
+    10300 if gc=0 then sprite off
+    10310 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
+    10320 px=3*8:py=18*8:put sprite pp,(px,py),,ps
+    10330 if gc=0 then sprite on
 10390 return
 
  
@@ -258,53 +327,45 @@
 1 'Los disparos se irán creando dinámicamente según vayamos pulsando la barra espaciadora'
 1 'Los parámteros se los metemos a ojo, la posición e y, son las del player'
 1 'dn= disparo número, sirve para ir creando disparos ya que despues se incrementa'
-1 'dd=disparo destruido, variable utilizada para eliminar enemigos (ver linea 11330 y 11200)'
-    11000 dn=0:dd=0:dm=3
-    11010 DIM dx(dm),dy(dm),dv(dm),dw(dm),dd(dm),ds(dm),dp(dm),da(dm)
+1 'dd=disparo dirección
+1 'ds=sprite'
+1 'dp=plano'
+1 'dc=color'
+    11000 dn=0:'dd=0:dm=3
+    1 '11010 DIM dx(dm),dy(dm),dv(dm),dw(dm),dd(dm),ds(dm),dp(dm),da(dm)
+    11000 dx=0:dy=0:dv=8:dd=0:ds=12:dp=0:dc=11
 11060 return
 
 1 ' Rutina crear disparos'
 1 ' Recuerda que hemos reservamos espacio para disparos en el loader'
-    1 ' solo permitiremos X disparos (recuerda que el 1 es la plantilla del cual copiamos, solo se mostraán 4)'
-    11100 if dn>9 then return 
+    1 ' Si y aexiste algún disparo lo eliminamos
+    11100 if dn>0 then gosub 11200
     1 'Posición'
-    11120 dx(dn)=px+16:dy(dn)=py+8
+    11120 dy=py
+    11125 dd=pd:if dd=3 then dx=px+16 else dx=px
     1 'Físicas: velocidad'
-    11130 dv(dn)=8
-    1 'Render: sprite y plano'
-    11140 ds(dn)=12:dp(dn)=2+dn
-    1 'RPG: disparo activo (no utlizado)'
-    11150 da(dn)=0
-    1 ' Para crear disparos sumamos 1 al contador de numero de disparos'
-    11160 dn=dn+1
-    11170 beep
+    11130 dv=8
+    1 'Render: el plano lo asignaremos según el número de siapros'
+    11140 dp=2+dn
+    11150 dn=dn+1
+    1 'Hacemos un sonido'
+    11170 re=10:gosub 4300
 11180 return
-
-1 ' Rutina eliminar disparos'
-    1 ' Si el enemigo es la última posición de array simplemente le restamos 1 al número de enemigos'
-    1 ' Aunque tenemos 5 disparos reservados en memoria, la rutina actualizar disparos solo pinta dn '
-    11200 'Bajamos el número de disparos para que nos pinte los X que habíamos reservado en el loader, solo los que le decimos
-    11210 dn=dn-1
-    11220 'Ponemos el sprite fuera para que no se vea'
-    11230 put sprite dp(dd),(-16,0),15,ds(dd)
-    11240 'preset (0,130):print #1,"D:ds: "ds(dd)", dp: "dp(dd)", dx: "dx(dd)
-    1 'Copiamos los valores del ultimo disparo sobre el disparo destruido (al fin y al cabo es solo moverlos)'
-    11250 dx(dd)=dx(dn):dy(dd)=dy(dn):dv(dd)=dv(dn):ds(dd)=ds(dn):dp(dd)=dp(dn):da(dd)=da(dn) 
-11260 return
+1 'Rutina eliminar disparo
+    11200 dn=dn-1
+    11210 put sprite dp,(0,212),0,ds:
+11290 return
 
 1 'Rutina actualizar disparos'
     1 'Si no hay disparos no pintes'
-    11300 if dn<=0 then return 
-    11310 for i=0 to dn-1 
-        1 'Si hay le sumamos la velocidad'
-        11320 dx(i)=dx(i)+dv(i) 
-        1 'put sprite numero_plano, (coordenada),color, numero de sprite'
-        11330 put sprite dp(i),(dx(i),dy(i)),15,ds(i)
-        1 'Si está fuera de la pantalla el disparo lo eliminamos'
-        11340 if dx(i)>=256 then dd=i:gosub 11200
-        11350 'preset (0,150+i*10):print #1,"i: "i", ds: "ds(i)", dp: "dp(i)
-        1 'Si la pantalla es superior a 256px, nos guardamos la posición del array del enemigo destruido y llamamos a la rutina destruir enemigo'
-    11360 next i
+    11300 if dn<=0 then return
+    1 'Si hay le sumamos la velocidad'
+    11320 if dd=3 then dx=dx+dv else dx=dx-dv
+    1 'put sprite numero_plano, (coordenada),color, numero de sprite'
+    11330 put sprite dp,(dx,dy),dc,ds
+    1 'Si está fuera de la pantalla el disparo lo eliminamos, la eliminación es con la variable dn(disparo número)'
+    11340 if dx >= 256-16 then gosub 11200
+    11350 if dx < 0 then gosub 11200
 11390 return
 
 1 '-----------------------------------'
@@ -315,19 +376,23 @@
     1 'Definiendo el espacio para los arrays con los valores de los enemigos' 
     1 'em=enemigos maximos'
     1 'en=enemigo numero, variable utilizar para gestionar la creación y destrucción de enemigos'
+    1 'er=enemigo a borrar, remove '
     12000 em=3
     12010 en=0
     1 'ex=coordenada x, ey=coordenada y'
     1 'ev=velocidad enemigo eje x, ew=velocidad eje y'r'
     1 'ed=enemigo dirección'
     1 'es=enemigo sprite, ep=enemigo plano'
-    1 'ee=enemigo energia '
+    1 'ep=enemigo plano'
+    1 'ec=enemigo color'
     1 'et= define el tipo, si es un perro, un pinguino, un pájaro, etc
+    1 'ee=enemigo energia '
+    1 'ef=enemigo frame'
     1 'Perro sprites derecha 13 y 14, izquierda 15 y 16 '
     1 'Conejo derecha 17,18  i<quierda 19,20'
     1 'Tortuga derecha 21,22   izquierda 23,24'
     1 'Reservamos el espacio en RAM para 5 enemigos'
-    12020 DIM ex(em),ey(em),ev(em),ew(em),ed(em),es(em),ep(em),ec(em),et(em),ee(em)
+    12020 DIM ex(em),ey(em),ev(em),ew(em),ed(em),es(em),ep(em),ec(em),et(em),ee(em),ef(em)
 12030 return
 
 1 ' Crear enemigo'
@@ -339,32 +404,47 @@
     12570 ec(en)=6
     12580 en=en+1
 12590 return
-1 '
-1 '1 ' Rutina eliminar enemigos'
-1 '    12600 en=en-1
-1 '    12610 ey(ed)=rnd(1)*140
-1 '    12620 if ey(ed)<64 then goto 11610
-1 '    12630 ec(ed)=rnd(1)*15
-1 '    12640 if ec(ed)<2 then goto 11630
-1 '    12650 put sprite ep(ed),(-16,0),ec(ed),es(ed)
-1 '12660 return
-1 '
+
+1 ' Rutina eliminar enemigos'
+    12600 'en=en-1
+    12605 put sprite ep(er),(0,212),0,es(er)
+    12610 ex(er)=ex(en):ey(er)=ey(en):ev(er)=ev(en):es(er)=es(en):ep(er)=ep(en) 
+    1 'Quitmos el sprite ya que si no se queda congelado'
+    12650 'put sprite ep(ed),(-16,0),ec(ed),es(ed)
+    12655 en=en-1
+12660 return
+
 1 'Update enemigo'
     12700 if en<=0 then return
     12710 for i = 0 to en-1
         1 'Chequeo bloques collectables'
         1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
-        12720 if ed(i)=3 then x=ex(i)+8: if ed(i)=7 then x=ex(i)-8
-        12730 y=ey(i):gosub 13600
-        1 'Si el tile en el que estamos no es sólido cambiamos la velocidad horizontal'
-        12740 if t5<>tw then ev(i)=-ev(i)
-        12750 ex(i)=ex(i)-ev(i):if ex(i)>256-40 then ex(i)=ex(i)-ev(i): if ex(i)<0 then ex(i)=ex(i)-ev(i)
-      
+        1 'Lo siguiente lo necesitamos para que no compruebe el tile sobre el que estamos sino el siguiente o anterior según la dirección'
+        12720 if ed(i)=3 then gx=ex(i)+8 else if ed(i)=7 then gx=ex(i)-8
+        1 'La rutina 13600 nos devuelve los tiles de alrededor si le paamos primero el gx y gy'
+        12730 gy=ey(i):gosub 13600
+
+        1 'Si el tile en el que estamos no es sólido invertmos la velocidad horizontal'
+        12740 if t5<>tw then ev(i)=-ev(i):if ed(i)=7 then ed(i)=3 else if ed(i)=3 then ed(i)=7
+        12750 if ex(i)>256-40 then ex(i)=ex(i)-ev(i): if ex(i)<0 then ex(i)=ex(i)-ev(i)
+        12755 ex(i)=ex(i)+ev(i)
+        12756 ef(i)=ef(i)+1:if ef(i)>1 then ef(i)=0
         1 'Chequeamos la colisión con el player'
         1 'La rutina 10300 es cuando el player muere'
-        12760  if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10300
+        12760 if gc=1 then if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10300
+        1 'chequeamos la colisión con la bala'
+        1 'La rutina 12600 es cuando el enemigo muere'
+        1 'Con ed=i, almacenamos la posición de array que se va a sobreescribir con el último enemigo del array'
+        1 'Con gosub 11200 eliminamos la bala'
+        12770 if gc=1 then if ex(i) < dx + 16 and ex(i) + 16 > dx and ey(i) < dy + 16 and 16 + ey(i) > dy then er=i:gosub 12600:gosub 11200
+        
+        1 'Sistema de animación enemigo'
+        12780 if ed(i)=7 then es(i)=es(i)+2
+        12785 if ef(i) mod 2 = 0 then es(i)=es(i)+1
         1 'put sprite numero_plano, (coordenada),color, numero de sprite'
-        12770 put sprite ep(i),(ex(i),ey(i)),ec(i),es(i)
+        12790 put sprite ep(i),(ex(i),ey(i)),ec(i),es(i)
+        12795 if ef(i) mod 2 = 0 then es(i)=es(i)-1
+        12796 if ed(i)=7 then es(i)=es(i)-2
     12800 next i
 12810 return
 
@@ -444,17 +524,23 @@
 
 
 1'chequeando contorno de una coordeanda dada por tx y ty
-    13600 tx=x/8:ty=y/8
+    13600 'if gx<8 or gx> 256-16 or gy<0 or gy> 192-16 then return
+    13601 tx=gx/8:ty=gy/8
+    1 '13601 if ty<16 or ty >20*8 or tx<8 or tx > 30*8 then return
     1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px y solo queremos ver las piernas'
-    13605 if ty>0 then t0=m(ty+1,tx)
+    1 '13605 if ty>16 then t0=m(ty+1,tx)
+    13605 t0=m(ty+1,tx)
     1 't1 será el tile de arriba'
+    1 '13610 if ty>256-16 then t1=m(ty-1,tx)
     13610 t1=m(ty-1,tx)
     1't3 será el tile de la derecha
-    13620 if ty>256-16 then t3=m(ty,tx+1)
+    1 '13620 if ty>256-16 then t3=m(ty,tx+1)
+    13620 t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
     13630 if ty>0 and ty<20 then t5=m(ty+2,tx)
+
     1 'Izquierda'
     13640 if tx>0 then t7=m(ty,tx-1)
     

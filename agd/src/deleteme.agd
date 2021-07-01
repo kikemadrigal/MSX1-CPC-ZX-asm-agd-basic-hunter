@@ -3052,7 +3052,7 @@ IF A > 0
     ENDIF
 ELSE
     IF P = 0
-        MUSIC 0 0
+        ;MUSIC 0 0
     ENDIF
 ENDIF
 
@@ -3450,12 +3450,12 @@ LET P = 0
 
 
 IF P = 0 
-    DEFINEMUSIC "music_start.pt3"
-    DEFINEMUSIC "music_game.pt3"
-    DEFINEMUSIC "music_end.pt3"
-    MUSIC 1 1
-    ;event14, línea 4 (RESTARTSCREEN)MUSIC 2 1
+    ;DEFINEMUSIC "music_start.pt3"
+    ;DEFINEMUSIC "music_game.pt3"
+    ;DEFINEMUSIC "music_end.pt3"
+    ;MUSIC 1 1
     ;event10, línea 52 (MAINLOOP1) MUSIC 0 0
+    ;event14, línea 4 (RESTARTSCREEN)MUSIC 2 1
     ;event16, linea 4 (killplayer) MUSIC 0 0
     ;event17, linea 12 (lostgame) MUSIC 3 0
 ELSE
@@ -3693,7 +3693,7 @@ LET T = 60 ; Segundos, esta variable se inicializará con 60 segundos, aparece e
 EVENT RESTARTSCREEN
 
 IF P = 0
-    MUSIC 2 1
+    ;MUSIC 2 1
 ENDIF
 
 
@@ -3799,9 +3799,8 @@ INK 15
 EVENT FELLTOOFAR
 EVENT KILLPLAYER
 
-
-MUSIC 0 0
 IF P = 0
+    ;MUSIC 0 0
     SOUND 5
 ELSE
     BEEP 60
@@ -3833,7 +3832,7 @@ MESSAGE 3
 AT 12 15 
 SHOWSCORE
 
-MUSIC 3 0
+;MUSIC 3 0
 DELAY 254
 
 

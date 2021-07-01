@@ -5,13 +5,14 @@
 1 'inicialización player'
     1 'pv=velocidad horizontal
     1 'pw=velocidad vertical'
-    1 'po=player y old'
-    1 'pa=salta activdo'
+    1 'po=player y position old'
+    1 'pd= player direction, 1 up, 3 right, 5 down, 7 left'
+    1 'pj=player jump, salta activdo'
     1 'pl=player life o vida'
     1 'pr=player record, puntuación'
     1 'pb=bloques cogidos por el player'
     1 'pg=player gungs, balas, disparos que le quedan'
-    10000 px=3*8:py=18*8:pv=8:pw=8:pj=0:po=py:pe=100:pa=0:pl=3:pr=0:pb=0:pg=100
+    10000 px=3*8:py=18*8:pv=8:pw=8:po=py:pd=3:pj=0:pl=3:pr=0:pb=0:pg=100:pc=11
     1 'para ver el sprite camnando a la derecha, izquierda, etc utilizaremos un array'
     1 'Sprite 0 camina a la dercha'
     1 'sprite 1 camina ala derecha moviéndose, no se porqué  pero si pongo dim p(6) no funciona, parece que es algo del nbasic'
@@ -23,17 +24,19 @@
 
 1 'Physics player'
     1 'Con esto vemos los tiles que tenemos alrededor
-    10100 x=px:y=py:gosub 13600
+
+    10100 gx=px:gy=py:gosub 13600
+
     1 'Rutina salto: si esta saltando le restamos a la posición y la velocidad vertical
-    10110 if pa=1 then py=py-pw
+    10110 if pj=1 then py=py-pw
     1 'Si tenemos en la cabeza un bloque sólido bajamos'
-    10111 if t1=tw then pa=2
-    1 '-48 es la distancia máxima a la que puede saltar de la posición original (po), con pa=2 le decimos que está cayendo'
-    10120 if pa=1 and py<po-48 then pa=2
+    10111 if t1=tw then pj=2
+    1 '-48 es la distancia máxima a la que puede saltar de la posición original (po), con pj=2 le decimos que está cayendo'
+    10120 if pj=1 and py<po-48 then pj=2
     1 'Si cuando estemos cayendo hay un bloque sólido se termina el salto'
-    10135 if t5=tw and pa=2 then pa=0
+    10135 if t5=tw and pj=2 then pj=0
     1 'Rutina caida
-    10136 if pa=2 then py=py+pw
+    10136 if pj=2 then py=py+pw
    
 
     1 'Contorno, chqueamos que no se haya salido por la gravedad'
@@ -50,18 +53,24 @@
 
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
-    10170 if pa=0 and t5<>tw then py=py+pv
+    10170 if pj=0 and t5<>tw then py=py+pv
+
 10195 return
 
 
 1 'render player'
-    10200 put sprite pp,(px,py),,ps
+    10200 'call turbo on (pp, px,py,ps)
+    10201 put sprite pp,(px,py),,ps
+    10202 'call turbo off
 10290 return
 
 1 ' Rutina player dead'
     1 ' 8000 es el HUD'
     1 ' 14100 es la rutina cuando se termina el juego
-    10300 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000:px=3*8:py=18*8
+    10300 if gc=0 then sprite off
+    10310 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
+    10320 px=3*8:py=18*8:put sprite pp,(px,py),,ps
+    10330 if gc=0 then sprite on
 10390 return
 
  

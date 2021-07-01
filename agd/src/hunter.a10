@@ -49,7 +49,7 @@ IF A > 0
     ENDIF
 ELSE
     IF P = 0
-        MUSIC 0 0
+        ;MUSIC 0 0
     ENDIF
 ENDIF
 
