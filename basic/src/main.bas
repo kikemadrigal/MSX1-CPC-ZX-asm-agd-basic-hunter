@@ -36,7 +36,7 @@
 
 
 1 'main loop'
-    2000 'nada'
+    2000 ha=time/60:if ho<>ha then gosub 8100
     1 'input system
     2005 gosub 3500
     1 'Physics player'
@@ -51,8 +51,8 @@
     1 '8000=mostramos la puntuación'
     2050 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
     1 'marcamos como que el mapa ha cambiado para que vuelva a cargarlo y le decimos que el mapa actual es el 0'
-    2060 if pb=0 then mc=1:if ma>1 then ma=0
-    2070 ha=time/60:if ho<>ha then gosub 8100
+    2070 if pb=0 then mc=1:'if ma>1 then ma=0
+
     1 'debug'
     2080 'gosub 9000
 2090 goto 2000
@@ -173,7 +173,7 @@
     1 '9020 preset (0,8): print #1,"ed0  "ed(0)" ee0 "ee(0)
     1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
     1 '9020 preset (0,16): print #1," dd "dd" dx "dx" dy "dy" ds  "ds" dp "dp
-    9010 preset (0,16): print #1," sh "sh
+    9010 preset (0,16): print #1," mc "mc" pb "pb 
 9090 return
 
 

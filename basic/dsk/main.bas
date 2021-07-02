@@ -15,15 +15,14 @@
 110strig(0)on:onstriggosub11100
 130'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
 140gosub14000
-2000'nada'
+2000ha=time/60:ifho<>hathengosub8100
 2005gosub3500
 2010gosub10500
 2020gosub12700
 2030gosub10600
 2040gosub11300
 2050ifmc=1thencls:gosub13100:gosub13300:ma=ma+1:mc=0:gosub8000
-2060ifpb=0thenmc=1:ifma>1thenma=0
-2070ha=time/60:ifho<>hathengosub8100
+2070ifpb=0thenmc=1:'ifma>1thenma=0
 2080'gosub9000
 2090goto2000
 2500onstick(0)gosub2600,2660,2700,2500,2800,2500,2860,2900
@@ -83,7 +82,7 @@
 8120ho=ha:preset(216,204):print#1,hr
 8130return
 9000'nada'
-9010preset(0,16):print#1,"sh"sh
+9010preset(0,16):print#1,"mc"mc"pb"pb
 9090return
 14000cls:preset(10,30):print#1,"Thehunter"
     14050 preset (10,160): print #1, "Cursores para mover, pulsa una tecla para continuar"
