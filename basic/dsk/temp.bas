@@ -7,6 +7,8 @@
 20 open "grp:" as #1:defint a-z
 30 bload"sprites.bin",s:print #1,"!Sprites leidos"
 40 bload"scolor.bin",s:print #1,"!colores sprites leidos"
+1 'Vamos a sacar de la pantalla los sprites'
+45 for i=0 to 31: put sprite i,(0,212),,i:next i
 50 bload"TILESET.S05",s,32768:print #1,"!tileset leido"
 1 'Inicializamos el mapa'
 70 print #1,"!Cargando mapa":gosub 13000
@@ -20,6 +22,8 @@
 105 gosub 11000
 1 ' Rutina inicializar enemigos'
 106 gosub 12000
+1 'inicializamos el interruptor
+107 gosub 16000
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
 1 'gc es si el juego está en modo colisión onsprite
@@ -154,7 +158,7 @@
 1 'Rutina mostrar contador'
     8100 hr=hs-ha
     8110 if hr <= 0 then ha=0:time=0:hs=200
-    8120 ho=ha:preset (184,204):print #1,hr
+    8120 ho=ha:preset (216,204):print #1,hr
 8130 return
 
 
@@ -169,7 +173,7 @@
     1 '9020 preset (0,8): print #1,"ed0  "ed(0)" ee0 "ee(0)
     1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
     1 '9020 preset (0,16): print #1," dd "dd" dx "dx" dy "dy" ds  "ds" dp "dp
-    1 '9010 preset (0,16): print #1," st "stick(0)" pj "pj" time"time
+    9010 preset (0,16): print #1," sh "sh
 9090 return
 
 
@@ -227,6 +231,12 @@
     20040 pb=8
     1 'Rutina reposicionar sprite'
     20050 gosub 10100
+    1 'Colocamos el interruptor'
+    1 'Plano 0 player, plano 1 disparo, enemigos del 2 al 10, buo 11, mono 12, interruptor 13, jefe 14'
+    1 'put sprite plano, x, y, color y sprite'
+    1 '20060 put sprite 13,(256-16,19*8),,47
+    1 '16300 es la rutina par apintar el switch'
+    2060 sx=30*8:sy=19*8:tp=28*8:tq=7*8:gosub 16300
 20090 return
 
 1'------------------------------------'
@@ -325,9 +335,11 @@
     1 ' chequeo colisión con los tiles mortales
     10569 if t0=td then 10200
 
+    1 'Colision del player con el interruptor'
+    10570 if sx < px + 16 and sx + 16 > px and sy < py + 16 and 16 + sy > py then gosub 16400:beep:beep:beep
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
-    10570 if pj=0 and t5<>tw then py=py+pv
+    10580 if pj=0 and t5<>tw then py=py+pv
 10595 return
 
 
@@ -492,7 +504,9 @@
     1 'tf= tile pienso (fodder)'
     1 'td= tile mortal (deadly)'
     1 'tc= tile coleccionable (collectable)'
-    13005 te=255:tw=32:tl=0:tf=0:td=3:tc=67
+    1 'tp= inidica la posición en el eje x de la puerta'
+    1 'tq=indica la posición en el eje y de la puerta'
+    13005 te=255:tw=32:tl=0:tf=0:td=3:tc=67:tp=0:tq=0
     1 'dim mapa(filas,clumnas)'
     1 'ma=mapa activo o actual, se empieza con el 0'
     1 'mc=mapa cambia'
@@ -647,4 +661,38 @@
 1 '                13280 next c
 1 '        13290 next f 
 1 '        13300 a=usr4(0):call turbo off
-1 '13310 return
+1 '13310 return1' ------------------------------------'
+1' Rutinas switch /  switch 16000-16999 '
+1' -------------------------------------'
+
+
+
+1 ' Rutina Inicializar stiwch'
+    1 'Plano 0 player, plano 1 disparo, enemigos del 2 al 10, buo 11, mono 12, interruptor 13, jefe 14'
+    1 'put sprite plano, x, y, color y sprite'
+    1 'sx y sy coordenadas switch x e y'
+    1 'ss=sprite switch'
+    1 'sp=plano switch'
+    1 'sc=color switch'
+    1 'sh=switch habilitado'
+    16000 sx=0:sy=0:ss=47:sp=13:sc=6:sh=0
+16180 return
+
+1 'Rutina pintar switch '
+    1 'el interruptor se pintará desactivado si el switch no está habilitado'
+    16300 put sprite sp,(sx,sy),sc,ss
+    1 'Pintamos la puerta que viene con el switch'
+    16310 for i=8 to 24 step 8: copy (8,8)-((8)+8,(8)+8),1 to (tp,tq+i),0:next i
+16390 return
+
+1 'Rutina habilitar instruuptor'
+    1 '16400 if sh=0 then sh=1:sc=3:ss=ss+1:for i=8 to 24 step 8: copy (0,0)-(8,8),1 to (tp,tq+i),0,tpset:next i
+    16400 if sh=0 then sh=1:sc=3:ss=ss+1:line(tp,tq)-(tp+8,tq+24),14,bf
+    1 'Pintamos los tiles de fondo'
+    1 '16420 for i=8 to 24 step 8: copy (8,40)-(8+8,39+8),1 to (tp,tq+i),0:next i
+
+    16430 put sprite sp,(sx,sy),sc,ss
+16490 return
+
+
+

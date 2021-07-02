@@ -4,12 +4,14 @@
 20open"grp:"as#1:definta-z
 30 bload"sprites.bin",s:print #1,"Sprites leidos"
 40 bload"scolor.bin",s:print #1,"colores sprites leidos"
+45fori=0to31:putspritei,(0,212),,i:nexti
 50 bload"TILESET.S05",s,32768:print #1,"tileset leido"
 70 print #1,"Cargando mapa":gosub 13000
 80gx=0:gy=0:time=0:hr=0:hs=200:ha=0
 100gosub10000
 105gosub11000
 106gosub12000
+107gosub16000
 110strig(0)on:onstriggosub11100
 130'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
 140gosub14000
@@ -78,9 +80,10 @@
 8020return
 8100hr=hs-ha
 8110ifhr<=0thenha=0:time=0:hs=200
-8120ho=ha:preset(184,204):print#1,hr
+8120ho=ha:preset(216,204):print#1,hr
 8130return
 9000'nada'
+9010preset(0,16):print#1,"sh"sh
 9090return
 14000cls:preset(10,30):print#1,"Thehunter"
     14050 preset (10,160): print #1, "Cursores para mover, pulsa una tecla para continuar"
@@ -101,6 +104,7 @@
 20030gosub12500:ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
 20040pb=8
 20050gosub10100
+2060sx=30*8:sy=19*8:tp=28*8:tq=7*8:gosub16300
 20090return
 20100en=0
 20140pb=6
@@ -133,7 +137,8 @@
 10552ifpx<=0thenpx=0
 10568ift0=tcthencopy(8,40)-(8+8,39+8),1to(px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub8000
 10569ift0=tdthen10200
-10570ifpj=0andt5<>twthenpy=py+pv
+10570ifsx<px+16andsx+16>pxandsy<py+16and16+sy>pythengosub16400:beep:beep:beep
+10580ifpj=0andt5<>twthenpy=py+pv
 10595return
 10600'callturboon(pp,px,py,ps)
 10601putspritepp,(px,py),,ps
@@ -196,7 +201,7 @@
 12800nexti
 12810return
 13000dimm(22,31):ma=0:mc=1
-13005te=255:tw=32:tl=0:tf=0:td=3:tc=67
+13005te=255:tw=32:tl=0:tf=0:td=3:tc=67:tp=0:tq=0
 13010ty=19:tx=3:t0=m(ty+1,tx):t1=161:t3=m(ty,tx+1):t5=m(ty+2,tx):t7=m(ty,tx-1)
 13090return
     13100 'print #1, "cargando mapa"
@@ -239,3 +244,12 @@
 13660ifty<20thent5=m(ty+2,tx)
 13670iftx>0thent7=m(ty,tx-1)
 13690return
+16000sx=0:sy=0:ss=47:sp=13:sc=6:sh=0
+16180return
+16300putspritesp,(sx,sy),sc,ss
+16310fori=8to24step8:copy(8,8)-((8)+8,(8)+8),1to(tp,tq+i),0:nexti
+16390return
+16400ifsh=0thensh=1:sc=3:ss=ss+1:line(tp,tq)-(tp+8,tq+24),14,bf
+16430putspritesp,(sx,sy),sc,ss
+16490return
+

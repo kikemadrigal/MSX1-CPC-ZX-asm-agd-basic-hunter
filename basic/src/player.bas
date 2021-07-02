@@ -77,9 +77,11 @@
     1 ' chequeo colisión con los tiles mortales
     10569 if t0=td then 10200
 
+    1 'Colision del player con el interruptor'
+    10570 if sx < px + 16 and sx + 16 > px and sy < py + 16 and 16 + sy > py then gosub 16400:beep:beep:beep
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
-    10570 if pj=0 and t5<>tw then py=py+pv
+    10580 if pj=0 and t5<>tw then py=py+pv
 10595 return
 
 

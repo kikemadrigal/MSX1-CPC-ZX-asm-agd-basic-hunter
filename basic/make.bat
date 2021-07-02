@@ -16,7 +16,7 @@ move level1.bin dsk
 copy src\autoexec.bas dsk
 copy assets\tileset.s05 dsk
 rem Creamos el main uniendo los archivos y quitándo los espacios
-copy "src\main.bas"+"src\player.bas"+"src\shot.bas"+"src\enemy.bas"+"src\map.bas" "dsk\temp.bas"
+copy "src\main.bas"+"src\player.bas"+"src\shot.bas"+"src\enemy.bas"+"src\map.bas"+"src\switch.bas" "dsk\temp.bas"
 java -jar tools\deletecomments1.4\deletecomments1.4.jar dsk\temp.bas dsk\main.bas
 rem abrimos el emulador con el dsk
 tools\openmsx\openmsx.exe -machine Philips_NMS_8255 -diska dsk

@@ -7,6 +7,8 @@
 20 open "grp:" as #1:defint a-z
 30 bload"sprites.bin",s:print #1,"!Sprites leidos"
 40 bload"scolor.bin",s:print #1,"!colores sprites leidos"
+1 'Vamos a sacar de la pantalla los sprites'
+45 for i=0 to 31: put sprite i,(0,212),,i:next i
 50 bload"TILESET.S05",s,32768:print #1,"!tileset leido"
 1 'Inicializamos el mapa'
 70 print #1,"!Cargando mapa":gosub 13000
@@ -20,6 +22,8 @@
 105 gosub 11000
 1 ' Rutina inicializar enemigos'
 106 gosub 12000
+1 'inicializamos el interruptor
+107 gosub 16000
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
 1 'gc es si el juego está en modo colisión onsprite
@@ -154,7 +158,7 @@
 1 'Rutina mostrar contador'
     8100 hr=hs-ha
     8110 if hr <= 0 then ha=0:time=0:hs=200
-    8120 ho=ha:preset (224,204):print #1,hr
+    8120 ho=ha:preset (216,204):print #1,hr
 8130 return
 
 
@@ -169,7 +173,7 @@
     1 '9020 preset (0,8): print #1,"ed0  "ed(0)" ee0 "ee(0)
     1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
     1 '9020 preset (0,16): print #1," dd "dd" dx "dx" dy "dy" ds  "ds" dp "dp
-    1 '9010 preset (0,16): print #1," st "stick(0)" pj "pj" time"time
+    9010 preset (0,16): print #1," sh "sh
 9090 return
 
 
@@ -227,6 +231,12 @@
     20040 pb=8
     1 'Rutina reposicionar sprite'
     20050 gosub 10100
+    1 'Colocamos el interruptor'
+    1 'Plano 0 player, plano 1 disparo, enemigos del 2 al 10, buo 11, mono 12, interruptor 13, jefe 14'
+    1 'put sprite plano, x, y, color y sprite'
+    1 '20060 put sprite 13,(256-16,19*8),,47
+    1 '16300 es la rutina par apintar el switch'
+    2060 sx=30*8:sy=19*8:tp=28*8:tq=7*8:gosub 16300
 20090 return
 
 1'------------------------------------'
