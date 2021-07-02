@@ -23,8 +23,8 @@
 1 'Rutina barra espaciadora pulsada creamos un disparo
 110 strig(0) on:on strig gosub 11100
 1 'gc es si el juego está en modo colisión onsprite
-1 'La rutina 10300 es cuando el player muere'
-120 if gc=0 then on sprite gosub 10300:sprite on
+1 'La rutina 10200 es cuando el player muere'
+120 if gc=0 then on sprite gosub 10200:sprite on
 130 'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
 1 'Mostramos la pantalla de presentación
 140 gosub 14000
@@ -36,11 +36,11 @@
     1 'input system
     2005 gosub 3500
     1 'Physics player'
-    2010 gosub 10100
+    2010 gosub 10500
     1 'Physics enemies'
     2020 gosub 12700
     1'Render player
-    2030 gosub 10200
+    2030 gosub 10600
     1 'Render shots'
     2040 gosub 11300
     1 'si el mapa cambia 1 'Rutina hacer copys con mapa, 2 Escribimos en la VRAM, aumentamos el nivel:ponmeos el mc=0'
@@ -65,13 +65,13 @@
 2650 return
 1 '2 arriba-derecha'
     2660 if pj=0 then po=py:pj=1 
-    2670 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
+    2670 if t3<>tw then px=px+pv:pd=3 
     2680 swap p(0),p(1):ps=p(1)
 2690 return
 1 're=8 es el efecto de sonido 8 de la rutina de reprodución de sonidos 2300
 1 '3 derecha'
     1 'comprobamos que no hay un sólido a la derecha y despues si se ha salido lo recolocamos'
-    2700 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
+    2700 if t3<>tw then px=px+pv:pd=3
     2710 swap p(0),p(1):ps=p(1)
 2720 return
 1 '5 abajo'
@@ -79,12 +79,12 @@
     2800 'if t5=69 then py=py+pv
 2850 return
 1 '7 izquierda'
-    2860 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
+    2860 if t7<>tw then px=px-pv:pd=7
     2870 swap p(2),p(3):ps=p(3)
 2890 return
 1 '8 izquierda-arriba'
     2900 if pj=0 then po=py:pj=1 
-    2910 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
+    2910 if t7<>tw then px=px-pv:pd=7
     2920 swap p(2),p(3):ps=p(3)
 2950 return
 
@@ -102,13 +102,13 @@
 3610 goto 3960
 1 '2 arriba-derecha'
     3660 if pj=0 then po=py:pj=1 
-    3670 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
+    3670 if t3<>tw then px=px+pv:pd=3
     3680 swap p(0),p(1):ps=p(1)
 3690 goto 3960
 1 're=8 es el efecto de sonido 8 de la rutina de reprodución de sonidos 2300
 1 '3 derecha'
     1 'comprobamos que no hay un sólido a la derecha y despues si se ha salido lo recolocamos'
-    3700 if t3<>tw then px=px+pv:pd=3:if px>246 then px=246 
+    3700 if t3<>tw then px=px+pv:pd=3 
     3710 swap p(0),p(1):ps=p(1)
 3720 goto 3960
 1 '5 abajo'
@@ -116,14 +116,13 @@
     3800 'if t5=69 then py=py+pv
 3850 goto 3960
 1 '7 izquierda'
-    3860 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
+    3860 if t7<>tw then px=px-pv:pd=7
     3870 swap p(2),p(3):ps=p(3)
 3890 goto 3960
 1 '8 izquierda-arriba'
     3900 if pj=0 then po=py:pj=1 
-    3910 if t7<>tw then px=px-pv:pd=7:if px<=0 then px=0
+    3910 if t7<>tw then px=px-pv:pd=7
     3920 swap p(2),p(3):ps=p(3)
-
 3960 goto 2010
 
 1 ' ----------------------'
@@ -155,11 +154,11 @@
 1 'Debug'
     9000 'nada'
     1 '9010 preset (0,0): print #1," px "px" py "py" tx "tx" ty "ty
-    9010 preset (0,0): print #1,"pg "pg" ps "ps" pd "pd" pc "pc" px "px" py "py
-    9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
-    9030 preset (0,16): print #1," a0 "a0" a1 "a1" a3 "a3" a5 "a5" a7 "a7  
+    1 '9010 preset (0,0): print #1,"pg "pg" ps "ps" pd "pd" pc "pc" px "px" py "py
+    1 '9020 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
+    1 '9030 preset (0,16): print #1," a0 "a0" a1 "a1" a3 "a3" a5 "a5" a7 "a7  
     1 '9010 preset (0,0): print #1,"pj "pj" ty "ty" t5 "t5" tx "tx" t1 "t1
-    1 '9010 preset (0,0): print #1,"en  "en" ex0 "ex(0)" ex1 "ex(1)
+    1 '9010 preset (0,0): print #1,"en  "en" ex0 "ex(0)" ey0 "ey(0)" ep0 "ep(0)" es0 "es(0)
     1 '9020 preset (0,8): print #1,"ed0  "ed(0)" ee0 "ee(0)
     1 '9030 preset (0,16): print #1," ev0 "ev(0)" ev1 "ev(1)" ed0  "ed(0)" ed1 "ed(1)
     1 '9020 preset (0,16): print #1," dd "dd" dx "dx" dy "dy" ds  "ds" dp "dp
@@ -215,11 +214,12 @@
     1 'Situamos al player
     1 'creamos 2 enemigos'
     20000 en=0
-    20010 'gosub 12500: ex(en-1)=2*8:ey(en-1)=14*8
-    20030 gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
+    20010 'gosub 12500: ex(en-1)=14*8:ey(en-1)=9*8
+    20030 'gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
     1 'Rendremos que coger 6 bloques'
-    20040 pb=3
-    20050 px=3*8:py=18*8
+    20040 pb=8
+    1 'Rutina reposicionar sprite'
+    20050 gosub 10100
 20090 return
 
 1'------------------------------------'

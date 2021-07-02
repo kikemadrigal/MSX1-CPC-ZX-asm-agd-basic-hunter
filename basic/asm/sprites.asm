@@ -11,25 +11,25 @@ INICIO:
     ret    
 SPRITE_DATA:
     ; 0-
-    db 007h,00Fh,007h,007h,003h,001h,003h,00Fh
-    db 00Bh,00Bh,003h,003h,003h,003h,002h,003h
-    db 080h,0C0h,080h,0C0h,080h,080h,040h,040h
-    db 07Ch,070h,000h,0E0h,0C0h,0C0h,040h,060h
+    db 0E0h,0F0h,0E0h,0F0h,0E0h,060h,0D0h,050h
+    db 05Fh,05Ch,040h,0F8h,0F0h,0F0h,090h,0D8h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
     ; 1-
-    db 007h,00Fh,007h,007h,003h,001h,003h,003h
-    db 002h,002h,002h,003h,003h,001h,001h,001h
-    db 080h,0C0h,080h,0C0h,080h,080h,0C0h,0C0h
-    db 0FCh,0F0h,020h,0E0h,0D0h,070h,000h,080h
+    db 0E0h,0F0h,0E0h,0F0h,0E0h,060h,0F0h,0F0h
+    db 0BFh,0BCh,088h,0F8h,0F4h,05Ch,040h,060h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
     ; 2-
-    db 001h,003h,001h,003h,001h,001h,002h,002h
-    db 03Eh,00Eh,000h,007h,003h,003h,002h,006h
-    db 0E0h,0F0h,0E0h,0E0h,0C0h,080h,0C0h,0F0h
-    db 0D0h,0D0h,0C0h,0C0h,0C0h,0C0h,040h,0C0h
+    db 007h,00Fh,007h,00Fh,007h,006h,00Bh,00Ah
+    db 0FAh,03Ah,002h,01Fh,00Fh,00Fh,009h,01Bh
+    db 000h,000h,000h,000h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
     ; 3-
-    db 001h,003h,001h,003h,001h,001h,003h,003h
-    db 03Fh,00Fh,004h,007h,00Bh,00Eh,000h,001h
-    db 0E0h,0F0h,0E0h,0E0h,0C0h,080h,0C0h,0C0h
-    db 040h,040h,040h,0C0h,0C0h,080h,080h,080h
+    db 007h,00Fh,007h,00Fh,007h,006h,00Fh,00Fh
+    db 0FDh,03Dh,011h,01Fh,02Fh,03Ah,002h,006h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
+    db 000h,000h,000h,000h,000h,000h,000h,000h
     ; 4-
     db 000h,000h,000h,000h,003h,000h,000h,000h
     db 003h,002h,002h,003h,000h,000h,000h,000h

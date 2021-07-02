@@ -2,11 +2,11 @@ EVENT INTROMENU
 
 
 ;0 MSX, 1 amstrad, 2 spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
-LET P = 2
+LET P = 0
 
 
 IF P = 0 
-    ;DEFINEMUSIC "music_start.pt3"
+    DEFINEMUSIC "music_start.pt3"
     ;DEFINEMUSIC "music_game.pt3"
     ;DEFINEMUSIC "music_end.pt3"
     ;MUSIC 1 1

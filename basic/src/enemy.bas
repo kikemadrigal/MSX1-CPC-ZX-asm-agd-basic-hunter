@@ -36,12 +36,14 @@
 12590 return
 
 1 ' Rutina eliminar enemigos'
-    12600 'en=en-1
-    12605 put sprite ep(er),(0,212),0,es(er)
-    12610 ex(er)=ex(en):ey(er)=ey(en):ev(er)=ev(en):es(er)=es(en):ep(er)=ep(en) 
+    12600 en=en-1
+    12610 ex(er)=0:ey(er)=212
+    12620 put sprite ep(er),(ex(er),ey(er)),0,es(er)
+    12630 ex(er)=ex(en):ey(er)=ey(en):ev(er)=ev(en):es(er)=es(en):ep(er)=ep(en) 
     1 'Quitmos el sprite ya que si no se queda congelado'
-    12650 'put sprite ep(ed),(-16,0),ec(ed),es(ed)
-    12655 en=en-1
+    12640 'put sprite ep(ed),(-16,0),ec(ed),es(ed)
+   
+    12650 'en=en-1
 12660 return
 
 1 'Update enemigo'
@@ -60,8 +62,8 @@
         12755 ex(i)=ex(i)+ev(i)
         12756 ef(i)=ef(i)+1:if ef(i)>1 then ef(i)=0
         1 'Chequeamos la colisión con el player'
-        1 'La rutina 10300 es cuando el player muere'
-        12760 if gc=1 then if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10300
+        1 'La rutina 10200 es cuando el player muere'
+        12760 if gc=1 then if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10200
         1 'chequeamos la colisión con la bala'
         1 'La rutina 12600 es cuando el enemigo muere'
         1 'Con ed=i, almacenamos la posición de array que se va a sobreescribir con el último enemigo del array'

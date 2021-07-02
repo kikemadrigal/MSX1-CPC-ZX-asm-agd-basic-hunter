@@ -32,7 +32,7 @@
 11180 return
 1 'Rutina eliminar disparo
     11200 dn=dn-1
-    11210 put sprite dp,(0,212),0,ds:
+    11210 put sprite dp,(0,212),0,ds
 11290 return
 
 1 'Rutina actualizar disparos'

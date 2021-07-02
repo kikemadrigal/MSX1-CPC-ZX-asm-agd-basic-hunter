@@ -5,7 +5,7 @@
 1 'mu=update map, nos dice que debemos de volver a cargar el archivo.bin del disco en el array (en la RAM)'
     1' tx=Es el tile en el que está el player en el eje x
     1 't0=tile sobre el que está el player,t1 =tile arriba, t3 derecha, t5 abajo, t7 izquierda'
-    13000 tx=0:ty=0:t0=0:t1=0:t3=0:t5=0:t7=0
+    13000 dim m(22,31):ma=0:mc=1 
     1 'te= tile vacío (empty)'
     1 'tw= tile pared (wall)'
     1 'tl= tile escalera (ladder)'
@@ -16,7 +16,7 @@
     1 'dim mapa(filas,clumnas)'
     1 'ma=mapa activo o actual, se empieza con el 0'
     1 'mc=mapa cambia'
-    13010 dim m(22,32):ma=0:mc=1
+    13010 ty=19:tx=3:t0=m(ty+1,tx):t1=161:t3=m(ty,tx+1):t5=m(ty+2,tx):t7=m(ty,tx-1)
     1 ' Arary de tiles:'
     1 '0: tiles tipo vacíos'
     1 '1: tiles tipo muro'
@@ -38,7 +38,7 @@
     13115 call turbo on (m())
     13120 md=&hd001
     13130 for f=0 to 22
-        13140 for c=0 to 32-1
+        13140 for c=0 to 31
             13150 tn=peek(md):md=md+1
             13160 m(f,c)=tn
         13170 next c
@@ -69,29 +69,53 @@
 
 
 
+1 '1'chequeando contorno de una coordeanda dada por tx y ty
+1 '    13600 'if gx<8 or gx> 256-16 or gy<0 or gy> 192-16 then return
+1 '    1 'El array es de ancho del 0-31 y de alto 0-22'
+1 '    13601 tx=gx/8:ty=gy/8
+1 '    1 '13601 if ty<16 or ty >20*8 or tx<8 or tx > 30*8 then return
+1 '    1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px y solo queremos ver las piernas'
+1 '    1 '13605 if ty>16 then t0=m(ty+1,tx)
+1 '    13605 t0=m(ty+1,tx)
+1 '    1 't1 será el tile de arriba'
+1 '    1 '13610 if ty>256-16 then t1=m(ty-1,tx)
+1 '    13610 t1=m(ty-1,tx)
+1 '    1't3 será el tile de la derecha
+1 '    1 '13620 if ty>256-16 then t3=m(ty,tx+1)
+1 '    13620 t3=m(ty,tx+1)
+1 '    1 'Chequeando abajo'
+1 '    1  'tx=(px+8)/8:ty=(py+16+1)/8
+1 '    1 'Son 2 tiles hacia abao porque el sprite es de 16px'
+1 '    13630 if ty>0 and ty<20 then t5=m(ty+2,tx)
+1 '    1 'Izquierda'
+1 '    13640 if tx>0 then t7=m(ty,tx-1)
+1 '13690  return
+
 1'chequeando contorno de una coordeanda dada por tx y ty
     13600 'if gx<8 or gx> 256-16 or gy<0 or gy> 192-16 then return
-    13601 tx=gx/8:ty=gy/8
-    1 '13601 if ty<16 or ty >20*8 or tx<8 or tx > 30*8 then return
+    1 'El array es de ancho del 0-31 y de alto 0-22'
+    13610 tx=gx/8:ty=gy/8
+    1 'Chequeando márgenes del'
+    13620 if tx < 0 or tx > 31 or ty < 0 or ty > 22 then return
     1 't0 es el tile sobre el que estamos,le sumamos 1 a la y ya que es un sprite de 16px y solo queremos ver las piernas'
     1 '13605 if ty>16 then t0=m(ty+1,tx)
-    13605 t0=m(ty+1,tx)
+    13630 if tx < 32 then t0=m(ty+1,tx)
     1 't1 será el tile de arriba'
     1 '13610 if ty>256-16 then t1=m(ty-1,tx)
-    13610 t1=m(ty-1,tx)
+    1 'No le podemos restar -1 a la posición 0 del array'
+    13640 if ty > 0 then t1=m(ty-1,tx)
     1't3 será el tile de la derecha
     1 '13620 if ty>256-16 then t3=m(ty,tx+1)
-    13620 t3=m(ty,tx+1)
+    13650 if tx < 31 then t3=m(ty,tx+1)
     1 'Chequeando abajo'
     1  'tx=(px+8)/8:ty=(py+16+1)/8
     1 'Son 2 tiles hacia abao porque el sprite es de 16px'
-    13630 if ty>0 and ty<20 then t5=m(ty+2,tx)
-
+    1 'Como el maximo son 22 tiles de alto menos la altura del sprite que son 2 no podemos comprobar los tiles apatir del 20'
+    13660 if ty < 20 then t5=m(ty+2,tx)
     1 'Izquierda'
-    13640 if tx>0 then t7=m(ty,tx-1)
-    
+    1 'No le podemos sumar -1 a la posición del array'
+    13670 if tx > 0 then t7=m(ty,tx-1)
 13690  return
-
 
 
 

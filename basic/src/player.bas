@@ -21,57 +21,74 @@
     10020 pp=0:ps=0
 10090 return
 
+1 'Rutina reposicionar player'
+    10100 px=3*8:py=18*8
+    10110 'for i=1 to 16: read a:sc0$=sc0$+chr$(a):next i
+    10120 'color sprite$(0)=sc0$
+    10130 'put sprite pp,(px,py),,ps
+    10140 'data &h0C,&h0A,&h09,&h09,&h09,&h09,&h04,&h04
+    10150 'data &h04,&h04,&h04,&h04,&h04,&h04,&h08,&h08
+10190 return
+
+1 ' Rutina player dead'
+    1 ' 8000 es el HUD'
+    1 ' 14100 es la rutina cuando se termina el juego
+    10200 if gc=0 then sprite off
+    10210 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
+    1 '10100 es la rutina de posición de sprite player'
+    10220 gosub 10100:put sprite pp,(px,py),,ps
+    10230 if gc=0 then sprite on
+10290 return
+
 
 1 'Physics player'
     1 'Con esto vemos los tiles que tenemos alrededor
 
-    10100 gx=px:gy=py:gosub 13600
+    10500 gx=px:gy=py
 
+    10502 gosub 13600
+    1 '10501 preset (0,0): print #1," px "px" py "py" tx "tx"-"ty"-"gx"-"gy
+    1 '10502 preset (0,8): print #1," t0 "t0" t1 "t1" t3 "t3" t5 "t5" t7 "t7  
     1 'Rutina salto: si esta saltando le restamos a la posición y la velocidad vertical
-    10110 if pj=1 then py=py-pw
+    10510 if pj=1 then py=py-pw
     1 'Si tenemos en la cabeza un bloque sólido bajamos'
-    10111 if t1=tw then pj=2
+    10511 if t1=tw then pj=2
     1 '-48 es la distancia máxima a la que puede saltar de la posición original (po), con pj=2 le decimos que está cayendo'
-    10120 if pj=1 and py<po-48 then pj=2
+    10520 if pj=1 and py<po-48 then pj=2
     1 'Si cuando estemos cayendo hay un bloque sólido se termina el salto'
-    10135 if t5=tw and pj=2 then pj=0
+    10535 if t5=tw and pj=2 then pj=0
     1 'Rutina caida
-    10136 if pj=2 then py=py+pw
+    10536 if pj=2 then py=py+pw
    
 
     1 'Contorno, chqueamos que no se haya salido por la gravedad'
-    10140 if py>170 then py=170
-    10150 if py<=0 then py=0
+    1 '22*8=176-16 pixeles del sprite=160'
 
+    10540 if py>160 then py=160
+    10550 if py<=0 then py=0:pj=2
+    1 '32*8=256-16pixeles del sprite=240'
+    10551 if px>248 then px=248
+    10552 if px<=0 then px=0
     1 'Chequeo escalera
     1 'Si estamos sobre una escalera subimos: la definición de esto está en el input system'
    
     1 'Chequeo bloques collectables'
     1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
     1 'Con pb-1 le decimos que queda un bloque menos por recoger'
-    10168 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
+    10568 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
 
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
-    10170 if pj=0 and t5<>tw then py=py+pv
-
-10195 return
+    10570 if pj=0 and t5<>tw then py=py+pv
+10595 return
 
 
 1 'render player'
-    10200 'call turbo on (pp, px,py,ps)
-    10201 put sprite pp,(px,py),,ps
-    10202 'call turbo off
-10290 return
+    10600 'call turbo on (pp, px,py,ps)
+    10601 put sprite pp,(px,py),,ps
+    10602 'call turbo off
+10690 return
 
-1 ' Rutina player dead'
-    1 ' 8000 es el HUD'
-    1 ' 14100 es la rutina cuando se termina el juego
-    10300 if gc=0 then sprite off
-    10310 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
-    10320 px=3*8:py=18*8:put sprite pp,(px,py),,ps
-    10330 if gc=0 then sprite on
-10390 return
 
  
 
