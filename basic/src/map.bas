@@ -12,7 +12,7 @@
     1 'tf= tile pienso (fodder)'
     1 'td= tile mortal (deadly)'
     1 'tc= tile coleccionable (collectable)'
-    13005 te=255:tw=32:tl=0:tf=0:td=0:tc=67
+    13005 te=255:tw=32:tl=0:tf=0:td=3:tc=67
     1 'dim mapa(filas,clumnas)'
     1 'ma=mapa activo o actual, se empieza con el 0'
     1 'mc=mapa cambia'

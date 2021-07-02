@@ -6,12 +6,11 @@
 40 bload"scolor.bin",s:print #1,"colores sprites leidos"
 50 bload"TILESET.S05",s,32768:print #1,"tileset leido"
 70 print #1,"Cargando mapa":gosub 13000
-80gx=0:gy=0:gc=1:time=0
+80gx=0:gy=0:time=0:hr=0:hs=200:ha=0
 100gosub10000
 105gosub11000
 106gosub12000
 110strig(0)on:onstriggosub11100
-120ifgc=0thenonspritegosub10200:spriteon
 130'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
 140gosub14000
 2000'nada'
@@ -22,7 +21,8 @@
 2040gosub11300
 2050ifmc=1thencls:gosub13100:gosub13300:ma=ma+1:mc=0:gosub8000
 2060ifpb=0thenmc=1:ifma>1thenma=0
-2070'gosub9000
+2070ha=time/60:ifho<>hathengosub8100
+2080'gosub9000
 2090goto2000
 2500onstick(0)gosub2600,2660,2700,2500,2800,2500,2860,2900
 2599return
@@ -76,6 +76,10 @@
 8000preset(0,184):print#1,"Score:"pr"Vidas:"pl"cogidas:"pb
 8010preset(0,196):print#1,"Level:"ma"balas:"pg"libre:"fre(0)
 8020return
+8100hr=hs-ha
+8110ifhr<=0thenha=0:time=0:hs=200
+8120ho=ha:preset(184,204):print#1,hr
+8130return
 9000'nada'
 9090return
 14000cls:preset(10,30):print#1,"Thehunter"
@@ -94,7 +98,7 @@
 14190return
 20000en=0
 20010'gosub12500:ex(en-1)=14*8:ey(en-1)=9*8
-20030'gosub12500:ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
+20030gosub12500:ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
 20040pb=8
 20050gosub10100
 20090return
@@ -113,10 +117,8 @@
 10140'data&h0C,&h0A,&h09,&h09,&h09,&h09,&h04,&h04
 10150'data&h04,&h04,&h04,&h04,&h04,&h04,&h08,&h08
 10190return
-10200ifgc=0thenspriteoff
-10210ifpl<=0thengosub14100elsebeep:pl=pl-1:gosub8000
+10200ifpl<=0thengosub14100elsebeep:pl=pl-1:gosub8000
 10220gosub10100:putspritepp,(px,py),,ps
-10230ifgc=0thenspriteon
 10290return
 10500gx=px:gy=py
 10502gosub13600
@@ -130,6 +132,7 @@
 10551ifpx>248thenpx=248
 10552ifpx<=0thenpx=0
 10568ift0=tcthencopy(8,40)-(8+8,39+8),1to(px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub8000
+10569ift0=tdthen10200
 10570ifpj=0andt5<>twthenpy=py+pv
 10595return
 10600'callturboon(pp,px,py,ps)
@@ -183,8 +186,8 @@
 12750ifex(i)>256-40thenex(i)=ex(i)-ev(i):ifex(i)<0thenex(i)=ex(i)-ev(i)
 12755ex(i)=ex(i)+ev(i)
 12756ef(i)=ef(i)+1:ifef(i)>1thenef(i)=0
-12760ifgc=1thenifex(i)<px+16andex(i)+16>pxandey(i)<py+16and16+ey(i)>pythengosub10200
-12770ifgc=1thenifex(i)<dx+16andex(i)+16>dxandey(i)<dy+16and16+ey(i)>dythener=i:gosub12600:gosub11200
+12760ifex(i)<px+16andex(i)+16>pxandey(i)<py+16and16+ey(i)>pythengosub10200
+12770ifex(i)<dx+16andex(i)+16>dxandey(i)<dy+16and16+ey(i)>dythener=i:gosub12600:gosub11200
 12780ifed(i)=7thenes(i)=es(i)+2
 12785ifef(i)mod2=0thenes(i)=es(i)+1
 12790putspriteep(i),(ex(i),ey(i)),ec(i),es(i)
@@ -193,7 +196,7 @@
 12800nexti
 12810return
 13000dimm(22,31):ma=0:mc=1
-13005te=255:tw=32:tl=0:tf=0:td=0:tc=67
+13005te=255:tw=32:tl=0:tf=0:td=3:tc=67
 13010ty=19:tx=3:t0=m(ty+1,tx):t1=161:t3=m(ty,tx+1):t5=m(ty+2,tx):t7=m(ty,tx-1)
 13090return
     13100 'print #1, "cargando mapa"

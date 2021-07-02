@@ -13,7 +13,7 @@
 1 'Inicialización de las variables del juego'
 1 'gx,gy son variables temporales del juego'
 1 'gc=modo colisión de los sprites, gc=0 modo on sprite, gc=1 modo rectángulos'
-80 gx=0:gy=0:gc=1:time=0
+80 gx=0:gy=0:time=0:hr=0:hs=200:ha=0
 1 'Inicialización player'
 100 gosub 10000
 1 'Inicializamos shots'
@@ -24,7 +24,7 @@
 110 strig(0) on:on strig gosub 11100
 1 'gc es si el juego está en modo colisión onsprite
 1 'La rutina 10200 es cuando el player muere'
-120 if gc=0 then on sprite gosub 10200:sprite on
+1 '120 on sprite gosub 10200:sprite on
 130 'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
 1 'Mostramos la pantalla de presentación
 140 gosub 14000
@@ -48,8 +48,9 @@
     2050 if mc=1 then cls:gosub 13100:gosub 13300:ma=ma+1:mc=0:gosub 8000
     1 'marcamos como que el mapa ha cambiado para que vuelva a cargarlo y le decimos que el mapa actual es el 0'
     2060 if pb=0 then mc=1:if ma>1 then ma=0
+    2070 ha=time/60:if ho<>ha then gosub 8100
     1 'debug'
-    2070 'gosub 9000
+    2080 'gosub 9000
 2090 goto 2000
 
 
@@ -150,6 +151,12 @@
     8010 preset (0,196):print #1,"Level: "ma" balas: "pg" libre: "fre(0)
 8020 return
 
+1 'Rutina mostrar contador'
+    8100 hr=hs-ha
+    8110 if hr <= 0 then ha=0:time=0:hs=200
+    8120 ho=ha:preset (184,204):print #1,hr
+8130 return
+
 
 1 'Debug'
     9000 'nada'
@@ -215,7 +222,7 @@
     1 'creamos 2 enemigos'
     20000 en=0
     20010 'gosub 12500: ex(en-1)=14*8:ey(en-1)=9*8
-    20030 'gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
+    20030 gosub 12500: ex(en-1)=14*8:ey(en-1)=14*8:es(en-1)=17
     1 'Rendremos que coger 6 bloques'
     20040 pb=8
     1 'Rutina reposicionar sprite'
@@ -274,11 +281,9 @@
 1 ' Rutina player dead'
     1 ' 8000 es el HUD'
     1 ' 14100 es la rutina cuando se termina el juego
-    10200 if gc=0 then sprite off
-    10210 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
+    10200 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
     1 '10100 es la rutina de posición de sprite player'
     10220 gosub 10100:put sprite pp,(px,py),,ps
-    10230 if gc=0 then sprite on
 10290 return
 
 
@@ -317,6 +322,8 @@
     1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
     1 'Con pb-1 le decimos que queda un bloque menos por recoger'
     10568 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
+    1 ' chequeo colisión con los tiles mortales
+    10569 if t0=td then 10200
 
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
@@ -450,12 +457,12 @@
         12756 ef(i)=ef(i)+1:if ef(i)>1 then ef(i)=0
         1 'Chequeamos la colisión con el player'
         1 'La rutina 10200 es cuando el player muere'
-        12760 if gc=1 then if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10200
+        12760 if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10200
         1 'chequeamos la colisión con la bala'
         1 'La rutina 12600 es cuando el enemigo muere'
         1 'Con ed=i, almacenamos la posición de array que se va a sobreescribir con el último enemigo del array'
         1 'Con gosub 11200 eliminamos la bala'
-        12770 if gc=1 then if ex(i) < dx + 16 and ex(i) + 16 > dx and ey(i) < dy + 16 and 16 + ey(i) > dy then er=i:gosub 12600:gosub 11200
+        12770 if ex(i) < dx + 16 and ex(i) + 16 > dx and ey(i) < dy + 16 and 16 + ey(i) > dy then er=i:gosub 12600:gosub 11200
         
         1 'Sistema de animación enemigo'
         12780 if ed(i)=7 then es(i)=es(i)+2
@@ -485,7 +492,7 @@
     1 'tf= tile pienso (fodder)'
     1 'td= tile mortal (deadly)'
     1 'tc= tile coleccionable (collectable)'
-    13005 te=255:tw=32:tl=0:tf=0:td=0:tc=67
+    13005 te=255:tw=32:tl=0:tf=0:td=3:tc=67
     1 'dim mapa(filas,clumnas)'
     1 'ma=mapa activo o actual, se empieza con el 0'
     1 'mc=mapa cambia'

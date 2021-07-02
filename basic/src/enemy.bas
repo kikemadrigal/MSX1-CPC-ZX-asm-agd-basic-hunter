@@ -63,12 +63,12 @@
         12756 ef(i)=ef(i)+1:if ef(i)>1 then ef(i)=0
         1 'Chequeamos la colisión con el player'
         1 'La rutina 10200 es cuando el player muere'
-        12760 if gc=1 then if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10200
+        12760 if ex(i) < px + 16 and ex(i) + 16 > px and ey(i) < py + 16 and 16 + ey(i) > py then gosub 10200
         1 'chequeamos la colisión con la bala'
         1 'La rutina 12600 es cuando el enemigo muere'
         1 'Con ed=i, almacenamos la posición de array que se va a sobreescribir con el último enemigo del array'
         1 'Con gosub 11200 eliminamos la bala'
-        12770 if gc=1 then if ex(i) < dx + 16 and ex(i) + 16 > dx and ey(i) < dy + 16 and 16 + ey(i) > dy then er=i:gosub 12600:gosub 11200
+        12770 if ex(i) < dx + 16 and ex(i) + 16 > dx and ey(i) < dy + 16 and 16 + ey(i) > dy then er=i:gosub 12600:gosub 11200
         
         1 'Sistema de animación enemigo'
         12780 if ed(i)=7 then es(i)=es(i)+2

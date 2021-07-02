@@ -33,11 +33,9 @@
 1 ' Rutina player dead'
     1 ' 8000 es el HUD'
     1 ' 14100 es la rutina cuando se termina el juego
-    10200 if gc=0 then sprite off
-    10210 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
+    10200 if pl<=0 then gosub 14100 else beep:pl=pl-1: gosub 8000
     1 '10100 es la rutina de posición de sprite player'
     10220 gosub 10100:put sprite pp,(px,py),,ps
-    10230 if gc=0 then sprite on
 10290 return
 
 
@@ -76,6 +74,8 @@
     1 'vamos a coprobar los tiles de alrededor y sobre el que estamos'
     1 'Con pb-1 le decimos que queda un bloque menos por recoger'
     10568 if t0=tc then copy (8,40)-(8+8,39+8),1 to (px,py+8),0:m(ty+1,tx)=-1:beep:pb=pb-1:gosub 8000
+    1 ' chequeo colisión con los tiles mortales
+    10569 if t0=td then 10200
 
     1 'Gravedad'
     1 'Si no está saltando y no hay debajo un bloque sólido hacemos que caiga'
