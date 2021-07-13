@@ -13,7 +13,7 @@
 106gosub12000
 107gosub16000
 110strig(0)on:onstriggosub11100
-130'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
+130bload"music.bin":defusr5=&hc000:b=usr5(0):defusr6=&hc009:b=usr6(0):defusr7=&hc017:b=usr7(0):defusr8=&hC013
 140gosub14000
 2000ha=time/60:ifho<>hathengosub8100
 2005gosub3500
@@ -87,9 +87,9 @@
 14000cls:preset(10,30):print#1,"Thehunter"
     14050 preset (10,160): print #1, "Cursores para mover, pulsa una tecla para continuar"
     14060 preset (10,180): print #1, "libre: "fre(0)
-14070'b=usr6(0)
+14070b=usr6(0)
 14080ifinkey$=""thengoto14070
-14085'b=usr8(0)
+14085b=usr8(0)
 14090return
 14100en=0
 14110cls:preset(10,30):print#1,"Gameover"
@@ -204,10 +204,10 @@
 13010ty=19:tx=3:t0=m(ty+1,tx):t1=161:t3=m(ty,tx+1):t5=m(ty+2,tx):t7=m(ty,tx-1)
 13090return
     13100 'print #1, "cargando mapa"
-13110ifma=0thenbload"level0.bin",r:gosub20000
+13110ifma=0thengosub20000
 13111ifma=1thenbload"level1.bin",r:gosub20100
 13115callturboon(m())
-13120md=&hd001
+13120md=&hC73a
 13130forf=0to22
 13140forc=0to31
 13150tn=peek(md):md=md+1

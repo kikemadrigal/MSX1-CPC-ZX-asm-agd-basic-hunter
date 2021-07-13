@@ -35,10 +35,11 @@
 1 'Cargar mundo con los mapas de los niveles en el buffer o array'
     13100 'print #1, "!cargando mapa"
     1 '20000 rutina de inicialización mundo 0
-    13110 if ma=0 then bload"level0.bin",r:gosub 20000
+    1 '13110 if ma=0 then bload"level0.bin",r:gosub 20000
+    13110 if ma=0 then gosub 20000
     13111 if ma=1 then bload"level1.bin",r:gosub 20100
     13115 call turbo on (m())
-    13120 md=&hd001
+    13120 md=&hC73a 
     13130 for f=0 to 22
         13140 for c=0 to 31
             13150 tn=peek(md):md=md+1

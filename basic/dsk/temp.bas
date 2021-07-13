@@ -29,7 +29,7 @@
 1 'gc es si el juego está en modo colisión onsprite
 1 'La rutina 10200 es cuando el player muere'
 1 '120 on sprite gosub 10200:sprite on
-130 'bload"music.bin":defusr5=&hC000:b=usr5(0):defusr6=&hC009:defusr7=&hC01A:b=usr7(0):defusr8=&hC013
+130 bload"music.bin":defusr5=&hc000:b=usr5(0):defusr6=&hc009:b=usr6(0):defusr7=&hc017:b=usr7(0):defusr8=&hC013
 1 'Mostramos la pantalla de presentación
 140 gosub 14000
 
@@ -200,9 +200,9 @@
     14050 preset (10,160): print #1, "!Cursores para mover, pulsa una tecla para continuar"
     14060 preset (10,180): print #1, "!libre: "fre(0)
     1 'Si no se pulsa una tecla se queda en blucle infinito reproduciebdo una música, si se pulsa se para la música'
-    14070 'b=usr6(0)
+    14070 b=usr6(0)
     14080 if inkey$="" then goto 14070 
-    14085 'b=usr8(0)
+    14085 b=usr8(0)
 14090 return
 1'------------------------------------'
 1'  Pantalla de payer muere
@@ -527,10 +527,11 @@
 1 'Cargar mundo con los mapas de los niveles en el buffer o array'
     13100 'print #1, "!cargando mapa"
     1 '20000 rutina de inicialización mundo 0
-    13110 if ma=0 then bload"level0.bin",r:gosub 20000
+    1 '13110 if ma=0 then bload"level0.bin",r:gosub 20000
+    13110 if ma=0 then gosub 20000
     13111 if ma=1 then bload"level1.bin",r:gosub 20100
     13115 call turbo on (m())
-    13120 md=&hd001
+    13120 md=&hC73a 
     13130 for f=0 to 22
         13140 for c=0 to 31
             13150 tn=peek(md):md=md+1
