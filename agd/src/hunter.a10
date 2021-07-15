@@ -2,10 +2,33 @@ EVENT MAINLOOP1
 
 ;Debug muestra en el lado superior derecho datos
 ;at 3 20
-;display J
+;display O
 ;at 3 25
 ;display K
 
+
+;Si es un amstrad
+IF P = 1
+    ;O variable utilizada para saber cuando tnmos que reproducir mísica
+    IF O > 0
+        ;call &bd19
+        ASM 205
+        ASM 25
+        ASM 189
+        ;call &9003
+        ASM 205
+        ASM 03
+        ASM 144
+        SUBTRACT 1 FROM O
+    ELSE 
+        ;call &9006 ->Stop music
+        ASM 205
+        ASM 06
+        ASM 144
+        
+    ENDIF
+
+ENDIF
 
 ;Si quedan cestas por recoger
 IF A > 0 

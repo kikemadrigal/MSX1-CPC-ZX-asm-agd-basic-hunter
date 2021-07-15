@@ -223,7 +223,7 @@ IF COLLISION 1
     ENDIF
     ;Volvemos a activar los disparos del player
     LET D = 1
-    ;let O = 1
+
 
 
 

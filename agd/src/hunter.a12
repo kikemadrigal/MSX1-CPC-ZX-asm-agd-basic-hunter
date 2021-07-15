@@ -2,7 +2,7 @@ EVENT INTROMENU
 
 
 ;0 MSX, 1 amstrad, 2 spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
-LET P = 2
+LET P = 1
 
 
 IF P = 0 
@@ -15,18 +15,25 @@ IF P = 0
     ;event16, linea 4 (killplayer) MUSIC 0 0
     ;event17, linea 12 (lostgame) MUSIC 3 0
 ELSE
+    ;Para seleccionar el subsonido utilizamos el registro a del z80
+    ;ld a, 0 / 3e 00 / 62 00
+    ASM 62
+    ASM 02
     ;call &9000
     ASM 205
     ASM 00
     ASM 144
     ;Call &bd19
-    ASM 205
-    ASM 25
-    ASM 189
-    ;call &9003
-    ASM 205
-    ASM 03
-    ASM 144
+    ;ASM 205
+    ;ASM 25
+    ;ASM 189
+    ;;call &9003
+    ;ASM 205
+    ;ASM 03
+    ;ASM 144
+
+
+           
 
     ;SOUND 1		; Tema musical Pac-man
     ;SOUND 0             ; Música sólo una vez
@@ -37,6 +44,7 @@ ELSE
     ;    SOUND 36		; monitor
     ;ENDWHILE
 ENDIF
+
 
 
 ;       COLOURS
@@ -83,7 +91,6 @@ WHILE CONTROL >= 99
         ASM 205
         ASM 03
         ASM 144
-
         IF KEY OPTION1
             LET CONTROL = 0
         ENDIF
@@ -135,6 +142,19 @@ WHILE CONTROL >= 99
     ENDWHILE
  
 ENDWHILE
+
+;call &9006 ->Stop music
+ASM 205
+ASM 06
+ASM 144
+;;Cambiamos la musica por la del juego
+;;ld a, 2 / 3e 00 / 62 00
+;ASM 62
+;ASM 02
+;;call &9000
+;ASM 205
+;ASM 00
+;ASM 144
 
 CLS
 

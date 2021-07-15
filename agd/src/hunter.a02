@@ -1,6 +1,15 @@
 ;Evento para los animales
 EVENT SPRITETYPE2
 
+
+
+
+;Debug para mostrar los valores de las variablesd del jugador
+;at 2 0
+;display TRIPLEDIGITS SETTINGB
+;at 2 4
+;display TRIPLEDIGITS P
+
 IF A<>0
     IF DIRECTION = LEFT
         IF SETTINGA = 0
@@ -135,6 +144,7 @@ ENDIF
 
 ;Colision de los animales con la bala
 IF COLLISION 1
+
     ;Si no es una bola, (las bolas no se pueden destruir)
     IF SETTINGA < 6
         ;Vamos a la bala
@@ -181,16 +191,33 @@ IF COLLISION 1
                 PUT X Y 3
             ENDIF
             ;Borramos la bala-lo has tenido que quitar porque se borra en el remove del animal
-            REMOVE
-            ;Hacemos el sonido de muerte
-            IF P = 0
-                SOUND 5
+            REMOVE            
+        ENDIF
+
+
+        ;Hacemos el sonido de muerte
+        IF P = 0
+            SOUND 5
+        ELSE
+            IF P = 1
+                ;Necesitamos que reproduzca 2 ciclos
+                LET O = 10
+                ;Para seleccionar el subsonido utilizamos el registro a del z80
+                ;ld a, 0 / 3e 02 / 62 02
+                ASM 62
+                ASM 03
+                ;call &9000
+                ASM 205
+                ASM 00
+                ASM 144
+            ;Si es un spectrum
             ELSE
                 BEEP 60
             ENDIF
-            
-            
         ENDIF
     ENDIF ; final de si no es una bola
+
+
+
 ENDIF
 
