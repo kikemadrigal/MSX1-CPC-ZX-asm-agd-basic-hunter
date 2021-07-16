@@ -1704,7 +1704,19 @@ if OBJ=3
     IF P = 0
         SOUND 5
     ELSE
-        BEEP 70
+        IF P = 1
+            ;Para seleccionar el subsonido utilizamos el registro a del z80
+            ;ld a, 4 / 3e 00 / 62 00
+            ASM 62
+            ASM 04
+            ;call &9000
+            ASM 205
+            ASM 00
+            ASM 144
+            LET O = 10
+        ELSE
+            BEEP 70
+        ENDIF
     ENDIF
     ;Motramos el número de balas
     AT 0 23
@@ -1801,16 +1813,21 @@ IF KEY FIRE
             IF P = 0
                 SOUND 2
             ELSE
-                ;BEEP 50
-                ;Para seleccionar el subsonido utilizamos el registro a del z80
-                ;ld a, 4 / 3e 00 / 62 00
-                ASM 62
-                ASM 04
-                ;call &9000
-                ASM 205
-                ASM 00
-                ASM 144
-                LET O = 2
+                ;Si es amstrad
+                IF P = 1
+                    ;Para seleccionar el subsonido utilizamos el registro a del z80
+                    ;ld a, 4 / 3e 00 / 62 00
+                    ASM 62
+                    ASM 03
+                    ;call &9000
+                    ASM 205
+                    ASM 00
+                    ASM 144
+                    LET O = 2
+                ;Si es spectrum
+                ELSE
+                    BEEP 50
+                ENDIF
             ENDIF
             SPAWN 1 9
             LET U = DIRECTION
@@ -2201,7 +2218,8 @@ IF COLLISION 1
                 ;Almcenamos que se está en modo player
                 LET Q = 0
                 ;Esto hace un efecto de explosión
-                EXPLODE 30
+                ;EXPLODE 30
+                REMOVE
             ;Si la bala proviene del boss
             ELSE
                 LET Q = 1
@@ -2246,17 +2264,18 @@ IF COLLISION 1
         IF P = 0
             SOUND 5
         ELSE
+            ;Si es amstrad
             IF P = 1
-                ;Necesitamos que reproduzca 2 ciclos
-                LET O = 10
                 ;Para seleccionar el subsonido utilizamos el registro a del z80
                 ;ld a, 0 / 3e 02 / 62 02
                 ASM 62
-                ASM 03
+                ASM 02
                 ;call &9000
                 ASM 205
                 ASM 00
                 ASM 144
+                ;Necesitamos que reproduzca 10 ciclos
+                LET O = 10
             ;Si es un spectrum
             ELSE
                 BEEP 60
@@ -3615,45 +3634,34 @@ EVENT INTROMENU
 ;0 MSX, 1 amstrad, 2 spectrum (sino eleges MSx tenrás que comentar los definemusic y music)
 LET P = 1
 
-
+;Si es un MSX
 IF P = 0 
     ;DEFINEMUSIC "music_start.pt3"
     ;DEFINEMUSIC "music_game.pt3"
     ;DEFINEMUSIC "music_end.pt3"
     ;MUSIC 1 1
+    ;Por favor, descomenta las siguiente líneas
     ;event10, línea 52 (MAINLOOP1) MUSIC 0 0
     ;event14, línea 4 (RESTARTSCREEN)MUSIC 2 1
     ;event16, linea 4 (killplayer) MUSIC 0 0
     ;event17, linea 12 (lostgame) MUSIC 3 0
 ELSE
-    ;Para seleccionar el subsonido utilizamos el registro a del z80
-    ;ld a, 0 / 3e 00 / 62 00
-    ASM 62
-    ASM 02
-    ;call &9000
-    ASM 205
-    ASM 00
-    ASM 144
-    ;Call &bd19
-    ;ASM 205
-    ;ASM 25
-    ;ASM 189
-    ;;call &9003
-    ;ASM 205
-    ;ASM 03
-    ;ASM 144
-
-
-           
-
-    ;SOUND 1		; Tema musical Pac-man
-    ;SOUND 0             ; Música sólo una vez
-    ;;DELAY 200          ; Espera a la música
-    ;SOUND 36		; monitor
-    ;WHILE A = 1		; repite mientras suena el tema Pac-man
-    ;    ;SOUND 96		; reproduce siguiente nota
-    ;    SOUND 36		; monitor
-    ;ENDWHILE
+    ;Si es un amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 0 / 3e 00 / 62 00
+        ASM 62
+        ASM 00
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+    ;Si es un spectrum
+    ELSE
+        ;SOUND 1		; Tema musical Pac-man
+        ;SOUND 0             ; Música sólo una vez
+        ;SOUND 36		; monitor
+    ENDIF
 ENDIF
 
 
@@ -3692,16 +3700,21 @@ WHILE CONTROL >= 99
     PRINT "3. REDEFINE"
     LET CONTROL = 99
     WHILE CONTROL = 99
-		;SOUND 96            ; reproduce siguiente nota
-		;SOUND 36            ; monitor
-        ;call &bd19
-        ASM 205
-        ASM 25
-        ASM 189
-        ;call &9003
-        ASM 205
-        ASM 03
-        ASM 144
+        ;Si es un amstrad estaremos llamando a la rutina en ensamblador de reprofucir bloque de música
+        IF P = 1
+            ;call &bd19
+            ASM 205
+            ASM 25
+            ASM 189
+            ;call &9003
+            ASM 205
+            ASM 03
+            ASM 144
+        ENDIF
+        IF P = 2
+        	;SOUND 96            ; reproduce siguiente nota
+		    ;SOUND 36            ; monitor
+        ENDIF
         IF KEY OPTION1
             LET CONTROL = 0
         ENDIF
@@ -3754,18 +3767,13 @@ WHILE CONTROL >= 99
  
 ENDWHILE
 
-;call &9006 ->Stop music
-ASM 205
-ASM 06
-ASM 144
-;;Cambiamos la musica por la del juego
-;;ld a, 2 / 3e 00 / 62 00
-;ASM 62
-;ASM 02
-;;call &9000
-;ASM 205
-;ASM 00
-;ASM 144
+;Si es un amstrad, pausamos la música
+IF P = 1
+    ;call &9006 ->Stop music
+    ASM 205
+    ASM 06
+    ASM 144
+ENDIF
 
 CLS
 
@@ -3808,6 +3816,12 @@ EVENT GAMEINIT
 ;6 Laser
 ;7 Jet
 
+;Amstrad
+;1 Musica inicio
+;2 Final
+;3
+;4
+;5
 ;    DIRECTION
 
 ; LEFT 1
@@ -4096,8 +4110,26 @@ SCORE 10
 ;Restamos a la variable de bloques que hay que recoger por pantalla
 SUBTRACT 1 TO A
 ;Hacemos un sonido
-SOUND 3
-BEEP 50
+;sI ES MSX
+IF P = 0
+    SOUND 3
+
+ELSE
+    ;Si es amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 4 / 3e 00 / 62 00
+        ASM 62
+        ASM 04
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        LET O = 10
+    ELSE
+        BEEP 50
+    ENDIF
+ENDIF
 ;Mostramos la puntuación
 AT 0 2
 SHOWSCORE 
