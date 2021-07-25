@@ -13,15 +13,18 @@ IF P = 0
 ELSE
     ;Si es amstrad
     IF P = 1
-        ;Para seleccionar el subsonido utilizamos el registro a del z80
-        ;ld a, 4 / 3e 00 / 62 00
-        ASM 62
-        ASM 04
-        ;call &9000
-        ASM 205
-        ASM 00
-        ASM 144
-        LET O = 10
+        ;Con esto evitamos que se quede el sonido colgado cuando pase de pantalla
+        IF A>0
+            ;Para seleccionar el subsonido utilizamos el registro a del z80
+            ;ld a, 8 / 3e 08 / 62 08
+            ASM 62
+            ASM 04
+            ;call &9000
+            ASM 205
+            ASM 00
+            ASM 144
+            LET O = 5
+        ENDIF
     ELSE
         BEEP 50
     ENDIF

@@ -95,41 +95,41 @@ WHILE CONTROL >= 99
         ;    LET CONTROL = 2
         ;ENDIF
         IF KEY OPTION3
+            ;Si es un amstrad, pausamos la música
+            IF P = 1
+                ;call &9006 ->Stop music
+                ASM 205
+                ASM 06
+                ASM 144
+            ENDIF
             CLS
             AT 3 9
             PRINT "PRESS KEY FOR:"
             AT 6 12
-            ;WHILE KEY OPTION4
-            ;ENDWHILE
-            AT 6 12
             PRINT "up"
+            WAITKEY
             DEFINEKEY UP
             at 10 10
-            ;display UP
-            ;CLS
             AT 7 12
             PRINT "DOWN"
+            WAITKEY
             DEFINEKEY DOWN
             at 10 10
-            ;display DOWN
-            ;CLS
             AT 8 12
             PRINT "LEFT"
+            WAITKEY
             DEFINEKEY LEFT
             at 10 10
-            ;display LEFT
-            ;CLS
             AT 9 12
             PRINT "RIGHT"
+            WAITKEY
             DEFINEKEY RIGHT
             at 10 10
-            ;display RIGHT
-            ;CLS
             AT 10 12
             PRINT "FIRE1"
+            WAITKEY
             DEFINEKEY FIRE1
             at 10 10
-            ;display FIRE1
             LET CONTROL = 100
             CLS
         ENDIF

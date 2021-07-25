@@ -154,8 +154,8 @@ IF COLLISION 1
                 ;Almcenamos que se está en modo player
                 LET Q = 0
                 ;Esto hace un efecto de explosión
-                ;EXPLODE 30
-                REMOVE
+                EXPLODE 30
+                ;REMOVE
             ;Si la bala proviene del boss
             ELSE
                 LET Q = 1
@@ -211,7 +211,7 @@ IF COLLISION 1
                 ASM 00
                 ASM 144
                 ;Necesitamos que reproduzca 10 ciclos
-                LET O = 10
+                LET O = 2
             ;Si es un spectrum
             ELSE
                 BEEP 60

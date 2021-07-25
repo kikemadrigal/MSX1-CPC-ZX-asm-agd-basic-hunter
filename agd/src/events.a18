@@ -2,6 +2,29 @@ EVENT COMPLETEDGAME
 ;MUSIC 3 1
 CLS
 
+;Hacemos el sonido de muerte
+IF P = 0
+    ;MUSIC 0 0
+    SOUND 5
+ELSE
+    ;Si es amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 2 / 3e 02 / 62 02
+        ASM 62
+        ASM 02
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        ;Necesitamos que reproduzca 10 ciclos
+        LET O = 10
+    ;Si es un spectrum
+    ELSE
+        BEEP 60
+    ENDIF
+ENDIF
+
 at 2 5
 PRINT "Has ganado!!!"
 at 5 0

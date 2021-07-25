@@ -35,11 +35,16 @@ EVENT GAMEINIT
 ;7 Jet
 
 ;Amstrad
-;1 Musica inicio
-;2 Final
-;3
-;4
-;5
+;0 Musica inicio : EVENT12 INTROMNEU, 00
+;1 winig : 
+;2 ending
+;3 disparo :EVENT00 PLAYER, 03
+;4 colision enemigo
+;5 objeto recogido :EVENT00 PLAYER, 04
+;6 enemigo muerto
+;7 interruptor
+;8 bloque cogido, evento20 (COLLECTBLOCK)
+
 ;    DIRECTION
 
 ; LEFT 1

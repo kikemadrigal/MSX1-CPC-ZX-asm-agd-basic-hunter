@@ -820,19 +820,19 @@ SPRITEPOSITION  2 10 128 200
 DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0  19  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0  19   0   0   0   0   0   0   8   8   8   8  15   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0
+                  0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0
+                  0   0   0  19   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   8   8   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   8   8   0   0   0   0
                   0   0   0   0   0   8   8   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   8   8   0   0   0   0   0   0
                  19   0   0   0   0   0   0   8   8   0   0   0   0   0  15   0   0   0   0   0   8   8   0   0   0   0   0   0   0  19
-                  8   8   0   0   0   0   0   0   0   8   8   0   0   0  15   0   0   0   8   8   0   0   0   0   0   0   0   0   8   8
+                  8   8   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   8   8
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                  19   0   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
-                  8   8   8   8   8   8   8   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8
+                  8   8   8   8   8   8   8   8   8   8   0   0   0   0  15   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8
                   0   0   0   0   0   0   0   0   0   0   0   0   0   8   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
@@ -843,7 +843,7 @@ SPRITEPOSITION  2 12 128 32
 SPRITEPOSITION  5 27 32 160
 SPRITEPOSITION  5 27 32 64
 SPRITEPOSITION  6 2 160 8
-SPRITEPOSITION  8 28 72 128
+SPRITEPOSITION  8 28 64 128
 SPRITEPOSITION  2 23 160 152
 
 DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
@@ -898,7 +898,7 @@ DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
                   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8
 SPRITEPOSITION  0 0 160 8
 SPRITEPOSITION  4 26 88 152
-SPRITEPOSITION  5 27 96 120
+SPRITEPOSITION  5 27 32 136
 SPRITEPOSITION  6 2 160 8
 SPRITEPOSITION  2 12 104 192
 SPRITEPOSITION  8 29 64 232
@@ -1700,13 +1700,13 @@ if OBJ=3
     ADD 10 TO B
     ;Borramos el objeto y lo metemos en ek inventario
     GET OBJ
-    BEEP 16
+    ;Hacemos un sonidoM
     IF P = 0
         SOUND 5
     ELSE
         IF P = 1
             ;Para seleccionar el subsonido utilizamos el registro a del z80
-            ;ld a, 4 / 3e 00 / 62 00
+            ;ld a, 4 / 3e 04 / 62 04
             ASM 62
             ASM 04
             ;call &9000
@@ -1715,7 +1715,7 @@ if OBJ=3
             ASM 144
             LET O = 10
         ELSE
-            BEEP 70
+            BEEP 16
         ENDIF
     ENDIF
     ;Motramos el número de balas
@@ -1787,6 +1787,7 @@ IF KEY UP
         SPRITEUP
     ELSE
         JUMP 9
+        
     ENDIF
 ENDIF
 
@@ -1812,7 +1813,7 @@ IF KEY FIRE
         IF B>0
             IF P = 0
                 SOUND 2
-            ELSE
+            ELSE 
                 ;Si es amstrad
                 IF P = 1
                     ;Para seleccionar el subsonido utilizamos el registro a del z80
@@ -1823,7 +1824,7 @@ IF KEY FIRE
                     ASM 205
                     ASM 00
                     ASM 144
-                    LET O = 2
+                    LET O = 5
                 ;Si es spectrum
                 ELSE
                     BEEP 50
@@ -2218,8 +2219,8 @@ IF COLLISION 1
                 ;Almcenamos que se está en modo player
                 LET Q = 0
                 ;Esto hace un efecto de explosión
-                ;EXPLODE 30
-                REMOVE
+                EXPLODE 30
+                ;REMOVE
             ;Si la bala proviene del boss
             ELSE
                 LET Q = 1
@@ -2275,7 +2276,7 @@ IF COLLISION 1
                 ASM 00
                 ASM 144
                 ;Necesitamos que reproduzca 10 ciclos
-                LET O = 10
+                LET O = 2
             ;Si es un spectrum
             ELSE
                 BEEP 60
@@ -2425,12 +2426,32 @@ ELSE
     ;Solo crearemos el disparo si es un segundo distinto
 
     IF L <> Z
-        ;Hacemos un sonido
+        ; Hacemos un sonido
         IF P = 0
             SOUND 2
         ELSE
-            BEEP 50
+            ;Si es amstrad
+            IF P = 1
+                ;Para seleccionar el subsonido utilizamos el registro a del z80
+                ;ld a, 0 / 3e 02 / 62 02
+                ASM 62
+                ASM 03
+                ;call &9000
+                ASM 205
+                ASM 00
+                ASM 144
+                ;Necesitamos que reproduzca 10 ciclos
+                LET O = 10
+            ;Si es un spectrum
+            ELSE
+                BEEP 50
+            ENDIF
         ENDIF
+
+
+
+
+
         
         ;Creamos una bala con la imagen 9
         SPAWN 1 9    
@@ -2489,18 +2510,41 @@ ENDIF
 
 ;Si hay una colisión con el disparo
 IF COLLISION 1
+        
     ; Hacemos un sonido
     IF P = 0
         SOUND 4
     ELSE
-        BEEP 14
+        ;Si es amstrad
+        IF P = 1
+            ;Para seleccionar el subsonido utilizamos el registro a del z80
+            ;ld a, 0 / 3e 02 / 62 02
+            ASM 62
+            ASM 03
+            ;call &9000
+            ASM 205
+            ASM 00
+            ASM 144
+            ;Necesitamos que reproduzca 10 ciclos
+            LET O = 10
+        ;Si es un spectrum
+        ELSE
+            BEEP 14
+        ENDIF
     ENDIF
+
+
+
+
+
+
+
     ;K=Energía del enemigo
     SUBTRACT 1 FROM K
     ; Si al boss no le queda energía lo quitamos
     IF K <= 0
         EXPLODE 30
-        REMOVE
+        ;REMOVE
         ;Le ponemos que no le quedan capturas para que se paren los muñecos
         LET A = 0
         AT 1 2
@@ -2719,24 +2763,42 @@ ENDIF
 
 ;colisión con la bala
 IF COLLISION 1
+    ; Hacemos un sonido
     IF P = 0
         SOUND 4
     ELSE
-        BEEP 2
+        ;Si es amstrad
+        IF P = 1
+            ;Para seleccionar el subsonido utilizamos el registro a del z80
+            ;ld a, 0 / 3e 02 / 62 02
+            ASM 62
+            ASM 04
+            ;call &9000
+            ASM 205
+            ASM 00
+            ASM 144
+            ;Necesitamos que reproduzca 10 ciclos
+            LET O = 5
+        ;Si es un spectrum
+        ELSE
+            BEEP 2
+        ENDIF
     ENDIF
+
+
+
+
+
+
+
     ADD 1 TO SETTINGB
     ;Si los impactos de bala son mayores de 10
     IF SETTINGB >= 10
         EXPLODE 30
-        IF P = 0
-            SOUND 4
-        ELSE
-            BEEP 35
-        ENDIF
+        REMOVE
         OTHER
             REMOVE
         ENDSPRITE
-        REMOVE
     ;Si los disparos son menos de 10
     ELSE
         ;Borramo solo la bala
@@ -2805,8 +2867,28 @@ IF SETTINGA = 1
         IF P = 0
             SOUND 4
         ELSE
-            BEEP 14
+            ;Si es amstrad
+            IF P = 1
+                ;Para seleccionar el subsonido utilizamos el registro a del z80
+                ;ld a, 0 / 3e 02 / 62 02
+                ASM 62
+                ASM 07
+                ;call &9000
+                ASM 205
+                ASM 00
+                ASM 144
+                ;Necesitamos que reproduzca 10 ciclos
+                LET O = 10
+            ;Si es un spectrum
+            ELSE
+                BEEP 14
+            ENDIF
         ENDIF
+
+
+
+
+
         ;K=Energía del enemigo
         SUBTRACT 1 FROM K
         ; Si al boss no le queda energía lo quitamos
@@ -2872,82 +2954,82 @@ ENDIF
 EVENT SPRITETYPE7
 
 
-IF A<>0
-    IF DIRECTION = UP
-        IF LADDERABOVE
-            SPRITEUP
-        ELSE
-            GETRANDOM 2
-            IF RND = 0
-                LET DIRECTION = LEFT
-            ELSE
-                LET DIRECTION = RIGHT
-            ENDIF
-        ENDIF
-    ENDIF
-    IF DIRECTION = DOWN
-        IF LADDERBELOW
-            SPRITEDOWN
-        ELSE
-            GETRANDOM 2
-            IF RND = 0
-                LET DIRECTION = LEFT
-            ELSE
-                LET DIRECTION = RIGHT
-            ENDIF
-        ENDIF
-    ENDIF
-    IF DIRECTION = LEFT
-        IF CANGODOWN
-            SPRITERIGHT
-            LET DIRECTION = RIGHT        
-        ELSE
-            IF CANGOLEFT
-                SPRITELEFT
-            ELSE
-                LET DIRECTION = RIGHT
-            ENDIF
-            GETRANDOM 4
-            IF RND = 0
-                IF LADDERABOVE
-                    LET DIRECTION = UP
-                ELSE
-                    IF LADDERBELOW
-                        LET DIRECTION = DOWN
-                    ENDIF
-                ENDIF
-            ENDIF
-        
-        ENDIF
-    ENDIF
-    IF DIRECTION = RIGHT
-        IF CANGODOWN
-            SPRITELEFT
-            LET DIRECTION = LEFT        
-        ELSE
-            IF CANGORIGHT
-                SPRITERIGHT
-            ELSE
-                LET DIRECTION = LEFT
-            ENDIF
-            GETRANDOM 4
-            IF RND = 0
-                IF LADDERABOVE
-                    LET DIRECTION = UP
-                ELSE
-                    IF LADDERBELOW
-                        LET DIRECTION = DOWN
-                    ENDIF
-                ENDIF
-            ENDIF
-
-        ENDIF
-    ENDIF
-    ANIMATE SLOW
-ENDIF
-IF COLLISION PLAYER
-    ;KILL
-ENDIF
+; IF A<>0
+;     IF DIRECTION = UP
+;         IF LADDERABOVE
+;             SPRITEUP
+;         ELSE
+;             GETRANDOM 2
+;             IF RND = 0
+;                 LET DIRECTION = LEFT
+;             ELSE
+;                 LET DIRECTION = RIGHT
+;             ENDIF
+;         ENDIF
+;     ENDIF
+;     IF DIRECTION = DOWN
+;         IF LADDERBELOW
+;             SPRITEDOWN
+;         ELSE
+;             GETRANDOM 2
+;             IF RND = 0
+;                 LET DIRECTION = LEFT
+;             ELSE
+;                 LET DIRECTION = RIGHT
+;             ENDIF
+;         ENDIF
+;     ENDIF
+;     IF DIRECTION = LEFT
+;         IF CANGODOWN
+;             SPRITERIGHT
+;             LET DIRECTION = RIGHT        
+;         ELSE
+;             IF CANGOLEFT
+;                 SPRITELEFT
+;             ELSE
+;                 LET DIRECTION = RIGHT
+;             ENDIF
+;             GETRANDOM 4
+;             IF RND = 0
+;                 IF LADDERABOVE
+;                     LET DIRECTION = UP
+;                 ELSE
+;                     IF LADDERBELOW
+;                         LET DIRECTION = DOWN
+;                     ENDIF
+;                 ENDIF
+;             ENDIF
+;         
+;         ENDIF
+;     ENDIF
+;     IF DIRECTION = RIGHT
+;         IF CANGODOWN
+;             SPRITELEFT
+;             LET DIRECTION = LEFT        
+;         ELSE
+;             IF CANGORIGHT
+;                 SPRITERIGHT
+;             ELSE
+;                 LET DIRECTION = LEFT
+;             ENDIF
+;             GETRANDOM 4
+;             IF RND = 0
+;                 IF LADDERABOVE
+;                     LET DIRECTION = UP
+;                 ELSE
+;                     IF LADDERBELOW
+;                         LET DIRECTION = DOWN
+;                     ENDIF
+;                 ENDIF
+;             ENDIF
+; 
+;         ENDIF
+;     ENDIF
+;     ANIMATE SLOW
+; ENDIF
+; IF COLLISION PLAYER
+;     ;KILL
+; ENDIF
 
 
 
@@ -3008,11 +3090,32 @@ ENDIF
 IF COLLISION 0              ;Si hay colision con el player
     IF SETTINGA = 0          ; Si el interruptor no lo han tocado
         LET SETTINGA = 1 ;Lo marcamos como tiocado
+        ; Hacemos un sonido
         IF P = 0
             SOUND 0
         ELSE
-            BEEP 14
+            ;Si es amstrad
+            IF P = 1
+                ;Para seleccionar el subsonido utilizamos el registro a del z80
+                ;ld a, 7 / 3e 07 / 62 07
+                ASM 62
+                ASM 07
+                ;call &9000
+                ASM 205
+                ASM 00
+                ASM 144
+                ;Necesitamos que reproduzca 10 ciclos
+                LET O = 5
+            ;Si es un spectrum
+            ELSE
+                BEEP 14
+            ENDIF
         ENDIF
+
+
+
+
+
     ENDIF
       
 ENDIF
@@ -3191,9 +3294,7 @@ IF P = 1
         ASM 205
         ASM 06
         ASM 144
-        
     ENDIF
-
 ENDIF
 
 ;Si quedan cestas por recoger
@@ -3255,6 +3356,42 @@ IF J=0
         ;Mostramos el mensaje de miaión cumplida
         AT 9 9           
         MESSAGE 0  
+        ;Hacemos el sonido de misión cumplida
+        IF P = 0
+            SOUND 5
+        ELSE
+            ;Si es amstrad
+            IF P = 1
+                ;Para seleccionar el subsonido utilizamos el registro a del z80
+                ;ld a, 0 / 3e 02 / 62 02
+                ASM 62
+                ASM 01
+                ;call &9000
+                ASM 205
+                ASM 00
+                ASM 144
+                LET O = 90
+               ;O variable utilizada para saber cuando tnmos que reproducir mísica
+               WHILE O > 0
+                   ;call &bd19
+                   ASM 205
+                   ASM 25
+                   ASM 189
+                   ;call &9003
+                   ASM 205
+                   ASM 03
+                   ASM 144
+                   SUBTRACT 1 FROM O
+               ENDWHILE
+               ;call &9006 ->Stop music
+               ASM 205
+               ASM 06
+               ASM 144
+            ;Si es un spectrum
+            ELSE
+                BEEP 60
+            ENDIF
+        ENDIF
         ;Le sumamos con puntos los segundos que le han sobrado
         ;Si es 1 minuto le sumamos 60 puntos
         IF M = 1 
@@ -3272,7 +3409,10 @@ IF J=0
             SUBTRACT 1 FROM M
             at 2 26
             DISPLAY TRIPLEDIGITS M
-            BEEP 40
+            ;Si es un spectrum hacemos un pitido
+            IF P = 2
+                BEEP 40
+            ENDIF
             ;Mostramos la puntuación
             AT 0 2
             SHOWSCORE 
@@ -3283,7 +3423,10 @@ IF J=0
             SUBTRACT 1 FROM T
             at 2 29
             DISPLAY TRIPLEDIGITS T
-            BEEP 40
+            ;Si es un spectrum hacemos un pitido
+            IF P = 2
+                BEEP 40
+            ENDIF
             ;Mostramos la puntuación
             AT 0 2
             SHOWSCORE 
@@ -3725,41 +3868,41 @@ WHILE CONTROL >= 99
         ;    LET CONTROL = 2
         ;ENDIF
         IF KEY OPTION3
+            ;Si es un amstrad, pausamos la música
+            IF P = 1
+                ;call &9006 ->Stop music
+                ASM 205
+                ASM 06
+                ASM 144
+            ENDIF
             CLS
             AT 3 9
             PRINT "PRESS KEY FOR:"
             AT 6 12
-            ;WHILE KEY OPTION4
-            ;ENDWHILE
-            AT 6 12
             PRINT "up"
+            WAITKEY
             DEFINEKEY UP
             at 10 10
-            ;display UP
-            ;CLS
             AT 7 12
             PRINT "DOWN"
+            WAITKEY
             DEFINEKEY DOWN
             at 10 10
-            ;display DOWN
-            ;CLS
             AT 8 12
             PRINT "LEFT"
+            WAITKEY
             DEFINEKEY LEFT
             at 10 10
-            ;display LEFT
-            ;CLS
             AT 9 12
             PRINT "RIGHT"
+            WAITKEY
             DEFINEKEY RIGHT
             at 10 10
-            ;display RIGHT
-            ;CLS
             AT 10 12
             PRINT "FIRE1"
+            WAITKEY
             DEFINEKEY FIRE1
             at 10 10
-            ;display FIRE1
             LET CONTROL = 100
             CLS
         ENDIF
@@ -3817,11 +3960,16 @@ EVENT GAMEINIT
 ;7 Jet
 
 ;Amstrad
-;1 Musica inicio
-;2 Final
-;3
-;4
-;5
+;0 Musica inicio : EVENT12 INTROMNEU, 00
+;1 winig : 
+;2 ending
+;3 disparo :EVENT00 PLAYER, 03
+;4 colision enemigo
+;5 objeto recogido :EVENT00 PLAYER, 04
+;6 enemigo muerto
+;7 interruptor
+;8 bloque cogido, evento20 (COLLECTBLOCK)
+
 ;    DIRECTION
 
 ; LEFT 1
@@ -4016,12 +4164,32 @@ INK 15
 
 EVENT FELLTOOFAR
 EVENT KILLPLAYER
-
+;Hacemos el sonido de muerte
 IF P = 0
     ;MUSIC 0 0
     SOUND 5
 ELSE
-    BEEP 60
+    ;Si es amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 0 / 3e 02 / 62 02
+        ASM 62
+        ASM 03
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        
+        ;Necesitamos que reproduzca 10 ciclos
+        LET O = 10
+    ;Si es un spectrum
+    ELSE
+        BEEP 60
+    ENDIF
 ENDIF
 
 ; El disparo (archivo event00) tiene una restricción para que solo se dispare una bala
@@ -4043,6 +4211,46 @@ EVENT LOSTGAME
 
 CLS
 
+
+;Hacemos el sonido de misión cumplida
+IF P = 0
+    SOUND 5
+ELSE
+    ;Si es amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 0 / 3e 02 / 62 02
+        ASM 62
+        ASM 02
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        LET O = 70
+        ;O variable utilizada para saber cuando tnmos que reproducir mísica
+        WHILE O > 0
+            ;call &bd19
+            ASM 205
+            ASM 25
+            ASM 189
+            ;call &9003
+            ASM 205
+            ASM 03
+            ASM 144
+            SUBTRACT 1 FROM O
+        ENDWHILE
+        ;call &9006 ->Stop music
+        ASM 205
+        ASM 06
+        ASM 144
+    ;Si es un spectrum
+    ELSE
+        BEEP 60
+    ENDIF
+ENDIF
+
+
+
 AT 10 8           
 MESSAGE 2
 AT 12 8
@@ -4058,6 +4266,29 @@ DELAY 254
 EVENT COMPLETEDGAME
 ;MUSIC 3 1
 CLS
+
+;Hacemos el sonido de muerte
+IF P = 0
+    ;MUSIC 0 0
+    SOUND 5
+ELSE
+    ;Si es amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 2 / 3e 02 / 62 02
+        ASM 62
+        ASM 02
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        ;Necesitamos que reproduzca 10 ciclos
+        LET O = 10
+    ;Si es un spectrum
+    ELSE
+        BEEP 60
+    ENDIF
+ENDIF
 
 at 2 5
 PRINT "Has ganado!!!"
@@ -4117,15 +4348,18 @@ IF P = 0
 ELSE
     ;Si es amstrad
     IF P = 1
-        ;Para seleccionar el subsonido utilizamos el registro a del z80
-        ;ld a, 4 / 3e 00 / 62 00
-        ASM 62
-        ASM 04
-        ;call &9000
-        ASM 205
-        ASM 00
-        ASM 144
-        LET O = 10
+        ;Con esto evitamos que se quede el sonido colgado cuando pase de pantalla
+        IF A>0
+            ;Para seleccionar el subsonido utilizamos el registro a del z80
+            ;ld a, 8 / 3e 08 / 62 08
+            ASM 62
+            ASM 04
+            ;call &9000
+            ASM 205
+            ASM 00
+            ASM 144
+            LET O = 5
+        ENDIF
     ELSE
         BEEP 50
     ENDIF

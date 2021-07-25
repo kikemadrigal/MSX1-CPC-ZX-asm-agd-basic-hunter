@@ -54,11 +54,32 @@ ENDIF
 IF COLLISION 0              ;Si hay colision con el player
     IF SETTINGA = 0          ; Si el interruptor no lo han tocado
         LET SETTINGA = 1 ;Lo marcamos como tiocado
+        ; Hacemos un sonido
         IF P = 0
             SOUND 0
         ELSE
-            BEEP 14
+            ;Si es amstrad
+            IF P = 1
+                ;Para seleccionar el subsonido utilizamos el registro a del z80
+                ;ld a, 7 / 3e 07 / 62 07
+                ASM 62
+                ASM 07
+                ;call &9000
+                ASM 205
+                ASM 00
+                ASM 144
+                ;Necesitamos que reproduzca 10 ciclos
+                LET O = 5
+            ;Si es un spectrum
+            ELSE
+                BEEP 14
+            ENDIF
         ENDIF
+
+
+
+
+
     ENDIF
       
 ENDIF
