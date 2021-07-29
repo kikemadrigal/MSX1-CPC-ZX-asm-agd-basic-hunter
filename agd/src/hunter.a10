@@ -189,6 +189,45 @@ ELSE
         IF SCREEN = 29
             ENDGAME
         ELSE 
+            ;Hacemos el sonido de misión cumplida
+            IF P = 0
+                SOUND 5
+            ELSE
+                ;Si es amstrad
+                IF P = 1
+                    ;Para seleccionar el subsonido utilizamos el registro a del z80
+                    ;ld a, 0 / 3e 02 / 62 02
+                    ASM 62
+                    ASM 01
+                    ;call &9000
+                    ASM 205
+                    ASM 00
+                    ASM 144
+                    LET O = 90
+                ;O variable utilizada para saber cuando tnmos que reproducir mísica
+                WHILE O > 0
+                    ;call &bd19
+                    ASM 205
+                    ASM 25
+                    ASM 189
+                    ;call &9003
+                    ASM 205
+                    ASM 03
+                    ASM 144
+                    SUBTRACT 1 FROM O
+                ENDWHILE
+                ;call &9006 ->Stop music
+                ASM 205
+                ASM 06
+                ASM 144
+                ;Si es un spectrum
+                ELSE
+                    BEEP 60
+                ENDIF
+            ENDIF
+            ;Borrramos el mensaje de boss y la puntuación
+            AT 1 0
+            PRINT "          "
             ; Ponemos el mensaje de fase completada
             AT 9 9           
             MESSAGE 1
@@ -284,7 +323,7 @@ IF S=0
         at 1 2
         print "Boss:"
         at 1 7
-        display DOUBLEDIGITS K
+        display TRIPLEDIGITS K
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
         LET N = 90
         LET W = K
@@ -368,9 +407,9 @@ IF S=0
         at 1 2
         print "Boss:"
         at 1 7
-        display DOUBLEDIGITS K
+        display TRIPLEDIGITS K
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
-        LET N = 90
+        LET N = 100
         LET W = K
         ;ADD N TO W
         ;WHILE N < W
@@ -445,13 +484,13 @@ IF S=0
     ENDIF
     IF SCREEN=29
         LET A=1
-        LET K=100
+        LET K=2
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 
 
 
-                ;Mostramos la información del boss
+        ;Mostramos la información del boss
         ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
         at 1 2
         print "Boss:"

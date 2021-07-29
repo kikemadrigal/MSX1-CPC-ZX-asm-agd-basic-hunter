@@ -193,28 +193,29 @@ IF COLLISION 1
             ENDIF
             ;Borramos la bala-lo has tenido que quitar porque se borra en el remove del animal
             REMOVE            
-        ENDIF
+        
 
 
-        ;Hacemos el sonido de muerte
-        IF P = 0
-            SOUND 5
-        ELSE
-            ;Si es amstrad
-            IF P = 1
-                ;Para seleccionar el subsonido utilizamos el registro a del z80
-                ;ld a, 0 / 3e 02 / 62 02
-                ASM 62
-                ASM 02
-                ;call &9000
-                ASM 205
-                ASM 00
-                ASM 144
-                ;Necesitamos que reproduzca 10 ciclos
-                LET O = 2
-            ;Si es un spectrum
+            ;Hacemos el sonido de muerte
+            IF P = 0
+                SOUND 5
             ELSE
-                BEEP 60
+                ;Si es amstrad
+                IF P = 1
+                    ;Para seleccionar el subsonido utilizamos el registro a del z80
+                    ;ld a, 0 / 3e 02 / 62 02
+                    ASM 62
+                    ASM 02
+                    ;call &9000
+                    ASM 205
+                    ASM 00
+                    ASM 144
+                    ;Necesitamos que reproduzca 10 ciclos
+                    LET O = 2
+                ;Si es un spectrum
+                ELSE
+                    BEEP 60
+                ENDIF
             ENDIF
         ENDIF
     ENDIF ; final de si no es una bola

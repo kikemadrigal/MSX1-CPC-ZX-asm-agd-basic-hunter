@@ -50,10 +50,14 @@ IF SETTINGA = 1
         ELSE
             ;Si es amstrad
             IF P = 1
+                ;call &9006 ->Stop music
+                ASM 205
+                ASM 06
+                ASM 144
                 ;Para seleccionar el subsonido utilizamos el registro a del z80
                 ;ld a, 0 / 3e 02 / 62 02
                 ASM 62
-                ASM 07
+                ASM 02
                 ;call &9000
                 ASM 205
                 ASM 00
@@ -65,38 +69,24 @@ IF SETTINGA = 1
                 BEEP 14
             ENDIF
         ENDIF
-
-
-
-
-
         ;K=Energía del enemigo
         SUBTRACT 1 FROM K
         ; Si al boss no le queda energía lo quitamos
         IF K <= 0
             EXPLODE 30
             REMOVE
-            ;Le ponemos que no le quedan capturas para que se paren los muñecos
-            LET A = 0
-            AT 1 2
-            PRINT "           "
+        ;Si le queda energía al enemigo al haber colisión con el disparo borramos solo el disparo
         ELSE
             OTHER
                 REMOVE
             ENDSPRITE
         ENDIF
         ;Volvemos a activar los disparos del player
-        ;LET D = 1
-        ;let O = 1
-
-
-
-        ;Mostramos la información del boss
-        ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
-        at 1 2
-        print "Boss:"
+        LET D = 1
+        ;Mostramos la información del boss actualizada al haber una colosión con el disparo
         at 1 7
-        display DOUBLEDIGITS K
+        display TRIPLEDIGITS K
+        ;Barra de energía
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
         ;LET N = 90
         ;LET L = K

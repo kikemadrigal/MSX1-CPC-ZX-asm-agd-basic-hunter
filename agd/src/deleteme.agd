@@ -8,10 +8,10 @@ DEFINEBLOCK     EMPTYBLOCK
                 0 0 0 0 0 0 0 0
                 0 0 0 0 0 0 0 0
 
-DEFINEBLOCK     WALLBLOCK
-                240 240 160 240 240 160 240 240
-                160 240 240 160 240 240 160 240
-                240 160 240 240 160 240 240 160
+DEFINEBLOCK     FODDERBLOCK
+                244 244 160 248 248 168 244 244
+                160 248 248 168 244 244 160 248
+                248 168 244 244 160 248 248 168
 
 DEFINEBLOCK     EMPTYBLOCK
                 252 252 168 252 252 168 252 252
@@ -58,10 +58,10 @@ DEFINEBLOCK     WALLBLOCK
                 32 50 51 32 48 51 32 48
                 48 32 51 48 32 51 48 32
 
-DEFINEBLOCK     EMPTYBLOCK
-                195 225 160 195 225 160 195 225
-                160 195 225 160 210 225 160 210
-                225 160 240 240 160 240 240 160
+DEFINEBLOCK     CUSTOMBLOCK
+                12 6 8 12 6 8 12 6
+                8 12 12 8 12 12 8 6
+                12 2 3 9 2 3 9 2
 
 DEFINEBLOCK     EMPTYBLOCK
                 240 240 160 240 240 160 240 240
@@ -792,21 +792,21 @@ DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                 19   0   0   0   0   0   0   0   0   0   0   0   0   0  19   0   4   4   0   0   0   0   0   0   0   0   0   0   0  19
-                  8   8   8   8   0   0   0   8   8   8   8   8   8   8   8   8   8   8   0   0   0   0   8   8   8   8   8   8   8   8
-                 15  15  15  15   0   0   0  15  15  15  15  15  15  15  15  15  15  15   0   0   0   0  15  15  15  15  15  15  15  15
+                  0   0   0   0   0   0   0   0   0   0   0   0   0  19   0   4   4   0   0   0   0   0   0   0   0   0   0   0  19  19
+                  8   8   8   0   0   0   8   8   8   8   8   8   8   8   8   8   8   0   0   0   0   8   8   8   8   8   8   8   8   8
+                 15  15  15   0   0   0  15  15  15  15  15  15  15  15  15  15  15   0   0   0   0  15  15  15  15  15  15  15  15  15
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  4   4   4   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19   4   4   0   0   0   0   0  19
-                  8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   0   0   0   0   0   8
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  15  15  15  15  15   0   0   0   0   0  15
+                  4   4   0  19   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19   4   4   0   0   0   0   0  19   4
+                  8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   0   0   0   0   0   8   8
+                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  15  15  15  15  15   0   0   0   0   0  15  15
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0  19   0   0   0   0   3   0   0   0   0   0   4   5   0   0   0   0   0   0   0   0   0   0   0   4   4   0
-                  8   8   8   8   8   8   8   8   8   0   0   0   8   8   8   8   8   8   0   0   0   0   8   8   8   8   8   8   8   8
-                 15  15  15  15  15  15  15  15  15   0   0   0  15  15  15  15  15  15   0   0   0   0  15  15  15  15  15  15  15  15
+                  0   0  19   0   0   0   0   3   0   0   0   0   0   4   5   0   0   0   0   0   0   0   0   0   0   0   4   4   3   3
+                  8   8   8   8   8   8   8   8   0   0   0   8   8   8   8   8   8   0   0   0   0   8   8   8   8   8   8   8   8   8
+                 15  15  15  15  15  15  15  15   0   0   0  15  15  15  15  15  15   0   0   0   0  15  15  15  15  15  15  15  15  15
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0   0   3   3   4   3   4   3   3   0   0   0   0   0   0   0   0  19   0   0
+                  0   0   0   0   0   0   0   0   0   0   0   3   3   4   3   4   3   3   0   0   0   0   0   0   0   0  19   0   0   0
                   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8
 SPRITEPOSITION  2 10 48 192
 SPRITEPOSITION  0 0 160 16
@@ -940,12 +940,12 @@ DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   3   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
-                  8   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0  15   8   8   8   8   8   8   8   8
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19   3  15   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   8   8   0   0   0   0   0   0   0   0   8   8   8   0   0   0   0   0   0   0   0
+                  8   8   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8
+                  0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0  19   5  15   0   0   0   0   0   0   0   0   0
+                  0   0   0   0   0   0   0   0   8   8   0   0   0   0   0   0   0   0   8   8   8   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   4   3   4   0   0   0   0   0   0   0   0   0   0   0   0  19
-                  0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   0   0   0   0   0   8   8
+                  0   0   0   0   0   0   0   0   0   0   0   0   0   3   4   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
+                  0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   0   0   0   0   0   0   8   8
                   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   4   4   3   4   3   3  15   0   0   0   0   0   0   0   0  19   0   0   0   4   0   0   0   0
@@ -1250,7 +1250,7 @@ DEFINESCREEN     10  10  10  10  10  10  10  10  10  10  10  10  10  10  10  10 
                  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10
                  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10
                  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10
-                 10   0   0   0   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   0   0   0   0   0  10
+                 10   0   0   0   7  10  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7  10  10   0   0   0  10
                  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10
                  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10
                  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10
@@ -1264,6 +1264,8 @@ SPRITEPOSITION  0 0 152 24
 SPRITEPOSITION  3 35 96 128
 SPRITEPOSITION  6 2 152 24
 SPRITEPOSITION  6 36 112 128
+SPRITEPOSITION  2 16 88 192
+SPRITEPOSITION  2 16 88 56
 
 DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
@@ -1507,7 +1509,7 @@ SPRITEPOSITION  0 0 160 56
 SPRITEPOSITION  6 2 160 56
 SPRITEPOSITION  2 20 112 56
 SPRITEPOSITION  5 27 40 128
-SPRITEPOSITION  8 28 104 24
+SPRITEPOSITION  8 28 112 24
 SPRITEPOSITION  2 23 112 176
 
 DEFINESCREEN     25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25  25
@@ -1534,6 +1536,8 @@ SPRITEPOSITION  3 37 32 128
 SPRITEPOSITION  0 0 160 32
 SPRITEPOSITION  6 38 48 128
 SPRITEPOSITION  6 2 160 32
+SPRITEPOSITION  2 20 136 24
+SPRITEPOSITION  2 20 112 216
 
 MAP             WIDTH 18
                 STARTSCREEN 0
@@ -1729,14 +1733,33 @@ endif
 ;------------------BLOCKS--------------------
 GETBLOCKS 
 ;Rambien existe GETBLOCK X Y:
-;IF BLOCK = FODERBLOCK
-;LET LINE = X
-;LET COLUMN = Y
-;DIVIDE LINE BY 8
-;DIVIDE COLUMN BY 8
+IF GOT CUSTOMBLOCK
+    ADD 1 FROM LIVES
+     ;Hacemos un sonidoM
+    IF P = 0
+        SOUND 5
+    ELSE
+        IF P = 1
+            ;Para seleccionar el subsonido utilizamos el registro a del z80
+            ;ld a, 4 / 3e 04 / 62 04
+            ASM 62
+            ASM 04
+            ;call &9000
+            ASM 205
+            ASM 00
+            ASM 144
+            LET O = 10
+        ELSE
+            BEEP 16
+        ENDIF
+    ENDIF
+LET LINE = X
+LET COLUMN = Y
+DIVIDE LINE BY 8
+DIVIDE COLUMN BY 8
 ;Ponemos aki un bloque vacío
-;PUTBLOCK 0 
-;ENDIF
+PUTBLOCK 0 
+ENDIF
 
 ;Siempre que el sprite no esté cayendo o saltando, esto verifica si el sprite está parado sobre tierra firme
 FALL
@@ -2258,28 +2281,29 @@ IF COLLISION 1
             ENDIF
             ;Borramos la bala-lo has tenido que quitar porque se borra en el remove del animal
             REMOVE            
-        ENDIF
+        
 
 
-        ;Hacemos el sonido de muerte
-        IF P = 0
-            SOUND 5
-        ELSE
-            ;Si es amstrad
-            IF P = 1
-                ;Para seleccionar el subsonido utilizamos el registro a del z80
-                ;ld a, 0 / 3e 02 / 62 02
-                ASM 62
-                ASM 02
-                ;call &9000
-                ASM 205
-                ASM 00
-                ASM 144
-                ;Necesitamos que reproduzca 10 ciclos
-                LET O = 2
-            ;Si es un spectrum
+            ;Hacemos el sonido de muerte
+            IF P = 0
+                SOUND 5
             ELSE
-                BEEP 60
+                ;Si es amstrad
+                IF P = 1
+                    ;Para seleccionar el subsonido utilizamos el registro a del z80
+                    ;ld a, 0 / 3e 02 / 62 02
+                    ASM 62
+                    ASM 02
+                    ;call &9000
+                    ASM 205
+                    ASM 00
+                    ASM 144
+                    ;Necesitamos que reproduzca 10 ciclos
+                    LET O = 2
+                ;Si es un spectrum
+                ELSE
+                    BEEP 60
+                ENDIF
             ENDIF
         ENDIF
     ENDIF ; final de si no es una bola
@@ -2510,17 +2534,20 @@ ENDIF
 
 ;Si hay una colisión con el disparo
 IF COLLISION 1
-        
     ; Hacemos un sonido
     IF P = 0
         SOUND 4
     ELSE
         ;Si es amstrad
         IF P = 1
+            ;call &9006 ->Stop music
+            ASM 205
+            ASM 06
+            ASM 144
             ;Para seleccionar el subsonido utilizamos el registro a del z80
             ;ld a, 0 / 3e 02 / 62 02
             ASM 62
-            ASM 03
+            ASM 02
             ;call &9000
             ASM 205
             ASM 00
@@ -2532,23 +2559,13 @@ IF COLLISION 1
             BEEP 14
         ENDIF
     ENDIF
-
-
-
-
-
-
-
     ;K=Energía del enemigo
     SUBTRACT 1 FROM K
     ; Si al boss no le queda energía lo quitamos
     IF K <= 0
         EXPLODE 30
-        ;REMOVE
-        ;Le ponemos que no le quedan capturas para que se paren los muñecos
-        LET A = 0
-        AT 1 2
-        PRINT "           "
+        REMOVE
+    ;Si le queda energía al enemigo al haber colisión con el disparo borramos solo el disparo
     ELSE
         OTHER
             REMOVE
@@ -2556,16 +2573,10 @@ IF COLLISION 1
     ENDIF
     ;Volvemos a activar los disparos del player
     LET D = 1
-
-
-
-
-    ;Mostramos la información del boss
-    ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
-    at 1 2
-    print "Boss:"
+    ;Mostramos la información del boss actualizada al haber una colosión con el disparo
     at 1 7
-    display DOUBLEDIGITS K
+    display TRIPLEDIGITS K
+    ;Barra de energía del enemigo
     ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
     ;LET N = 90
     ;LET L = K
@@ -2869,10 +2880,14 @@ IF SETTINGA = 1
         ELSE
             ;Si es amstrad
             IF P = 1
+                ;call &9006 ->Stop music
+                ASM 205
+                ASM 06
+                ASM 144
                 ;Para seleccionar el subsonido utilizamos el registro a del z80
                 ;ld a, 0 / 3e 02 / 62 02
                 ASM 62
-                ASM 07
+                ASM 02
                 ;call &9000
                 ASM 205
                 ASM 00
@@ -2884,38 +2899,24 @@ IF SETTINGA = 1
                 BEEP 14
             ENDIF
         ENDIF
-
-
-
-
-
         ;K=Energía del enemigo
         SUBTRACT 1 FROM K
         ; Si al boss no le queda energía lo quitamos
         IF K <= 0
             EXPLODE 30
             REMOVE
-            ;Le ponemos que no le quedan capturas para que se paren los muñecos
-            LET A = 0
-            AT 1 2
-            PRINT "           "
+        ;Si le queda energía al enemigo al haber colisión con el disparo borramos solo el disparo
         ELSE
             OTHER
                 REMOVE
             ENDSPRITE
         ENDIF
         ;Volvemos a activar los disparos del player
-        ;LET D = 1
-        ;let O = 1
-
-
-
-        ;Mostramos la información del boss
-        ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
-        at 1 2
-        print "Boss:"
+        LET D = 1
+        ;Mostramos la información del boss actualizada al haber una colosión con el disparo
         at 1 7
-        display DOUBLEDIGITS K
+        display TRIPLEDIGITS K
+        ;Barra de energía
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
         ;LET N = 90
         ;LET L = K
@@ -3458,6 +3459,45 @@ ELSE
         IF SCREEN = 29
             ENDGAME
         ELSE 
+            ;Hacemos el sonido de misión cumplida
+            IF P = 0
+                SOUND 5
+            ELSE
+                ;Si es amstrad
+                IF P = 1
+                    ;Para seleccionar el subsonido utilizamos el registro a del z80
+                    ;ld a, 0 / 3e 02 / 62 02
+                    ASM 62
+                    ASM 01
+                    ;call &9000
+                    ASM 205
+                    ASM 00
+                    ASM 144
+                    LET O = 90
+                ;O variable utilizada para saber cuando tnmos que reproducir mísica
+                WHILE O > 0
+                    ;call &bd19
+                    ASM 205
+                    ASM 25
+                    ASM 189
+                    ;call &9003
+                    ASM 205
+                    ASM 03
+                    ASM 144
+                    SUBTRACT 1 FROM O
+                ENDWHILE
+                ;call &9006 ->Stop music
+                ASM 205
+                ASM 06
+                ASM 144
+                ;Si es un spectrum
+                ELSE
+                    BEEP 60
+                ENDIF
+            ENDIF
+            ;Borrramos el mensaje de boss y la puntuación
+            AT 1 0
+            PRINT "          "
             ; Ponemos el mensaje de fase completada
             AT 9 9           
             MESSAGE 1
@@ -3553,7 +3593,7 @@ IF S=0
         at 1 2
         print "Boss:"
         at 1 7
-        display DOUBLEDIGITS K
+        display TRIPLEDIGITS K
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
         LET N = 90
         LET W = K
@@ -3637,9 +3677,9 @@ IF S=0
         at 1 2
         print "Boss:"
         at 1 7
-        display DOUBLEDIGITS K
+        display TRIPLEDIGITS K
         ;Coordenada en el eje x donde empezará a dibujarse la barra de energía del boss
-        LET N = 90
+        LET N = 100
         LET W = K
         ;ADD N TO W
         ;WHILE N < W
@@ -3714,13 +3754,13 @@ IF S=0
     ENDIF
     IF SCREEN=29
         LET A=1
-        LET K=100
+        LET K=2
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 
 
 
-                ;Mostramos la información del boss
+        ;Mostramos la información del boss
         ; Usamos las variables  V y W de las coordenaas del player porque aquí no las necesitamos
         at 1 2
         print "Boss:"
@@ -3882,22 +3922,18 @@ WHILE CONTROL >= 99
             PRINT "up"
             WAITKEY
             DEFINEKEY UP
-            at 10 10
             AT 7 12
             PRINT "DOWN"
             WAITKEY
             DEFINEKEY DOWN
-            at 10 10
             AT 8 12
             PRINT "LEFT"
             WAITKEY
             DEFINEKEY LEFT
-            at 10 10
             AT 9 12
             PRINT "RIGHT"
             WAITKEY
             DEFINEKEY RIGHT
-            at 10 10
             AT 10 12
             PRINT "FIRE1"
             WAITKEY
@@ -4264,31 +4300,11 @@ DELAY 254
 
 
 EVENT COMPLETEDGAME
-;MUSIC 3 1
+
 CLS
 
-;Hacemos el sonido de muerte
-IF P = 0
-    ;MUSIC 0 0
-    SOUND 5
-ELSE
-    ;Si es amstrad
-    IF P = 1
-        ;Para seleccionar el subsonido utilizamos el registro a del z80
-        ;ld a, 2 / 3e 02 / 62 02
-        ASM 62
-        ASM 02
-        ;call &9000
-        ASM 205
-        ASM 00
-        ASM 144
-        ;Necesitamos que reproduzca 10 ciclos
-        LET O = 10
-    ;Si es un spectrum
-    ELSE
-        BEEP 60
-    ENDIF
-ENDIF
+
+
 
 at 2 5
 PRINT "Has ganado!!!"
@@ -4311,7 +4327,43 @@ PRINT "Musica y efectos: Kike Madrigal"
 ;DELAY 255        
 ;DELAY 255 
 
-
+;Hacemos el sonido de misión cumplida
+IF P = 0
+    SOUND 5
+    ;MUSIC 3 1
+ELSE
+    ;Si es amstrad
+    IF P = 1
+        ;Para seleccionar el subsonido utilizamos el registro a del z80
+        ;ld a, 0 / 3e 02 / 62 02
+        ASM 62
+        ASM 01
+        ;call &9000
+        ASM 205
+        ASM 00
+        ASM 144
+        LET O = 190
+        ;O variable utilizada para saber cuando tnmos que reproducir mísica
+        WHILE O > 0
+            ;call &bd19
+            ASM 205
+            ASM 25
+            ASM 189
+            ;call &9003
+            ASM 205
+            ASM 03
+            ASM 144
+            SUBTRACT 1 FROM O
+        ENDWHILE
+        ;call &9006 ->Stop music
+        ASM 205
+        ASM 06
+        ASM 144
+    ;Si es un spectrum
+    ELSE
+        BEEP 60
+    ENDIF
+ENDIF
 
 AT 19 0
 PRINT "Presione una tecla para continuar"

@@ -109,22 +109,18 @@ WHILE CONTROL >= 99
             PRINT "up"
             WAITKEY
             DEFINEKEY UP
-            at 10 10
             AT 7 12
             PRINT "DOWN"
             WAITKEY
             DEFINEKEY DOWN
-            at 10 10
             AT 8 12
             PRINT "LEFT"
             WAITKEY
             DEFINEKEY LEFT
-            at 10 10
             AT 9 12
             PRINT "RIGHT"
             WAITKEY
             DEFINEKEY RIGHT
-            at 10 10
             AT 10 12
             PRINT "FIRE1"
             WAITKEY
