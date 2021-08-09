@@ -9,9 +9,11 @@
 
 [![YouTube](https://img.shields.io/badge/YouTube-Kike_Madrigal-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=101010)](https://youtube.com/KLEO_UejznDAY-vcU7lNRw)
 
-![GitHub Followers](https://img.shields.io/github/followers/kikemadrigal?label=Follow)
+![GitHub Followers](https://img.shields.io/github/followers/kikemadrigal?style=social)
 
-![GitHub language count](https://img.shields.io/github/languages/count/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter)
+![GitHub language count](https://img.shields.io/github/languages/count/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter?style=social)
+
+![GitHub stars](https://img.shields.io/github/stars/kikemadrigal?style=social)
 
 # Play online & download 
 
