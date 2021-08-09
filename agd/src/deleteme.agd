@@ -939,25 +939,24 @@ DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
                   8   8   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   3   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
-                  8   8   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8
-                  0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0  19   5  15   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   8   8   0   0   0   0   0   0   0   0   8   8   8   0   0   0   0   0   0   0   0   0
+                  0   0   0   0   0   4   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
+                  8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8   8   8
+                  0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0  19   3  15   0   0   0   0   0   0   0   0   0   0   0
+                  0   0   0   0   0   0   8   8   0   0   0   0   0   0   0   0   8   8   8   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   3   4   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
-                  0   0   0   0   0   0   0   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   0   0   0   0   0   0   8   8
+                  0   0   0   0   0   0   0   0   0   0   0   4   4   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  19
+                  0   0   0   0   0   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   0   0   0   0   0   0   0   0   0   8
                   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   4   4   3   4   3   3  15   0   0   0   0   0   0   0   0  19   0   0   0   4   0   0   0   0
+                  0   0   0   0   0   0   4   4   3   4   3   3  15   0   0   0   0   0   0   0   0   0   0   0   4   0   0   0   0   0
                   0   0   0   0   8   8   8   8   8   8   8   8  15   0   0   0   0   8   8   8   8   8   8   8   8   8   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0  19  15  19   0   0   0   4   0   0   0   0   0   0   0   0   0   0   0   4
+                  0   0   0   0   0   0   0   0   0   0   0  19  15  19   0   0   0   4   0   0  19   0   0   0   0   0   0   0   0   4
                   8   8   8   8   8   8   8   8   8   8   8   8  15   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8
 SPRITEPOSITION  0 0 160 8
-SPRITEPOSITION  2 12 64 40
-SPRITEPOSITION  2 10 104 96
+SPRITEPOSITION  2 12 136 152
 SPRITEPOSITION  5 27 48 120
-SPRITEPOSITION  4 26 112 40
+SPRITEPOSITION  4 26 96 208
 SPRITEPOSITION  6 2 160 8
 SPRITEPOSITION  8 28 64 16
 SPRITEPOSITION  2 10 64 200
@@ -992,18 +991,18 @@ SPRITEPOSITION  6 2 160 24
 DEFINESCREEN      0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   7   0   0   0   0   0   0   0
+                  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   7   7   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   7   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                  0   0   0   0  26   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   4   0   0   0
-                  0   0   0   7   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   7   7   7
+                  0   0   0   0  26   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   4   0   0   0   0
+                  0   0   0   7   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   7   7   7   7
                   0   0   0   0   0   0   0   0   0   0   0   0   4   3   0  26   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   7   7   7   7   7   7   7   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0  26   0   0   0   0   4   3   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  26
-                  0   0   7   7   7   7   7   7   7   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   7   7   7
+                  0   0   7   7   7   7   7   7   7   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7   7   7   7   7
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-                 26   0   0   0   0   0   0   0   0   3   4   0   0   0   0   0   0   0   0   0   0   3   5   0   0   0   0   0   0  26
+                 26   0   0   0   0   0   0   0   0   3   4   0   0   0   0   0   0   0   0   0   0   3   0   0   0   0   0   0   0  26
                   7   7   7   7   7   7   7   7   7   7   7   7   0   0   0   0   0   0   0   0   7   7   7   7   7   7   7   7   7   7
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
                   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
@@ -1859,11 +1858,11 @@ IF KEY FIRE
             LET V= X
             LET W= Y
             ;Hay que sumarle unos pixeles a la derecha e izquierda a la bala
-            IF DIRECTION = LEFT
-                SUBTRACT 16 FROM V 
-            ELSE
-                ADD 16 TO V            
-            ENDIF
+            ;IF DIRECTION = LEFT
+            ;    SUBTRACT 16 FROM V 
+            ;ELSE
+            ;    ADD 16 TO V            
+            ;ENDIF
             ;Con esto configuramos los parámetros de la bala
             SPAWNED
                 LET DIRECTION = U
@@ -1929,24 +1928,13 @@ ENDIF
 
 
 ;Colision del player con la bala
-IF COLLISION 1   
-    ;Esto hace un efecto de explosión
-    IF P = 0
-        SOUND 5
-    ELSE
-        Beep 70
-    ENDIF
-   
+IF COLLISION 1     
     ;Vamos a la bala
     OTHER
         ;Si es una bala del boss
         IF SETTINGA = 1
-            ;El evento Killplayer hace varias
+            ;El evento Killplayer hace varias cosas, como sonidos, pausas y mensajes
             KILL
-        ;Si la bala es del player
-        ELSE
-            ;Activamos que el player pueda crar más balas
-            LET D = 1
         ENDIF
     ENDSPRITE
 ENDIF
@@ -3624,7 +3612,7 @@ IF S=0
     IF SCREEN=10
         LET A=7 
         LET H=15
-        LET I=27
+        LET I=26
     ENDIF
     IF SCREEN=11
         LET A=8
@@ -3755,7 +3743,7 @@ IF S=0
     ENDIF
     IF SCREEN=29
         LET A=1
-        LET K=2
+        LET K=100
         ; Como es la última pantalla de la fase activamos el modo jefe de fase
         LET J=1
 

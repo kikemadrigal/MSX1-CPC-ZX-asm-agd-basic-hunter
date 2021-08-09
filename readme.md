@@ -2,7 +2,16 @@
 
 💟 MSX Murcia
 😀
+## Contact me:
 
+
+[![Email](https://img.shields.io/badge/kikemadrigal@hotmail.com-my_personal_email-D14836?style=for-the-badge&logo=gmail&logoColor=white&labelColor=101010)](mailto:kikemadrigal@hotmail)
+
+[![YouTube](https://img.shields.io/badge/YouTube-Kike_Madrigal-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=101010)](https://youtube.com/KLEO_UejznDAY-vcU7lNRw)
+
+![GitHub Followers](https://img.shields.io/github/followers/kikemadrigal?label=Follow)
+
+![GitHub language count](https://img.shields.io/github/languages/count/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter)
 
 # Play online & download 
 
@@ -11,6 +20,8 @@
 ## Android version
 
 ### Download
+
+https://play.google.com/store/apps/details?id=com.cpctelera.rvmengine.hunter
 
 https://github.com/kikemadrigal/MSX1-CPC-ZX-asm-agd-basic-hunter/blob/main/docs/ANDROID/hunter%20apk.zip
 
